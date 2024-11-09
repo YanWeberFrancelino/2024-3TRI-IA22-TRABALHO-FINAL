@@ -1,0 +1,203 @@
+/* ----------------- Estilos do Formulário de Login ----------------- */
+.login-container {
+    display: flex;
+    min-height: calc(100vh - 100px);
+    width: 100%;
+    padding: 26px;
+    gap: 26px;
+    max-width: 1200px;
+    margin: 0 auto;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-box {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-form {
+    background-color: #2A324B;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 450px;
+    animation: fadeInLeft 1s ease-out;
+    transition: transform 0.3s ease;
+}
+
+.login-form:hover {
+    transform: translateY(-5px);
+}
+
+/* Títulos */
+.login-form .titles {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.login-form .titles h1 {
+    color: #EFF1F6;
+    font-size: 36px;
+    font-family: "Barlow Condensed", sans-serif;
+    font-weight: 700;
+    line-height: 1.2;
+    animation: pulse 2s infinite;
+}
+
+.login-form .titles p {
+    color: #4BCBDD;
+    font-family: "Barlow Condensed", sans-serif;
+    font-size: 20px;
+    line-height: 1.3;
+    font-weight: 700;
+    transition: color 0.3s ease;
+}
+
+.login-form .titles p span {
+    color: #4BCBDD;
+}
+
+.login-form .titles p:hover span {
+    color: #28BDD2;
+}
+
+/* Campos do Formulário */
+.login-form form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.login-form .input-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.login-form .input-group label {
+    font-size: 16px;
+    color: #EFF1F6;
+    margin-bottom: 6px;
+    font-family: "Barlow Condensed", sans-serif;
+    font-weight: 700;
+}
+
+.login-form .input-field {
+    padding: 12px 16px;
+    font-size: 16px;
+    line-height: 22px;
+    font-family: "Barlow", sans-serif;
+    font-weight: 600;
+    caret-color: #4BCBDD;
+    background-color: #1A1F2D;
+    border: 1px #1E2434 solid;
+    border-radius: 8px;
+    color: #EFF1F6;
+    transition: border 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+}
+
+.login-form .input-field::placeholder {
+    color: #404C6E;
+}
+
+.login-form .input-field:hover,
+.login-form .input-field:focus {
+    border: 1px solid #4BCBDD;
+    outline: none;
+    box-shadow: 0 0 8px rgba(75, 203, 221, 0.5);
+    background-color: #2A324B;
+}
+
+.login-form .buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.login-form .buttons .btn {
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.login-form .buttons .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.login-form > p {
+    font-size: 18px;
+    margin-top: 20px;
+    text-align: center;
+    font-family: "Barlow Condensed", sans-serif;
+    font-weight: 700;
+    line-height: 1.3;
+    transition: color 0.3s ease;
+}
+
+.login-form p a {
+    color: #4BCBDD;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.login-form p a:hover {
+    color: #28BDD2;
+}
+
+/* ----------------- Responsividade ----------------- */
+@media (max-width: 992px) {
+    .login-form {
+        padding: 30px;
+    }
+
+    .login-form .titles h1 {
+        font-size: 32px;
+    }
+
+    .login-form .titles p {
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 768px) {
+    .login-form {
+        padding: 20px;
+    }
+
+    .login-form .titles h1 {
+        font-size: 28px;
+    }
+
+    .login-form .titles p {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .login-container {
+        padding: 10px;
+    }
+
+    .login-form {
+        padding: 20px;
+    }
+
+    .login-form .titles h1 {
+        font-size: 24px;
+    }
+
+    .login-form .titles p {
+        font-size: 14px;
+    }
+
+    .login-form .buttons .btn {
+        font-size: 14px;
+        padding: 10px 0;
+    }
+}

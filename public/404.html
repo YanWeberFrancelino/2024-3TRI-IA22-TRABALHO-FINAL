@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Página Não Encontrada</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/pages/404.css">
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700&family=Barlow:wght@100;600;800&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="/assets/img/icon.jpg" type="image/jpeg">
+</head>
+<body class="page-404">
+    <header>
+        <div class="header-container">
+            <h1>Erro 404 - Página Não Encontrada</h1>
+        </div>
+    </header>
+
+    <section class="error-section">
+        <div class="error-content">
+            <img src="/assets/img/404.png" alt="Imagem de erro 404" class="error-image">
+            <h2>Oops! A página que você procura não existe.</h2>
+            <p>Parece que você se perdeu. Não se preocupe, vamos ajudá-lo a encontrar o caminho de volta.</p>
+            <button id="returnButton" class="btn secondary-btn">Voltar</button>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Bcrypt. Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+        const token = localStorage.getItem('token');
+        const returnButton = document.getElementById('returnButton');
+
+        if (token) {
+            returnButton.onclick = function() {
+                window.location.href = '/dashboard';
+            };
+            returnButton.textContent = 'Voltar ao Dashboard';
+        } else {
+            returnButton.onclick = function() {
+                window.location.href = '/';
+            };
+            returnButton.textContent = 'Voltar à Página Principal';
+        }
+    </script>
+</body>
+</html>

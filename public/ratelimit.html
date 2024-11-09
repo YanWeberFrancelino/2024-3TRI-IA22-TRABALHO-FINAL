@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Limite de Requisições Atingido</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700&family=Barlow:wght@100;600;800&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="/assets/img/icon.jpg" type="image/jpeg">
+</head>
+<body class="page-rate-limit">
+    <header>
+        <div class="header-container">
+            <h1>Você atingiu o limite de requisições!</h1>
+        </div>
+    </header>
+
+    <section class="rate-limit-section">
+        <div class="rate-limit-content">
+            <img src="/assets/img/ratel.png" alt="Imagem de Limite de Requisições" class="rate-limit-image">
+            <h2>Oops! Você está fazendo muitas requisições.</h2>
+            <p>Por favor, tente novamente após alguns minutos.</p>
+            <button id="returnButton" class="btn secondary-btn">Voltar</button>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Bcrypt. Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+
+        const token = localStorage.getItem('token');
+        const returnButton = document.getElementById('returnButton');
+
+        if (token) {
+            returnButton.onclick = function() {
+                window.location.href = '/dashboard';
+            };
+            returnButton.textContent = 'Voltar ao Dashboard';
+        } else {
+            returnButton.onclick = function() {
+                window.location.href = '/';
+            };
+            returnButton.textContent = 'Voltar à Página Principal';
+        }
+    </script>
+</body>
+</html>

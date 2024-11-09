@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Página Pública</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700&family=Barlow:wght@100;600;800&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="/assets/img/icon.jpg" type="image/jpeg">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <h1>Bem-vindo ao Curso de Segurança com BCRYPT</h1>
+            <div class="header-buttons">
+                <button onclick="window.location.href='/login'" class="btn primary-btn">Login</button>
+            </div>
+        </div>
+    </header>
+    <section class="hero-section">
+        <div class="hero-content">
+            <h2>Proteja suas senhas com o máximo de segurança</h2>
+            <p>Aprenda como utilizar o BCRYPT para garantir a integridade e confidencialidade dos dados.</p>
+            <button onclick="window.location.href='/registrar'" class="btn secondary-btn">Inscreva-se Agora</button>
+        </div>
+    </section>
+
+    <section class="about-section">
+        <div class="content-box">
+            <h2>Por que escolher nosso curso?</h2>
+            <p>Nosso curso oferece um aprendizado completo sobre o BCRYPT, desde os conceitos básicos até implementações avançadas.</p>
+            <ul>
+                <li>Aulas interativas e práticas</li>
+                <li>Quizzes para testar seus conhecimentos</li>
+                <li>Suporte personalizado dos instrutores</li>
+                <li>Acesso a materiais exclusivos</li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="modules-section">
+        <div class="content-box">
+            <h2>Módulos do Curso</h2>
+            <div class="modules-carousel">
+                <div class="carousel-container" id="carousel-container">
+                    <div class="carousel-slide">
+                        <h3>Módulo 1: Introdução ao BCRYPT</h3>
+                        <p>Entenda o que é o BCRYPT e por que ele é essencial para a segurança de senhas.</p>
+                    </div>
+                    <div class="carousel-slide">
+                        <h3>Módulo 2: Implementação Básica</h3>
+                        <p>Aprenda a implementar o BCRYPT em aplicações simples.</p>
+                    </div>
+                    <div class="carousel-slide">
+                        <h3>Módulo 3: Boas Práticas</h3>
+                        <p>Conheça as melhores práticas para utilização segura do BCRYPT.</p>
+                    </div>
+                    <div class="carousel-slide">
+                        <h3>Módulo 4: Casos Avançados</h3>
+                        <p>Explore casos avançados e resolva desafios complexos de segurança.</p>
+                    </div>
+                </div>
+                <button class="carousel-btn prev-btn" onclick="prevSlide()">&#10094;</button>
+                <button class="carousel-btn next-btn" onclick="nextSlide()">&#10095;</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials-section">
+        <div class="content-box">
+            <h2>O que nossos alunos dizem</h2>
+            <div class="testimonials">
+                <div class="testimonial">
+                    <p>"O curso me ajudou a entender profundamente como proteger as senhas dos usuários. Recomendo a todos!"</p>
+                    <h4>- Ana Silva</h4>
+                </div>
+                <div class="testimonial">
+                    <p>"As aulas são claras e os quizzes reforçam o aprendizado. Excelente conteúdo."</p>
+                    <h4>- João Souza</h4>
+                </div>
+                <div class="testimonial">
+                    <p>"Aprendi a implementar o BCRYPT de forma eficaz nas minhas aplicações."</p>
+                    <h4>- Maria Oliveira</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="content-box">
+            <h2>Pronto para começar?</h2>
+            <p>Inscreva-se agora e comece a aprender como proteger suas aplicações com o BCRYPT.</p>
+            <button onclick="window.location.href='/registrar'" class="btn primary-btn">Quero me Inscrever</button>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Bcrypt. Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+        const token = localStorage.getItem('token');
+        if (token) {
+            window.location.href = '/dashboard';
+        }
+
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.carousel-slide');
+
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.style.display = i === index ? 'block' : 'none';
+            });
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % slides.length;
+            showSlide(currentSlide);
+        }
+
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+            showSlide(currentSlide);
+        }
+
+        showSlide(currentSlide);
+
+        setInterval(nextSlide, 5000);
+    </script>
+</body>
+</html>

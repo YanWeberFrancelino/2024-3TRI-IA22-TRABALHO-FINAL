@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Área Privada</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700&family=Barlow:wght@100;600;800&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="/assets/img/icon.jpg" type="image/jpeg">
+</head>
+
+<body>
+    <header>
+        <div class="header-container">
+            <h1>Área Privada</h1>
+            <div class="header-buttons">
+                <button onclick="logout()" class="btn secondary-btn">Logout</button>
+            </div>
+        </div>
+    </header>
+
+    <nav class="navbar">
+        <button onclick="showHome()" class="btn">Início</button>
+        <button onclick="showCourse()" class="btn">Curso</button>
+        <button onclick="viewMembers()" class="btn">Ver Membros</button>
+        <button onclick="viewProfile()" class="btn">Meus Dados</button>
+    </nav>
+
+    <section class="content-box">
+        <div class="content-text" id="content-text">
+            <h2>Bem-vindo, <span id="username">Usuário</span>!</h2>
+            <p>Você está autenticado. Utilize as opções acima para navegar.</p>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Bcrypt. Todos os direitos reservados.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/jwt-decode/build/jwt-decode.min.js"></script>
+    <script>
+        const token = localStorage.getItem('token');
+
+        if (!token) {
+            window.location.href = '/login';
+        } else {
+            try {
+                const decoded = jwt_decode(token);
+                document.getElementById('username').textContent = decoded.name;
+            } catch (error) {
+                console.error('Token inválido:', error);
+                alert('Token inválido. Por favor, faça login novamente.');
+                setTimeout(() => {
+                    window.location.href = '/login';
+                }, 3000);
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem('token');
+            window.location.href = '/login';
+        }
+
+        function showHome() {
+            const content = document.getElementById('content-text');
+            content.innerHTML = `
+                <h2>Bem-vindo ao Painel de Controle</h2>
+                <p>Aqui você encontrará informações úteis sobre o uso da plataforma e recursos disponíveis.</p>
+                <h3>Sobre o BCRYPT</h3>
+                <p>BCRYPT é um algoritmo de hashing de senhas que oferece segurança avançada para proteger os dados dos usuários.</p>
+                <h3>FAQs</h3>
+                <div class="faq">
+                    <div class="faq-item">
+                        <h4 onclick="toggleElement('faq1')">Como fazer quizzes?</h4>
+                        <div id="faq1" class="faq-content">
+                            <p>Para fazer quizzes, vá até a seção "Curso", selecione um módulo e clique no quiz correspondente.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <h4 onclick="toggleElement('faq2')">Como ver os módulos?</h4>
+                        <div id="faq2" class="faq-content">
+                            <p>Na seção "Curso", você encontrará a lista de módulos disponíveis para estudo.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <h4 onclick="toggleElement('faq3')">Como ver meus dados?</h4>
+                        <div id="faq3" class="faq-content">
+                            <p>Para visualizar seus dados pessoais, clique em "Meus Dados" na barra de navegação.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <h4 onclick="toggleElement('faq4')">Como deslogar?</h4>
+                        <div id="faq4" class="faq-content">
+                            <p>Para sair da sua conta, clique no botão "Logout" no canto superior direito da página.</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function showCourse() {
+            const content = document.getElementById('content-text');
+            content.innerHTML = `
+                <h2>Curso de Segurança com BCRYPT</h2>
+                <div class="modules">
+                    <!-- Módulo 1 -->
+                    <div class="module">
+                        <h3 onclick="toggleElement('module1')">Módulo 1: Introdução ao BCRYPT</h3>
+                        <div id="module1" class="lessons">
+                            <!-- Aula 1 -->
+                            <div class="lesson">
+                                <h4 onclick="toggleElement('lesson1')">Aula 1: O que é BCRYPT?</h4>
+                                <div id="lesson1" class="lesson-content">
+                                    <p>BCRYPT é um algoritmo de hashing de senhas que utiliza uma função adaptativa, tornando-o mais seguro contra ataques de força bruta...</p>
+                                </div>
+                            </div>
+                            <!-- Aula 2 -->
+                            <div class="lesson">
+                                <h4 onclick="toggleElement('lesson2')">Aula 2: Como funciona o BCRYPT?</h4>
+                                <div id="lesson2" class="lesson-content">
+                                    <p>O BCRYPT incorpora um fator de custo, que determina quantas vezes o algoritmo será executado, aumentando a segurança...</p>
+                                </div>
+                            </div>
+                            <!-- Aula 3 -->
+                            <div class="lesson">
+                                <h4 onclick="toggleElement('lesson3')">Aula 3: Implementação em Aplicações</h4>
+                                <div id="lesson3" class="lesson-content">
+                                    <p>Aprenda como implementar o BCRYPT em suas aplicações para garantir a segurança das senhas dos usuários...</p>
+                                </div>
+                            </div>
+                            <!-- Quiz -->
+                            <button onclick="toggleElement('quiz1')" class="btn quiz-btn">Fazer Quiz do Módulo 1</button>
+                            <div id="quiz1" class="quiz">
+                                <!-- Conteúdo do Quiz 1 -->
+                                <p><strong>Pergunta 1:</strong> O que é BCRYPT?</p>
+                                <ul>
+                                    <li><input type="radio" name="quiz1" value="A"> A) Um tipo de criptografia simétrica</li>
+                                    <li><input type="radio" name="quiz1" value="B"> B) Um algoritmo de hashing de senhas</li>
+                                    <li><input type="radio" name="quiz1" value="C"> C) Um protocolo de comunicação</li>
+                                    <li><input type="radio" name="quiz1" value="D"> D) Um banco de dados</li>
+                                </ul>
+                                <button onclick="checkAnswer('quiz1', 'B')" class="btn secondary-btn">Enviar Resposta</button>
+                                <p id="quiz1-answer" class="quiz-answer"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Adicione mais módulos conforme necessário -->
+                </div>
+            `;
+        }
+
+        function viewMembers() {
+            fetch('/users/', {
+                method: 'GET',
+                headers: {
+                    'Authorization': 'Bearer ' + token
+                }
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Erro ao buscar membros.');
+                }
+                return response.json();
+            })
+            .then(data => {
+                let membersTable = `
+                    <table class="members-list">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Email</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                `;
+                data.forEach((member) => {
+                    membersTable += `
+                        <tr>
+                            <td>${member.name}</td>
+                            <td>${member.email}</td>
+                        </tr>
+                    `;
+                });
+                membersTable += `
+                        </tbody>
+                    </table>
+                `;
+
+                const content = document.getElementById('content-text');
+                content.innerHTML = `
+                    <h2>Outros Membros</h2>
+                    ${membersTable}
+                `;
+            })
+            .catch(error => {
+                console.error('Erro:', error);
+                alert('Erro ao carregar os membros. Por favor, tente novamente.');
+            });
+        }
+
+        function viewProfile() {
+            fetch('/users/me', {
+                method: 'GET',
+                headers: {
+                    'Authorization': 'Bearer ' + token
+                }
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Erro ao buscar dados do usuário.');
+                }
+                return response.json();
+            })
+            .then(data => {
+                const content = document.getElementById('content-text');
+                content.innerHTML = `
+                    <h2>Meus Dados</h2>
+                    <div class="profile-info">
+                        <p><strong>Nome:</strong> ${data.name}</p>
+                        <p><strong>Email:</strong> ${data.email}</p>
+                    </div>
+                `;
+            })
+            .catch(error => {
+                console.error('Erro:', error);
+                alert('Erro ao carregar seus dados. Por favor, tente novamente.');
+            });
+        }
+
+
+        function toggleElement(elementId) {
+            const element = document.getElementById(elementId);
+            if (element.style.display === 'none' || element.style.display === '') {
+                element.style.display = 'block';
+            } else {
+                element.style.display = 'none';
+            }
+        }
+
+        function checkAnswer(quizId, correctOption) {
+            const quiz = document.getElementById(quizId);
+            const selectedOption = quiz.querySelector('input[name="' + quizId + '"]:checked');
+            const answerPara = document.getElementById(`${quizId}-answer`);
+
+            if (selectedOption) {
+                const userAnswer = selectedOption.value;
+                if (userAnswer === correctOption) {
+                    answerPara.textContent = 'Correto! 🎉';
+                    answerPara.style.color = '#28BDD2';
+                } else {
+                    answerPara.textContent = 'Incorreto. A resposta correta é: ' + correctOption;
+                    answerPara.style.color = '#f8d7da';
+                }
+            } else {
+                answerPara.textContent = 'Por favor, selecione uma opção.';
+                answerPara.style.color = '#f8d7da';
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,182 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700&family=Barlow:wght@100;600;800&display=swap');
+
+@import url('pages/login.css');
+@import url('pages/registrar.css');
+@import url('pages/dashboard.css');
+@import url('pages/home.css');
+@import url('pages/404.css');
+@import url('pages/ratelimit.css');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body, html {
+    width: 100%;
+    height: 100%;
+    font-family: 'Barlow', sans-serif;
+    background-color: #1A1F2D;
+    color: #EFF1F6;
+    overflow-x: hidden;
+}
+
+/* ----------------- Estilos do Header ----------------- */
+header {
+    background-color: #2A324B;
+    padding: 10px 30px;
+    display: flex;
+    align-items: center;
+    color: #EFF1F6;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.header-container h1 {
+    font-size: 24px;
+    font-family: 'Barlow Condensed', sans-serif;
+}
+
+.header-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+/* ----------------- Estilos do Footer ----------------- */
+footer {
+    background-color: #2A324B;
+    padding: 10px 30px;
+    text-align: center;
+    color: #EFF1F6;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+footer p {
+    font-size: 14px;
+}
+
+/* ----------------- Estilos Gerais de Botões ----------------- */
+.btn {
+    padding: 10px 20px;
+    background-color: #4BCBDD;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    text-align: center;
+    font-size: 16px;
+}
+
+.btn.primary-btn {
+    background-color: #28BDD2;
+    font-weight: 800;
+    border: 1px solid #24AABD;
+}
+
+.btn.primary-btn:hover {
+    background-color: #25B2C5;
+    box-shadow: 0 4px 8px rgba(40, 189, 210, 0.3);
+}
+
+.btn.primary-btn:active {
+    background-color: #22A2B4;
+    border: 1px solid #2097A7;
+    transform: scale(0.98);
+}
+
+.btn.secondary-btn {
+    background-color: #404C6E;
+    color: #EFF1F6;
+    font-weight: 600;
+    border: 1px solid #404C6E;
+}
+
+.btn.secondary-btn:hover {
+    background-color: #4BCBDD;
+    border: 1px solid #4BCBDD;
+    box-shadow: 0 4px 8px rgba(75, 203, 221, 0.3);
+}
+
+.btn.secondary-btn:active {
+    background-color: #38A1B6;
+    border: 1px solid #38A1B6;
+    transform: scale(0.98);
+}
+
+/* ----------------- Estilos de Mensagens ----------------- */
+#message, #dashboard-message {
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 16px;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+#message.error, #dashboard-message.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+#message.success, #dashboard-message.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+#message.fade-in, #dashboard-message.fade-in {
+    opacity: 1;
+}
+
+/* ----------------- Classe Oculta ----------------- */
+.hidden {
+    display: none;
+}
+
+/* ----------------- Animações Comuns ----------------- */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+/* ----------------- Responsividade Comum ----------------- */
+@media (max-width: 480px) {
+    header {
+        padding: 10px 20px;
+    }
+
+    .header-container h1 {
+        font-size: 20px;
+    }
+
+    .header-buttons {
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .btn {
+        font-size: 14px;
+        padding: 8px 0;
+    }
+}
