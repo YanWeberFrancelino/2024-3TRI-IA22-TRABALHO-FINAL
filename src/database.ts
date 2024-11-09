@@ -31,10 +31,10 @@ export async function connect() {
       await db.run(`
         INSERT INTO users (name, email, password) 
         VALUES (?, ?, ?)
-      `, ['Susan Bar', 'susan@mail.com', password]);
-      console.log('Usuário "Susan Bar" inserido no banco de dados.');
+      `, ['Teste', 'teste@mail.com', password]);
+      console.log('Usuário "Teste" inserido no banco de dados.');
     } else {
-      console.log('Usuário "Susan Bar" já existe no banco de dados.');
+      console.log('Usuário "Teste" já existe no banco de dados.');
     }
 
     instance = db;
