@@ -45,6 +45,13 @@
     color: #EFF1F6;
 }
 
+.content-text h3 {
+    font-size: 24px;
+    margin-bottom: 12px;
+    color: #28BDD2;
+    font-family: "Barlow Condensed", sans-serif;
+}
+
 .content-text p {
     font-size: 18px;
     line-height: 1.6;
@@ -111,7 +118,7 @@
 
 .lessons {
     margin-top: 10px;
-    display: none;
+    display: flex;
     flex-direction: column;
     gap: 10px;
 }
@@ -130,16 +137,27 @@
 }
 
 .lesson-content {
-    display: none;
+    margin-top: 15px;
     font-size: 16px;
     line-height: 1.6;
 }
 
+.lesson-content pre {
+    background-color: #1E2434;
+    padding: 15px;
+    border-radius: 5px;
+    overflow-x: auto;
+    color: #EFF1F6;
+}
+
 /* Botão do Quiz */
 .btn.quiz-btn {
+    top: 15px;
+    padding: 12px;
     background-color: #6A5ACD;
     color: #FFF;
     border: none;
+    margin-top: 10px;
 }
 
 .btn.quiz-btn:hover {
@@ -177,7 +195,6 @@
 .quiz-answer {
     margin-top: 10px;
     font-weight: bold;
-    color: #28BDD2;
 }
 
 /* ----------------- Estilos da Lista de Membros ----------------- */
@@ -208,18 +225,109 @@
 
 /* ----------------- Estilos do Perfil ----------------- */
 .profile-info {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #1E2434;
+    border-radius: 8px;
+}
+
+.profile-field {
     display: flex;
-    flex-direction: column;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.profile-field label {
+    width: 100px;
+    font-weight: bold;
+    color: #4BCBDD;
+}
+
+.profile-field span {
+    font-size: 18px;
+}
+
+.profile-buttons {
+    display: flex;
     gap: 10px;
     margin-top: 20px;
 }
 
-.profile-info p {
-    font-size: 18px;
+/* Formulários de Edição */
+.edit-profile-form,
+.change-password-form,
+.delete-account-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 20px;
 }
 
-.profile-info p strong {
-    color: #4BCBDD;
+.edit-profile-form label,
+.change-password-form label,
+.delete-account-form label {
+    font-size: 16px;
+    color: #EFF1F6;
+}
+
+.edit-profile-form input,
+.change-password-form input,
+.delete-account-form input {
+    padding: 10px;
+    border: 1px solid #404C6E;
+    border-radius: 5px;
+    background-color: #1E2434;
+    color: #EFF1F6;
+}
+
+.form-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+/* Estilos das Mensagens */
+.message {
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.message.success {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.message.error {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+/* Botão de Perigo */
+.btn.danger-btn {
+    background-color: #d9534f;
+    color: #fff;
+}
+
+.btn.danger-btn:hover {
+    background-color: #c9302c;
+}
+
+.btn.danger-btn:active {
+    background-color: #ac2925;
+}
+
+/* ----------------- Animações ----------------- */
+@keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
 
 /* ----------------- Responsividade ----------------- */

@@ -2,11 +2,12 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>Área Privada</title>
+    <title>Área Privada - Curso Completo de Segurança com BCRYPT</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/assets/css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700&family=Barlow:wght@100;600;800&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="/assets/img/icon.jpg" type="image/jpeg">
+    
 </head>
 
 <body>
@@ -28,28 +29,28 @@
 
     <section class="content-box">
         <div class="content-text" id="content-text">
-            <h2>Bem-vindo, <span id="username">Usuário</span>!</h2>
-            <p>Você está autenticado. Utilize as opções acima para navegar.</p>
+            <!-- O conteúdo dinâmico será inserido aqui -->
         </div>
     </section>
 
     <footer>
-        <p>&copy; 2024 Bcrypt. Todos os direitos reservados.</p>
+        <p>&copy; 2024 BCRYPT Segurança. Todos os direitos reservados.</p>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/jwt-decode/build/jwt-decode.min.js"></script>
     <script>
         const token = localStorage.getItem('token');
+        let username = 'Usuário';
 
         if (!token) {
             window.location.href = '/login';
         } else {
             try {
                 const decoded = jwt_decode(token);
-                document.getElementById('username').textContent = decoded.name;
+                username = decoded.name;
             } catch (error) {
                 console.error('Token inválido:', error);
-                alert('Token inválido. Por favor, faça login novamente.');
+                displayMessage('Token inválido. Por favor, faça login novamente.', 'error');
                 setTimeout(() => {
                     window.location.href = '/login';
                 }, 3000);
@@ -61,13 +62,23 @@
             window.location.href = '/login';
         }
 
+        function displayMessage(msg, type) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${type}`;
+            messageDiv.textContent = msg;
+            document.getElementById('content-text').prepend(messageDiv);
+            setTimeout(() => {
+                messageDiv.remove();
+            }, 5000);
+        }
+
         function showHome() {
             const content = document.getElementById('content-text');
             content.innerHTML = `
-                <h2>Bem-vindo ao Painel de Controle</h2>
-                <p>Aqui você encontrará informações úteis sobre o uso da plataforma e recursos disponíveis.</p>
+                <h2>Bem-vindo, <span id="username">${username}</span>!</h2>
+                <p>Você está autenticado. Utilize as opções acima para navegar.</p>
                 <h3>Sobre o BCRYPT</h3>
-                <p>BCRYPT é um algoritmo de hashing de senhas que oferece segurança avançada para proteger os dados dos usuários.</p>
+                <p>BCRYPT é um algoritmo de hashing de senhas que oferece segurança avançada para proteger os dados dos usuários. Este curso irá guiá-lo através de todos os aspectos do BCRYPT, desde a instalação até implementações avançadas.</p>
                 <h3>FAQs</h3>
                 <div class="faq">
                     <div class="faq-item">
@@ -101,52 +112,768 @@
         function showCourse() {
             const content = document.getElementById('content-text');
             content.innerHTML = `
-                <h2>Curso de Segurança com BCRYPT</h2>
+                <h2>Curso Completo de Segurança com BCRYPT</h2>
                 <div class="modules">
-                    <!-- Módulo 1 -->
-                    <div class="module">
-                        <h3 onclick="toggleElement('module1')">Módulo 1: Introdução ao BCRYPT</h3>
-                        <div id="module1" class="lessons">
-                            <!-- Aula 1 -->
-                            <div class="lesson">
-                                <h4 onclick="toggleElement('lesson1')">Aula 1: O que é BCRYPT?</h4>
-                                <div id="lesson1" class="lesson-content">
-                                    <p>BCRYPT é um algoritmo de hashing de senhas que utiliza uma função adaptativa, tornando-o mais seguro contra ataques de força bruta...</p>
-                                </div>
-                            </div>
-                            <!-- Aula 2 -->
-                            <div class="lesson">
-                                <h4 onclick="toggleElement('lesson2')">Aula 2: Como funciona o BCRYPT?</h4>
-                                <div id="lesson2" class="lesson-content">
-                                    <p>O BCRYPT incorpora um fator de custo, que determina quantas vezes o algoritmo será executado, aumentando a segurança...</p>
-                                </div>
-                            </div>
-                            <!-- Aula 3 -->
-                            <div class="lesson">
-                                <h4 onclick="toggleElement('lesson3')">Aula 3: Implementação em Aplicações</h4>
-                                <div id="lesson3" class="lesson-content">
-                                    <p>Aprenda como implementar o BCRYPT em suas aplicações para garantir a segurança das senhas dos usuários...</p>
-                                </div>
-                            </div>
-                            <!-- Quiz -->
-                            <button onclick="toggleElement('quiz1')" class="btn quiz-btn">Fazer Quiz do Módulo 1</button>
-                            <div id="quiz1" class="quiz">
-                                <!-- Conteúdo do Quiz 1 -->
-                                <p><strong>Pergunta 1:</strong> O que é BCRYPT?</p>
-                                <ul>
-                                    <li><input type="radio" name="quiz1" value="A"> A) Um tipo de criptografia simétrica</li>
-                                    <li><input type="radio" name="quiz1" value="B"> B) Um algoritmo de hashing de senhas</li>
-                                    <li><input type="radio" name="quiz1" value="C"> C) Um protocolo de comunicação</li>
-                                    <li><input type="radio" name="quiz1" value="D"> D) Um banco de dados</li>
-                                </ul>
-                                <button onclick="checkAnswer('quiz1', 'B')" class="btn secondary-btn">Enviar Resposta</button>
-                                <p id="quiz1-answer" class="quiz-answer"></p>
-                            </div>
+                    ${modules.map(module => `
+                        <div class="module">
+                            <h3 onclick="openModule('${module.id}')">${module.title}</h3>
                         </div>
-                    </div>
-                    <!-- Adicione mais módulos conforme necessário -->
+                    `).join('')}
                 </div>
             `;
+        }
+
+        const modules = [
+            {
+                id: 'module1',
+                title: 'Módulo 1: Introdução ao BCRYPT',
+                lessons: [
+                    {
+                        id: 'lesson1',
+                        title: 'Aula 1: O que é BCRYPT?',
+                        content: `
+                            <h2>Aula 1: O que é BCRYPT?</h2>
+                            <button onclick="openModule('module1')" class="btn secondary-btn">Voltar às Aulas</button>
+                            <div class="lesson-content">
+                                <p>BCRYPT é um algoritmo de hashing de senhas baseado no cipher Blowfish e foi introduzido em 1999 por Niels Provos e David Mazieres. Ele foi projetado para ser computacionalmente intensivo, tornando ataques de força bruta menos viáveis.</p>
+                                <p>Diferente de algoritmos como MD5 ou SHA, o BCRYPT incorpora um fator de custo, também conhecido como work factor, que determina quantas vezes o algoritmo é executado. Isso permite que a segurança seja aumentada ao longo do tempo, conforme o poder computacional cresce.</p>
+                                <p>O BCRYPT também utiliza um salt exclusivo para cada senha, o que ajuda a proteger contra ataques de rainbow table. O salt é um valor aleatório que é concatenado com a senha antes do hashing, garantindo que senhas idênticas resultem em hashes diferentes.</p>
+                                <p>Em resumo, o BCRYPT é uma ferramenta essencial para qualquer desenvolvedor preocupado com a segurança das senhas dos usuários. Sua implementação adequada é crucial para proteger informações sensíveis e manter a confiança dos usuários.</p>
+                            </div>
+                        `
+                    },
+                    {
+                        id: 'lesson2',
+                        title: 'Aula 2: História e Evolução',
+                        content: `
+                            <h2>Aula 2: História e Evolução</h2>
+                            <button onclick="openModule('module1')" class="btn secondary-btn">Voltar às Aulas</button>
+                            <div class="lesson-content">
+                                <p>A história do BCRYPT começa com a necessidade de algoritmos de hashing mais seguros. Antes do BCRYPT, algoritmos como MD5 e SHA-1 eram amplamente utilizados, mas com o tempo, suas vulnerabilidades foram expostas.</p>
+                                <p>Com o aumento do poder computacional, tornou-se mais fácil para atacantes realizarem ataques de força bruta e de dicionário. O BCRYPT foi desenvolvido para mitigar esses riscos, introduzindo um algoritmo que pode ser ajustado para ser mais lento, dificultando ataques.</p>
+                                <p>Desde sua introdução, o BCRYPT tem sido adotado em diversas linguagens de programação e frameworks, tornando-se um padrão de fato para hashing seguro de senhas.</p>
+                                <p>A evolução do BCRYPT também abriu caminho para algoritmos mais recentes, como o Argon2, que participam de competições como o Password Hashing Competition (PHC) para definir novos padrões de segurança.</p>
+                            </div>
+                        `
+                    },
+                    {
+                        id: 'lesson3',
+                        title: 'Aula 3: Por que utilizar BCRYPT?',
+                        content: `
+                            <h2>Aula 3: Por que utilizar BCRYPT?</h2>
+                            <button onclick="openModule('module1')" class="btn secondary-btn">Voltar às Aulas</button>
+                            <div class="lesson-content">
+                                <p>Utilizar o BCRYPT para hashing de senhas oferece várias vantagens em termos de segurança:</p>
+                                <ul>
+                                    <li><strong>Fator de Custo Ajustável:</strong> Permite aumentar a complexidade do hashing conforme o poder computacional cresce.</li>
+                                    <li><strong>Salt Único:</strong> Garante que cada senha tenha um hash único, mesmo que os usuários tenham a mesma senha.</li>
+                                    <li><strong>Resistência a Ataques de Força Bruta:</strong> A natureza computacionalmente intensiva do BCRYPT dificulta a realização de ataques de força bruta.</li>
+                                    <li><strong>Implementações Amplamente Suportadas:</strong> Disponível em várias linguagens de programação e frameworks.</li>
+                                </ul>
+                                <p>Essas características fazem do BCRYPT uma escolha robusta para proteger as senhas dos usuários e, por consequência, a segurança geral do sistema.</p>
+                            </div>
+                        `
+                    }
+                ],
+                quiz: {
+                    id: 'module1-quiz',
+                    questions: [
+                        {
+                            question: 'O que é BCRYPT?',
+                            options: ['A) Um tipo de criptografia simétrica', 'B) Um algoritmo de hashing de senhas', 'C) Um protocolo de comunicação', 'D) Um banco de dados'],
+                            correct: 'B'
+                        },
+                        {
+                            question: 'Qual é a principal vantagem do fator de custo no BCRYPT?',
+                            options: ['A) Reduzir o tamanho do hash', 'B) Aumentar a velocidade de hashing', 'C) Ajustar a complexidade do hashing', 'D) Facilitar a implementação'],
+                            correct: 'C'
+                        }
+                    ]
+                }
+            },
+            {
+                id: 'module2',
+                title: 'Módulo 2: Instalação e Configuração',
+                lessons: [
+                    {
+                        id: 'lesson1',
+                        title: 'Aula 1: Instalando o BCRYPT em Diferentes Linguagens',
+                        content: `
+                            <h2>Aula 1: Instalando o BCRYPT em Diferentes Linguagens</h2>
+                            <button onclick="openModule('module2')" class="btn secondary-btn">Voltar às Aulas</button>
+                            <div class="lesson-content">
+                                <p>O BCRYPT pode ser instalado em várias linguagens de programação. Abaixo estão alguns exemplos de como instalá-lo nas linguagens mais comuns:</p>
+                                <h3>JavaScript (Node.js)</h3>
+                                <pre><code>npm install bcrypt</code></pre>
+                                <h3>Python</h3>
+                                <pre><code>pip install bcrypt</code></pre>
+                                <h3>PHP</h3>
+                                <pre><code>composer require bcrypt/bcrypt</code></pre>
+                                <h3>Ruby</h3>
+                                <pre><code>gem install bcrypt</code></pre>
+                                <p>Após a instalação, você pode começar a utilizar o BCRYPT em seu projeto conforme a documentação específica da linguagem escolhida.</p>
+                            </div>
+                        `
+                    },
+                    {
+                        id: 'lesson2',
+                        title: 'Aula 2: Configurando o Ambiente de Desenvolvimento',
+                        content: `
+                            <h2>Aula 2: Configurando o Ambiente de Desenvolvimento</h2>
+                            <button onclick="openModule('module2')" class="btn secondary-btn">Voltar às Aulas</button>
+                            <div class="lesson-content">
+                                <p>Configurar corretamente o ambiente de desenvolvimento é essencial para garantir que o BCRYPT funcione de maneira eficiente e segura. Siga os passos abaixo para configurar seu ambiente:</p>
+                                <ol>
+                                    <li><strong>Instale as Dependências:</strong> Certifique-se de que todas as bibliotecas necessárias para a linguagem escolhida estão instaladas.</li>
+                                    <li><strong>Configure Variáveis de Ambiente:</strong> Utilize variáveis de ambiente para armazenar chaves e salts de forma segura.</li>
+                                    <li><strong>Teste a Instalação:</strong> Crie um pequeno script para verificar se o BCRYPT está funcionando corretamente.</li>
+                                </ol>
+                                <h3>Exemplo em Node.js</h3>
+                                <pre><code>
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
+const myPlaintextPassword = 'senha123';
+
+bcrypt.hash(myPlaintextPassword, saltRounds, function(err, hash) {
+    if (err) throw err;
+    console.log('Hash:', hash);
+});
+                                </code></pre>
+                                <p>Execute o script acima para verificar se o BCRYPT está instalado corretamente.</p>
+                            </div>
+                        `
+                    },
+                    {
+                        id: 'lesson3',
+                        title: 'Aula 3: Testando a Instalação',
+                        content: `
+                            <h2>Aula 3: Testando a Instalação</h2>
+                            <button onclick="openModule('module2')" class="btn secondary-btn">Voltar às Aulas</button>
+                            <div class="lesson-content">
+                                <p>Após a instalação e configuração, é importante testar se o BCRYPT está funcionando corretamente. Abaixo está um exemplo de como realizar esse teste em Node.js:</p>
+                                <pre><code>
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
+const password = 'minhaSenhaSegura';
+
+// Gerar hash
+bcrypt.hash(password, saltRounds, function(err, hash) {
+    if (err) throw err;
+    console.log('Hash gerado:', hash);
+
+    // Verificar senha
+    bcrypt.compare(password, hash, function(err, result) {
+        if (err) throw err;
+        console.log('Senha corresponde ao hash?', result); // Deve retornar true
+    });
+});
+                                </code></pre>
+                                <p>Execute o script e verifique se o hash é gerado corretamente e se a verificação da senha retorna true.</p>
+                            </div>
+                        `
+                    }
+                ],
+                quiz: {
+                    id: 'module2-quiz',
+                    questions: [
+                        {
+                            question: 'Como instalar o BCRYPT no Node.js?',
+                            options: ['A) npm install bcrypt', 'B) pip install bcrypt', 'C) composer require bcrypt', 'D) gem install bcrypt'],
+                            correct: 'A'
+                        },
+                        {
+                            question: 'Qual é a função do salt no BCRYPT?',
+                            options: ['A) Reduzir o tamanho do hash', 'B) Aumentar a velocidade de hashing', 'C) Garantir que hashes iguais sejam únicos', 'D) Facilitar a implementação'],
+                            correct: 'C'
+                        }
+                    ]
+                }
+            },
+            {
+                id: 'module3',
+                title: 'Módulo 3: Implementação Básica',
+                lessons: [
+                    {
+                        id: 'lesson1',
+                        title: 'Aula 1: Hashing de Senhas com BCRYPT',
+                        content: `
+                            <h2>Aula 1: Hashing de Senhas com BCRYPT</h2>
+                            <button onclick="openModule('module3')" class="btn secondary-btn">Voltar às Aulas</button>
+                            <div class="lesson-content">
+                                <p>O processo de hashing de senhas com BCRYPT envolve duas etapas principais: geração do hash e verificação da senha. Abaixo está um exemplo básico de como implementar essas etapas em Node.js:</p>
+                                <h3>Gerando um Hash</h3>
+                                <pre><code>
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
+const password = 'minhaSenha123';
+
+bcrypt.hash(password, saltRounds, function(err, hash) {
+    if (err) throw err;
+    console.log('Hash:', hash);
+});
+                                </code></pre>
+                                <h3>Verificando a Senha</h3>
+                                <pre><code>
+const bcrypt = require('bcrypt');
+const password = 'minhaSenha123';
+const hash = '$2b$10$EixZaYVK1fsbw1ZfbX3OXePaWxn96p36tyA0aE9F6eGdE6K/aeS1O';
+
+bcrypt.compare(password, hash, function(err, result) {
+    if (err) throw err;
+    console.log('Senha correta?', result); // Deve retornar true
+});
+                                </code></pre>
+                                <p>Esses exemplos demonstram como gerar um hash a partir de uma senha e como verificar se uma senha corresponde a um hash existente.</p>
+                            </div>
+                        `
+                    },
+                    {
+                        id: 'lesson2',
+                        title: 'Aula 2: Armazenando Hashes no Banco de Dados',
+                        content: `
+                            <h2>Aula 2: Armazenando Hashes no Banco de Dados</h2>
+                            <button onclick="openModule('module3')" class="btn secondary-btn">Voltar às Aulas</button>
+                            <div class="lesson-content">
+                                <p>Após gerar o hash da senha, o próximo passo é armazená-lo de forma segura no banco de dados. Abaixo está um exemplo de como fazer isso usando Node.js e MongoDB:</p>
+                                <pre><code>
+const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
+
+const userSchema = new mongoose.Schema({
+    username: String,
+    password: String
+});
+
+const User = mongoose.model('User', userSchema);
+
+function registerUser(username, password) {
+    bcrypt.hash(password, 10, function(err, hash) {
+        if (err) throw err;
+        const newUser = new User({ username, password: hash });
+        newUser.save(function(err) {
+            if (err) throw err;
+            console.log('Usuário registrado com sucesso!');
+        });
+    });
+}
+
+registerUser('usuarioExemplo', 'senhaSegura123');
+                                </code></pre>
+                                <p>Esse script registra um novo usuário, hash a senha e armazena o usuário no MongoDB.</p>
+                            </div>
+                        `
+                    },
+                    {
+                        id: 'lesson3',
+                        title: 'Aula 3: Autenticação de Usuários',
+                        content: `
+                            <h2>Aula 3: Autenticação de Usuários</h2>
+                            <button onclick="openModule('module3')" class="btn secondary-btn">Voltar às Aulas</button>
+                            <div class="lesson-content">
+                                <p>A autenticação de usuários envolve verificar se a senha fornecida corresponde ao hash armazenado. Abaixo está um exemplo de como implementar essa verificação:</p>
+                                <pre><code>
+const bcrypt = require('bcrypt');
+
+function authenticateUser(inputPassword, storedHash) {
+    bcrypt.compare(inputPassword, storedHash, function(err, result) {
+        if (err) throw err;
+        if (result) {
+            console.log('Autenticação bem-sucedida!');
+        } else {
+            console.log('Senha incorreta.');
+        }
+    });
+}
+
+// Exemplo de uso
+const inputPassword = 'senhaSegura123';
+const storedHash = '$2b$10$EixZaYVK1fsbw1ZfbX3OXePaWxn96p36tyA0aE9F6eGdE6K/aeS1O';
+authenticateUser(inputPassword, storedHash);
+                                </code></pre>
+                                <p>Esse script verifica se a senha fornecida pelo usuário corresponde ao hash armazenado no banco de dados.</p>
+                            </div>
+                        `
+                    }
+                ],
+                quiz: {
+                    id: 'module3-quiz',
+                    questions: [
+                        {
+                            question: 'Qual função do BCRYPT é usada para gerar o hash de uma senha?',
+                            options: ['A) bcrypt.compare', 'B) bcrypt.hash', 'C) bcrypt.encrypt', 'D) bcrypt.generate'],
+                            correct: 'B'
+                        },
+                        {
+                            question: 'Como você verifica se uma senha fornecida corresponde ao hash armazenado?',
+                            options: ['A) bcrypt.verify', 'B) bcrypt.check', 'C) bcrypt.compare', 'D) bcrypt.match'],
+                            correct: 'C'
+                        }
+                    ]
+                }
+            },
+            // Adicione os módulos 4 a 7 aqui com estrutura similar
+            {
+                id: 'module4',
+                title: 'Módulo 4: Boas Práticas de Segurança',
+                lessons: [
+                    {
+                        id: 'lesson1',
+                        title: 'Aula 1: Escolhendo o Fator de Custo Adequado',
+                        content: `
+                            <h2>Aula 1: Escolhendo o Fator de Custo Adequado</h2>
+                            <button onclick="openModule('module4')" class="btn secondary-btn">Voltar às Aulas</button>
+                            <div class="lesson-content">
+                                <p>O fator de custo (salt rounds) determina a complexidade e o tempo necessário para gerar um hash com BCRYPT. Escolher o fator de custo adequado é essencial para equilibrar a segurança e a performance do sistema.</p>
+                                <p>Um fator de custo mais alto aumenta a segurança, tornando ataques de força bruta mais difíceis, mas também aumenta o tempo de processamento. Recomenda-se iniciar com um fator de custo de 10 e ajustar conforme necessário.</p>
+                                <pre><code>
+// Exemplo de configuração com fator de custo 12
+const saltRounds = 12;
+bcrypt.hash(password, saltRounds, function(err, hash) {
+    // Armazena o hash
+});
+                                </code></pre>
+                                <p>Teste diferentes valores de salt rounds para encontrar um equilíbrio ideal entre segurança e performance para a sua aplicação.</p>
+                            </div>
+                        `
+                    },
+                    {
+                        id: 'lesson2',
+                        title: 'Aula 2: Protegendo Contra Ataques de Timing',
+                        content: `
+                            <h2>Aula 2: Protegendo Contra Ataques de Timing</h2>
+                            <button onclick="openModule('module4')" class="btn secondary-btn">Voltar às Aulas</button>
+                            <div class="lesson-content">
+                                <p>Os ataques de timing exploram diferenças no tempo de execução das operações para obter informações sensíveis. Para proteger sua aplicação, é importante minimizar essas diferenças.</p>
+                                <p>Utilize funções de comparação seguras, como bcrypt.compare, que são projetadas para evitar ataques de timing.</p>
+                                <pre><code>
+bcrypt.compare(inputPassword, storedHash, function(err, result) {
+    if (err) throw err;
+    if (result) {
+        // Senha correta
+    } else {
+        // Senha incorreta
+    }
+});
+                                </code></pre>
+                                <p>Evite implementar suas próprias funções de comparação que possam ser vulneráveis a ataques de timing.</p>
+                            </div>
+                        `
+                    },
+                    {
+                        id: 'lesson3',
+                        title: 'Aula 3: Armazenamento Seguro de Hashes',
+                        content: `
+                            <h2>Aula 3: Armazenamento Seguro de Hashes</h2>
+                            <button onclick="openModule('module4')" class="btn secondary-btn">Voltar às Aulas</button>
+                            <div class="lesson-content">
+                                <p>Armazenar os hashes de senhas de forma segura é fundamental para a proteção dos dados dos usuários. Siga estas práticas recomendadas:</p>
+                                <ul>
+                                    <li><strong>Use um Banco de Dados Seguro:</strong> Garanta que o banco de dados esteja protegido contra acessos não autorizados.</li>
+                                    <li><strong>Restrinja Acessos:</strong> Apenas componentes autorizados da aplicação devem ter acesso aos hashes.</li>
+                                    <li><strong>Criptografe os Dados em Repouso:</strong> Utilize criptografia para proteger os dados armazenados no banco.</li>
+                                    <li><strong>Implemente Auditorias:</strong> Monitore e audite acessos aos hashes para detectar atividades suspeitas.</li>
+                                </ul>
+                                <p>Seguindo essas práticas, você aumentará significativamente a segurança das senhas armazenadas na sua aplicação.</p>
+                            </div>
+                        `
+                    }
+                ],
+                quiz: {
+                    id: 'module4-quiz',
+                    questions: [
+                        {
+                            question: 'Por que é importante escolher um fator de custo adequado no BCRYPT?',
+                            options: ['A) Para reduzir o tamanho do hash', 'B) Para equilibrar segurança e performance', 'C) Para facilitar a implementação', 'D) Para aumentar a velocidade de hashing'],
+                            correct: 'B'
+                        },
+                        {
+                            question: 'Qual função do BCRYPT ajuda a proteger contra ataques de timing?',
+                            options: ['A) bcrypt.hash', 'B) bcrypt.compare', 'C) bcrypt.encrypt', 'D) bcrypt.generate'],
+                            correct: 'B'
+                        }
+                    ]
+                }
+            },
+            {
+                id: 'module5',
+                title: 'Módulo 5: Casos Avançados',
+                lessons: [
+                    {
+                        id: 'lesson1',
+                        title: 'Aula 1: Integração com Sistemas de Autenticação',
+                        content: `
+                            <h2>Aula 1: Integração com Sistemas de Autenticação</h2>
+                            <button onclick="openModule('module5')" class="btn secondary-btn">Voltar às Aulas</button>
+                            <div class="lesson-content">
+                                <p>Integrar o BCRYPT com sistemas de autenticação existentes é essencial para garantir a segurança das senhas dos usuários. Abaixo está um exemplo de como integrar o BCRYPT com um sistema de autenticação JWT em Node.js:</p>
+                                <pre><code>
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
+
+function login(username, password) {
+    User.findOne({ username }, function(err, user) {
+        if (err) throw err;
+        if (!user) {
+            return console.log('Usuário não encontrado.');
+        }
+
+        bcrypt.compare(password, user.password, function(err, result) {
+            if (err) throw err;
+            if (result) {
+                const token = jwt.sign({ id: user._id, name: user.username }, 'segredo', { expiresIn: '1h' });
+                console.log('Token JWT:', token);
+            } else {
+                console.log('Senha incorreta.');
+            }
+        });
+    });
+}
+
+login('usuarioExemplo', 'senhaSegura123');
+                                </code></pre>
+                                <p>Esse script autentica um usuário verificando a senha e, se correta, gera um token JWT para sessões seguras.</p>
+                            </div>
+                        `
+                    },
+                    {
+                        id: 'lesson2',
+                        title: 'Aula 2: Migração de Sistemas Legados para BCRYPT',
+                        content: `
+                            <h2>Aula 2: Migração de Sistemas Legados para BCRYPT</h2>
+                            <button onclick="openModule('module5')" class="btn secondary-btn">Voltar às Aulas</button>
+                            <div class="lesson-content">
+                                <p>Migrar sistemas legados para utilizar o BCRYPT requer planejamento cuidadoso para garantir que a segurança seja mantida durante o processo. Siga estes passos:</p>
+                                <ol>
+                                    <li><strong>Auditoria de Senhas:</strong> Analise como as senhas são armazenadas atualmente.</li>
+                                    <li><strong>Implementação do BCRYPT:</strong> Atualize o sistema para utilizar o BCRYPT para hashing de novas senhas.</li>
+                                    <li><strong>Migração Gradual:</strong> Converta as senhas existentes para BCRYPT à medida que os usuários fazem login ou alteram suas senhas.</li>
+                                    <li><strong>Testes Rigorosos:</strong> Teste todas as funcionalidades para garantir que a migração não introduza vulnerabilidades.</li>
+                                </ol>
+                                <p>Com essas etapas, você pode migrar de maneira segura e eficiente, melhorando a segurança das senhas dos usuários.</p>
+                            </div>
+                        `
+                    },
+                    {
+                        id: 'lesson3',
+                        title: 'Aula 3: Uso Avançado de Salts e Work Factors',
+                        content: `
+                            <h2>Aula 3: Uso Avançado de Salts e Work Factors</h2>
+                            <button onclick="openModule('module5')" class="btn secondary-btn">Voltar às Aulas</button>
+                            <div class="lesson-content">
+                                <p>O uso avançado de salts e work factors no BCRYPT pode aumentar ainda mais a segurança das senhas. Veja como otimizar esses parâmetros:</p>
+                                <h3>Salts Customizados</h3>
+                                <p>Embora o BCRYPT gere automaticamente um salt, você pode personalizar a geração para casos específicos:</p>
+                                <pre><code>
+const salt = bcrypt.genSaltSync(12);
+const hash = bcrypt.hashSync(password, salt);
+                                </code></pre>
+                                <h3>Ajustando o Work Factor Dinamicamente</h3>
+                                <p>Adapte o work factor com base na carga do sistema para manter a performance:</p>
+                                <pre><code>
+const workFactor = getOptimalWorkFactor(); // Função que determina o work factor
+bcrypt.hash(password, workFactor, function(err, hash) {
+    // Armazena o hash
+});
+                                </code></pre>
+                                <p>Monitorar e ajustar dinamicamente o work factor ajuda a manter um equilíbrio entre segurança e performance.</p>
+                            </div>
+                        `
+                    }
+                ],
+                quiz: {
+                    id: 'module5-quiz',
+                    questions: [
+                        {
+                            question: 'Qual é a principal razão para migrar sistemas legados para BCRYPT?',
+                            options: ['A) Reduzir o tamanho das senhas', 'B) Melhorar a segurança das senhas armazenadas', 'C) Aumentar a velocidade de autenticação', 'D) Facilitar a implementação'],
+                            correct: 'B'
+                        },
+                        {
+                            question: 'Como você pode ajustar o work factor dinamicamente?',
+                            options: ['A) Alterando o salt manualmente', 'B) Utilizando uma função que determina o work factor com base na carga do sistema', 'C) Aumentando o tamanho do banco de dados', 'D) Reduzindo o tamanho das senhas'],
+                            correct: 'B'
+                        }
+                    ]
+                }
+            },
+            {
+                id: 'module6',
+                title: 'Módulo 6: Integração com Frameworks',
+                lessons: [
+                    {
+                        id: 'lesson1',
+                        title: 'Aula 1: Integração com Express.js',
+                        content: `
+                            <h2>Aula 1: Integração com Express.js</h2>
+                            <button onclick="openModule('module6')" class="btn secondary-btn">Voltar às Aulas</button>
+                            <div class="lesson-content">
+                                <p>Integrar o BCRYPT com o framework Express.js facilita a implementação de autenticação segura. Veja como configurar o BCRYPT em uma aplicação Express.js:</p>
+                                <pre><code>
+const express = require('express');
+const bcrypt = require('bcrypt');
+const app = express();
+
+app.use(express.json());
+
+app.post('/register', async (req, res) => {
+    const { username, password } = req.body;
+    const hash = await bcrypt.hash(password, 10);
+    // Armazene o usuário com o hash no banco de dados
+    res.send('Usuário registrado!');
+});
+
+app.post('/login', async (req, res) => {
+    const { username, password } = req.body;
+    // Recupere o usuário do banco de dados
+    const user = await getUserByUsername(username);
+    if (user && await bcrypt.compare(password, user.password)) {
+        res.send('Login bem-sucedido!');
+    } else {
+        res.status(401).send('Credenciais inválidas.');
+    }
+});
+
+app.listen(3000, () => {
+    console.log('Servidor rodando na porta 3000');
+});
+                                </code></pre>
+                                <p>Esse exemplo mostra como criar rotas de registro e login utilizando o BCRYPT para hashing e verificação de senhas.</p>
+                            </div>
+                        `
+                    },
+                    {
+                        id: 'lesson2',
+                        title: 'Aula 2: Integração com Django',
+                        content: `
+                            <h2>Aula 2: Integração com Django</h2>
+                            <button onclick="openModule('module6')" class="btn secondary-btn">Voltar às Aulas</button>
+                            <div class="lesson-content">
+                                <p>Em Django, a integração com BCRYPT pode ser feita utilizando bibliotecas adicionais. Abaixo está um exemplo de como configurar o BCRYPT em um projeto Django:</p>
+                                <pre><code>
+# Instale a biblioteca bcrypt
+pip install bcrypt
+
+# No settings.py, configure o password hasher
+PASSWORD_HASHERS = [
+    'django.contrib.auth.hashers.BCryptSHA256PasswordHasher',
+    'django.contrib.auth.hashers.PBKDF2PasswordHasher',
+    # Outros hashers
+]
+                                </code></pre>
+                                <p>Com essa configuração, Django utilizará o BCRYPTSHA256PasswordHasher para hashing de senhas, proporcionando uma camada adicional de segurança.</p>
+                            </div>
+                        `
+                    },
+                    {
+                        id: 'lesson3',
+                        title: 'Aula 3: Integração com Laravel',
+                        content: `
+                            <h2>Aula 3: Integração com Laravel</h2>
+                            <button onclick="openModule('module6')" class="btn secondary-btn">Voltar às Aulas</button>
+                            <div class="lesson-content">
+                                <p>Laravel já vem com suporte nativo para BCRYPT. Veja como utilizá-lo em uma aplicação Laravel:</p>
+                                <pre><code>
+// Registrando um usuário
+use Illuminate\Support\Facades\Hash;
+
+$user = new User;
+$user->name = 'usuarioExemplo';
+$user->password = Hash::make('senhaSegura123');
+$user->save();
+
+// Autenticando um usuário
+if (Hash::check('senhaSegura123', $user->password)) {
+    // Senha correta
+} else {
+    // Senha incorreta
+}
+                                </code></pre>
+                                <p>Laravel simplifica o uso do BCRYPT com a facade Hash, tornando fácil implementar autenticação segura.</p>
+                            </div>
+                        `
+                    }
+                ],
+                quiz: {
+                    id: 'module6-quiz',
+                    questions: [
+                        {
+                            question: 'Como você configura o BCRYPT como hasher padrão no Django?',
+                            options: ['A) Adicionando "django.contrib.auth.hashers.BCryptPasswordHasher" em PASSWORD_HASHERS', 'B) Instalando um pacote externo', 'C) Utilizando a função bcrypt.hash diretamente', 'D) Configurando no arquivo urls.py'],
+                            correct: 'A'
+                        },
+                        {
+                            question: 'Qual facade Laravel é usada para hashing de senhas?',
+                            options: ['A) Encrypt', 'B) Hash', 'C) Secure', 'D) Crypto'],
+                            correct: 'B'
+                        }
+                    ]
+                }
+            },
+            {
+                id: 'module7',
+                title: 'Módulo 7: Projeto Final',
+                lessons: [
+                    {
+                        id: 'lesson1',
+                        title: 'Aula 1: Planejamento do Projeto',
+                        content: `
+                            <h2>Aula 1: Planejamento do Projeto</h2>
+                            <button onclick="openModule('module7')" class="btn secondary-btn">Voltar às Aulas</button>
+                            <div class="lesson-content">
+                                <p>O projeto final do curso envolverá a criação de uma aplicação completa que utiliza o BCRYPT para autenticação de usuários. Siga os passos abaixo para planejar seu projeto:</p>
+                                <ol>
+                                    <li><strong>Definir Requisitos:</strong> Determine quais funcionalidades a aplicação terá (registro, login, recuperação de senha, etc.).</li>
+                                    <li><strong>Escolher a Stack Tecnológica:</strong> Decida quais linguagens, frameworks e banco de dados serão utilizados.</li>
+                                    <li><strong>Estruturar o Banco de Dados:</strong> Planeje as tabelas e relacionamentos necessários.</li>
+                                    <li><strong>Planejar a Segurança:</strong> Além do BCRYPT, considere outras práticas de segurança, como proteção contra SQL Injection, XSS, etc.</li>
+                                </ol>
+                                <p>Um bom planejamento é crucial para o sucesso do projeto e para garantir que todas as funcionalidades de segurança sejam implementadas corretamente.</p>
+                            </div>
+                        `
+                    },
+                    {
+                        id: 'lesson2',
+                        title: 'Aula 2: Implementação das Funcionalidades Básicas',
+                        content: `
+                            <h2>Aula 2: Implementação das Funcionalidades Básicas</h2>
+                            <button onclick="openModule('module7')" class="btn secondary-btn">Voltar às Aulas</button>
+                            <div class="lesson-content">
+                                <p>Com o planejamento concluído, inicie a implementação das funcionalidades básicas da aplicação:</p>
+                                <h3>Registro de Usuários</h3>
+                                <pre><code>
+// Exemplo em Node.js com Express
+app.post('/register', async (req, res) => {
+    const { username, password } = req.body;
+    const hash = await bcrypt.hash(password, 10);
+    const newUser = new User({ username, password: hash });
+    await newUser.save();
+    res.send('Usuário registrado com sucesso!');
+});
+                                </code></pre>
+                                <h3>Login de Usuários</h3>
+                                <pre><code>
+app.post('/login', async (req, res) => {
+    const { username, password } = req.body;
+    const user = await User.findOne({ username });
+    if (user && await bcrypt.compare(password, user.password)) {
+        // Gerar token JWT
+        const token = jwt.sign({ id: user._id, name: user.username }, 'segredo', { expiresIn: '1h' });
+        res.json({ token });
+    } else {
+        res.status(401).send('Credenciais inválidas.');
+    }
+});
+                                </code></pre>
+                                <p>Essas rotas permitem que os usuários se registrem e façam login de forma segura, utilizando o BCRYPT para hashing de senhas.</p>
+                            </div>
+                        `
+                    },
+                    {
+                        id: 'lesson3',
+                        title: 'Aula 3: Testes e Validação',
+                        content: `
+                            <h2>Aula 3: Testes e Validação</h2>
+                            <button onclick="openModule('module7')" class="btn secondary-btn">Voltar às Aulas</button>
+                            <div class="lesson-content">
+                                <p>Após implementar as funcionalidades, é essencial realizar testes para garantir que tudo está funcionando corretamente:</p>
+                                <ul>
+                                    <li><strong>Testes Unitários:</strong> Teste individualmente cada função para garantir que está retornando os resultados esperados.</li>
+                                    <li><strong>Testes de Integração:</strong> Verifique se os diferentes componentes da aplicação estão funcionando juntos conforme o planejado.</li>
+                                    <li><strong>Testes de Segurança:</strong> Realize testes para identificar possíveis vulnerabilidades na aplicação.</li>
+                                </ul>
+                                <p>Exemplo de teste unitário em Node.js com Jest:</p>
+                                <pre><code>
+const bcrypt = require('bcrypt');
+
+test('Hash e comparação de senha', async () => {
+    const password = 'senhaSegura123';
+    const hash = await bcrypt.hash(password, 10);
+    const isMatch = await bcrypt.compare(password, hash);
+    expect(isMatch).toBe(true);
+});
+                                </code></pre>
+                                <p>Executando esses testes, você pode garantir que a implementação do BCRYPT está correta e segura.</p>
+                            </div>
+                        `
+                    }
+                ],
+                quiz: {
+                    id: 'module7-quiz',
+                    questions: [
+                        {
+                            question: 'Qual é o primeiro passo no planejamento do projeto final?',
+                            options: ['A) Implementar as funcionalidades', 'B) Definir requisitos', 'C) Testar a aplicação', 'D) Escolher a stack tecnológica'],
+                            correct: 'B'
+                        },
+                        {
+                            question: 'Por que os testes de segurança são importantes?',
+                            options: ['A) Para melhorar a performance', 'B) Para identificar vulnerabilidades', 'C) Para facilitar a implementação', 'D) Para reduzir o custo do projeto'],
+                            correct: 'B'
+                        }
+                    ]
+                }
+            }
+        ];
+
+        function openModule(moduleId) {
+            const module = modules.find(m => m.id === moduleId);
+            if (!module) {
+                displayMessage('Módulo não encontrado.', 'error');
+                return;
+            }
+
+            let lessonsContent = `
+                <h2>${module.title}</h2>
+                <button onclick="showCourse()" class="btn secondary-btn">Voltar aos Módulos</button>
+                <div class="lessons">
+                    ${module.lessons.map(lesson => `
+                        <div class="lesson">
+                            <h4 onclick="openLesson('${moduleId}', '${lesson.id}')">${lesson.title}</h4>
+                        </div>
+                    `).join('')}
+                </div>
+                <button onclick="toggleQuiz('${module.quiz.id}')" class="btn quiz-btn">Fazer Quiz do ${module.title}</button>
+                <div id="${module.quiz.id}" class="quiz">
+                    ${module.quiz.questions.map((q, index) => `
+                        <p><strong>Pergunta ${index + 1}:</strong> ${q.question}</p>
+                        <ul>
+                            ${q.options.map(option => `
+                                <li><label><input type="radio" name="${module.quiz.id}-q${index + 1}" value="${option.charAt(0)}"> ${option}</label></li>
+                            `).join('')}
+                        </ul>
+                        <button onclick="checkAnswer('${module.quiz.id}-q${index + 1}', '${q.correct}')" class="btn secondary-btn">Enviar Resposta</button>
+                        <p id="${module.quiz.id}-q${index + 1}-answer" class="quiz-answer"></p>
+                        <hr>
+                    `).join('')}
+                </div>
+            `;
+
+            const content = document.getElementById('content-text');
+            content.innerHTML = lessonsContent;
+        }
+
+        function openLesson(moduleId, lessonId) {
+            const module = modules.find(m => m.id === moduleId);
+            if (!module) {
+                displayMessage('Módulo não encontrado.', 'error');
+                return;
+            }
+
+            const lesson = module.lessons.find(l => l.id === lessonId);
+            if (!lesson) {
+                displayMessage('Aula não encontrada.', 'error');
+                return;
+            }
+
+            const content = document.getElementById('content-text');
+            content.innerHTML = lesson.content;
+        }
+
+        function toggleQuiz(quizId) {
+            const quiz = document.getElementById(quizId);
+            if (quiz) {
+                quiz.style.display = quiz.style.display === 'block' ? 'none' : 'block';
+            }
         }
 
         function viewMembers() {
@@ -194,11 +921,11 @@
             })
             .catch(error => {
                 console.error('Erro:', error);
-                alert('Erro ao carregar os membros. Por favor, tente novamente.');
+                displayMessage('Erro ao carregar os membros. Por favor, tente novamente.', 'error');
             });
         }
 
-        function viewProfile() {
+        function viewProfile(message = '', messageType = 'success') {
             fetch('/users/me', {
                 method: 'GET',
                 headers: {
@@ -216,31 +943,191 @@
                 content.innerHTML = `
                     <h2>Meus Dados</h2>
                     <div class="profile-info">
-                        <p><strong>Nome:</strong> ${data.name}</p>
-                        <p><strong>Email:</strong> ${data.email}</p>
+                        <div class="profile-field">
+                            <label>Nome:</label>
+                            <span>${data.name}</span>
+                        </div>
+                        <div class="profile-field">
+                            <label>Email:</label>
+                            <span>${data.email}</span>
+                        </div>
+                        <div class="profile-buttons">
+                            <button onclick="editProfile('${data.name}', '${data.email}')" class="btn secondary-btn">Editar Dados</button>
+                            <button onclick="changePassword()" class="btn secondary-btn">Alterar Senha</button>
+                            <button onclick="confirmDeleteAccount()" class="btn danger-btn">Apagar Conta</button>
+                        </div>
                     </div>
+                    ${message ? `<div id="message" class="message ${messageType}">${message}</div>` : ''}
                 `;
             })
             .catch(error => {
                 console.error('Erro:', error);
-                alert('Erro ao carregar seus dados. Por favor, tente novamente.');
+                displayMessage('Erro ao carregar seus dados. Por favor, tente novamente.', 'error');
             });
         }
 
+        function editProfile(currentName, currentEmail) {
+            const content = document.getElementById('content-text');
+            content.innerHTML = `
+                <h2>Editar Meus Dados</h2>
+                <div class="edit-profile-form">
+                    <label for="edit-name">Nome:</label>
+                    <input type="text" id="edit-name" name="edit-name" value="${currentName}">
+                    <label for="edit-email">Email:</label>
+                    <input type="email" id="edit-email" name="edit-email" value="${currentEmail}">
+                    <div class="form-buttons">
+                        <button onclick="saveProfile()" class="btn primary-btn">Salvar Alterações</button>
+                        <button onclick="viewProfile()" class="btn secondary-btn">Cancelar</button>
+                    </div>
+                </div>
+                <div id="message" class="message"></div>
+            `;
+        }
+
+        function saveProfile() {
+            const name = document.getElementById('edit-name').value.trim();
+            const email = document.getElementById('edit-email').value.trim();
+
+            fetch('/users/me', {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + token
+                },
+                body: JSON.stringify({ name, email })
+            })
+            .then(response => {
+                return response.json().then(data => {
+                    if (!response.ok) {
+                        throw new Error(data.error || 'Erro ao atualizar os dados.');
+                    }
+                    return data;
+                });
+            })
+            .then(data => {
+                viewProfile('Dados atualizados com sucesso!', 'success');
+            })
+            .catch(error => {
+                console.error('Erro:', error);
+                displayMessage(error.message, 'error');
+            });
+        }
+
+        function changePassword() {
+            const content = document.getElementById('content-text');
+            content.innerHTML = `
+                <h2>Alterar Senha</h2>
+                <div class="change-password-form">
+                    <label for="current-password">Senha Atual:</label>
+                    <input type="password" id="current-password" name="current-password">
+                    <label for="new-password">Nova Senha:</label>
+                    <input type="password" id="new-password" name="new-password">
+                    <label for="confirm-password">Confirme a Nova Senha:</label>
+                    <input type="password" id="confirm-password" name="confirm-password">
+                    <div class="form-buttons">
+                        <button onclick="savePassword()" class="btn primary-btn">Alterar Senha</button>
+                        <button onclick="viewProfile()" class="btn secondary-btn">Cancelar</button>
+                    </div>
+                </div>
+                <div id="message" class="message"></div>
+            `;
+        }
+
+        function savePassword() {
+            const currentPassword = document.getElementById('current-password').value;
+            const newPassword = document.getElementById('new-password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+
+            if (newPassword !== confirmPassword) {
+                displayMessage('A nova senha e a confirmação não correspondem.', 'error');
+                return;
+            }
+
+            fetch('/users/me/password', {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + token
+                },
+                body: JSON.stringify({ currentPassword, newPassword })
+            })
+            .then(response => {
+                return response.json().then(data => {
+                    if (!response.ok) {
+                        throw new Error(data.error || 'Erro ao alterar a senha.');
+                    }
+                    return data;
+                });
+            })
+            .then(data => {
+                viewProfile('Senha alterada com sucesso!', 'success');
+            })
+            .catch(error => {
+                console.error('Erro:', error);
+                displayMessage(error.message, 'error');
+            });
+        }
+
+        function confirmDeleteAccount() {
+            const content = document.getElementById('content-text');
+            content.innerHTML = `
+                <h2>Confirmar Exclusão da Conta</h2>
+                <div class="delete-account-form">
+                    <p>Digite sua senha para confirmar a exclusão da conta.</p>
+                    <label for="delete-password">Senha:</label>
+                    <input type="password" id="delete-password" name="delete-password">
+                    <div class="form-buttons">
+                        <button onclick="deleteAccount()" class="btn danger-btn">Apagar Conta</button>
+                        <button onclick="viewProfile()" class="btn secondary-btn">Cancelar</button>
+                    </div>
+                </div>
+                <div id="message" class="message"></div>
+            `;
+        }
+
+        function deleteAccount() {
+            const password = document.getElementById('delete-password').value;
+
+            if (!password) {
+                displayMessage('Por favor, insira sua senha para confirmar.', 'error');
+                return;
+            }
+
+            fetch('/users/me', {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + token
+                },
+                body: JSON.stringify({ password })
+            })
+            .then(response => {
+                return response.json().then(data => {
+                    if (!response.ok) {
+                        throw new Error(data.error || 'Erro ao apagar a conta.');
+                    }
+                    return data;
+                });
+            })
+            .then(data => {
+                logout();
+            })
+            .catch(error => {
+                console.error('Erro:', error);
+                displayMessage(error.message, 'error');
+            });
+        }
 
         function toggleElement(elementId) {
             const element = document.getElementById(elementId);
-            if (element.style.display === 'none' || element.style.display === '') {
-                element.style.display = 'block';
-            } else {
-                element.style.display = 'none';
+            if (element) {
+                element.style.display = element.style.display === 'block' ? 'none' : 'block';
             }
         }
 
-        function checkAnswer(quizId, correctOption) {
-            const quiz = document.getElementById(quizId);
-            const selectedOption = quiz.querySelector('input[name="' + quizId + '"]:checked');
-            const answerPara = document.getElementById(`${quizId}-answer`);
+        function checkAnswer(questionName, correctOption) {
+            const selectedOption = document.querySelector(`input[name="${questionName}"]:checked`);
+            const answerPara = document.getElementById(`${questionName}-answer`);
 
             if (selectedOption) {
                 const userAnswer = selectedOption.value;
@@ -248,7 +1135,8 @@
                     answerPara.textContent = 'Correto! 🎉';
                     answerPara.style.color = '#28BDD2';
                 } else {
-                    answerPara.textContent = 'Incorreto. A resposta correta é: ' + correctOption;
+                    const correctOptionLabel = document.querySelector(`input[name="${questionName}"][value="${correctOption}"]`).parentElement.textContent.trim();
+                    answerPara.textContent = 'Incorreto. A resposta correta é: ' + correctOptionLabel;
                     answerPara.style.color = '#f8d7da';
                 }
             } else {
@@ -256,6 +1144,8 @@
                 answerPara.style.color = '#f8d7da';
             }
         }
+
+        showHome();
     </script>
 </body>
 </html>

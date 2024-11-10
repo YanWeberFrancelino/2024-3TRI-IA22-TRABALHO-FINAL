@@ -22,6 +22,49 @@
     font-size: 18px;
 }
 
+/* ----------------- Seção de Recursos (Features Section) ----------------- */
+.features-section {
+    padding: 60px 40px;
+    background-color: #1A1F2D;
+}
+
+.features-section h2 {
+    text-align: center;
+    font-size: 32px;
+    margin-bottom: 40px;
+    font-family: 'Barlow Condensed', sans-serif;
+}
+
+.features {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.feature-item {
+    background-color: #2A324B;
+    padding: 20px;
+    border-radius: 8px;
+    width: 30%;
+    min-width: 250px;
+    text-align: center;
+}
+
+.feature-item h3 {
+    font-size: 24px;
+    margin-bottom: 15px;
+    color: #28BDD2;
+    font-family: 'Barlow Condensed', sans-serif;
+}
+
+.feature-item p {
+    font-size: 18px;
+    color: #EFF1F6;
+}
+
 /* ----------------- Seção Sobre o Curso (About Section) ----------------- */
 .about-section {
     padding: 60px 40px;
@@ -175,6 +218,43 @@
     font-family: 'Barlow Condensed', sans-serif;
 }
 
+/* ----------------- Seção FAQ (FAQ Section) ----------------- */
+.faq-section {
+    padding: 60px 40px;
+    background-color: #1E2434;
+}
+
+.faq-section h2 {
+    text-align: center;
+    font-size: 32px;
+    margin-bottom: 40px;
+    font-family: 'Barlow Condensed', sans-serif;
+}
+
+.faq {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.faq-item {
+    background-color: #2A324B;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.faq-item h3 {
+    font-size: 22px;
+    color: #28BDD2;
+    margin-bottom: 10px;
+    font-family: 'Barlow Condensed', sans-serif;
+}
+
+.faq-item p {
+    font-size: 18px;
+    color: #EFF1F6;
+}
+
 /* ----------------- Seção CTA (Call to Action) ----------------- */
 .cta-section {
     padding: 60px 40px;
@@ -195,6 +275,62 @@
 
 .cta-section .btn {
     font-size: 18px;
+}
+
+/* ----------------- Seção de Contato (Contact Section) ----------------- */
+.contact-section {
+    padding: 60px 40px;
+    background-color: #1A1F2D;
+}
+
+.contact-section h2 {
+    text-align: center;
+    font-size: 32px;
+    margin-bottom: 20px;
+    font-family: 'Barlow Condensed', sans-serif;
+}
+
+.contact-section p {
+    text-align: center;
+    font-size: 18px;
+    margin-bottom: 30px;
+}
+
+.contact-info {
+    list-style: none;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0;
+    text-align: center;
+}
+
+.contact-info li {
+    font-size: 18px;
+    color: #EFF1F6;
+    margin-bottom: 10px;
+}
+
+/* ----------------- Navegação (Navigation) ----------------- */
+.navigation ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.navigation ul li {
+    display: inline;
+}
+
+.navigation ul li a {
+    color: #EFF1F6;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.navigation ul li a:hover {
+    color: #4BCBDD;
 }
 
 /* ----------------- Animações Específicas ----------------- */
@@ -218,7 +354,10 @@
     .about-section,
     .modules-section,
     .testimonials-section,
-    .cta-section {
+    .cta-section,
+    .features-section,
+    .faq-section,
+    .contact-section {
         padding: 50px 30px;
     }
 
@@ -233,14 +372,19 @@
     .about-section h2,
     .modules-section h2,
     .testimonials-section h2,
-    .cta-section h2 {
+    .cta-section h2,
+    .features-section h2,
+    .faq-section h2,
+    .contact-section h2 {
         font-size: 28px;
     }
 
     .about-section p,
     .about-section ul li,
     .carousel-slide p,
-    .testimonial p {
+    .testimonial p,
+    .feature-item p,
+    .faq-item p {
         font-size: 16px;
     }
 
@@ -260,6 +404,15 @@
         min-width: 80%;
         margin: 0 10%;
     }
+
+    .features {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .feature-item {
+        width: 80%;
+    }
 }
 
 @media (max-width: 768px) {
@@ -271,7 +424,10 @@
     .about-section p,
     .about-section ul li,
     .carousel-slide p,
-    .testimonial p {
+    .testimonial p,
+    .feature-item p,
+    .faq-item p,
+    .contact-info li {
         font-size: 14px;
     }
 }
@@ -285,7 +441,10 @@
     .about-section p,
     .about-section ul li,
     .carousel-slide p,
-    .testimonial p {
+    .testimonial p,
+    .feature-item p,
+    .faq-item p,
+    .contact-info li {
         font-size: 12px;
     }
 
@@ -293,5 +452,10 @@
     .cta-section .btn {
         font-size: 14px;
         padding: 8px 16px;
+    }
+
+    .navigation ul {
+        flex-direction: column;
+        gap: 10px;
     }
 }

@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>Página Pública</title>
+    <title>Curso de Segurança com BCRYPT</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/assets/css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700&family=Barlow:wght@100;600;800&display=swap" rel="stylesheet">
@@ -11,13 +11,23 @@
 <body>
     <header>
         <div class="header-container">
-            <h1>Bem-vindo ao Curso de Segurança com BCRYPT</h1>
+            <h1>BCRYPT Segurança</h1>
+            <nav class="navigation">
+                <ul>
+                    <li><a href="#home">Início</a></li>
+                    <li><a href="#about">Sobre</a></li>
+                    <li><a href="#modules">Módulos</a></li>
+                    <li><a href="#testimonials">Depoimentos</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                    <li><a href="#contact">Contato</a></li>
+                </ul>
+            </nav>
             <div class="header-buttons">
                 <button onclick="window.location.href='/login'" class="btn primary-btn">Login</button>
             </div>
         </div>
     </header>
-    <section class="hero-section">
+    <section class="hero-section" id="home">
         <div class="hero-content">
             <h2>Proteja suas senhas com o máximo de segurança</h2>
             <p>Aprenda como utilizar o BCRYPT para garantir a integridade e confidencialidade dos dados.</p>
@@ -25,7 +35,27 @@
         </div>
     </section>
 
-    <section class="about-section">
+    <section class="features-section">
+        <div class="content-box">
+            <h2>Recursos do Curso</h2>
+            <div class="features">
+                <div class="feature-item">
+                    <h3>Conteúdo Atualizado</h3>
+                    <p>Mantenha-se atualizado com as últimas práticas em segurança de senhas.</p>
+                </div>
+                <div class="feature-item">
+                    <h3>Certificado de Conclusão</h3>
+                    <p>Receba um certificado reconhecido ao finalizar o curso.</p>
+                </div>
+                <div class="feature-item">
+                    <h3>Acesso Vitalício</h3>
+                    <p>Acesse o conteúdo do curso a qualquer momento, sem limites.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="about-section" id="about">
         <div class="content-box">
             <h2>Por que escolher nosso curso?</h2>
             <p>Nosso curso oferece um aprendizado completo sobre o BCRYPT, desde os conceitos básicos até implementações avançadas.</p>
@@ -34,11 +64,12 @@
                 <li>Quizzes para testar seus conhecimentos</li>
                 <li>Suporte personalizado dos instrutores</li>
                 <li>Acesso a materiais exclusivos</li>
+                <li>Comunidade ativa de alunos</li>
             </ul>
         </div>
     </section>
 
-    <section class="modules-section">
+    <section class="modules-section" id="modules">
         <div class="content-box">
             <h2>Módulos do Curso</h2>
             <div class="modules-carousel">
@@ -59,6 +90,14 @@
                         <h3>Módulo 4: Casos Avançados</h3>
                         <p>Explore casos avançados e resolva desafios complexos de segurança.</p>
                     </div>
+                    <div class="carousel-slide">
+                        <h3>Módulo 5: Integração com Frameworks</h3>
+                        <p>Aprenda a integrar o BCRYPT com frameworks populares.</p>
+                    </div>
+                    <div class="carousel-slide">
+                        <h3>Módulo 6: Projeto Final</h3>
+                        <p>Desenvolva um projeto completo aplicando todos os conceitos aprendidos.</p>
+                    </div>
                 </div>
                 <button class="carousel-btn prev-btn" onclick="prevSlide()">&#10094;</button>
                 <button class="carousel-btn next-btn" onclick="nextSlide()">&#10095;</button>
@@ -66,7 +105,7 @@
         </div>
     </section>
 
-    <section class="testimonials-section">
+    <section class="testimonials-section" id="testimonials">
         <div class="content-box">
             <h2>O que nossos alunos dizem</h2>
             <div class="testimonials">
@@ -82,6 +121,34 @@
                     <p>"Aprendi a implementar o BCRYPT de forma eficaz nas minhas aplicações."</p>
                     <h4>- Maria Oliveira</h4>
                 </div>
+                <div class="testimonial">
+                    <p>"A comunidade é muito ativa e os instrutores sempre dispostos a ajudar."</p>
+                    <h4>- Pedro Santos</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="faq-section" id="faq">
+        <div class="content-box">
+            <h2>Perguntas Frequentes</h2>
+            <div class="faq">
+                <div class="faq-item">
+                    <h3>O curso é indicado para iniciantes?</h3>
+                    <p>Sim, o curso é adequado tanto para iniciantes quanto para profissionais que desejam aprofundar seus conhecimentos.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>Preciso de conhecimentos prévios em programação?</h3>
+                    <p>Conhecimentos básicos em programação são recomendados, mas não obrigatórios.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>Como funciona o suporte aos alunos?</h3>
+                    <p>Você terá acesso a um fórum exclusivo e poderá enviar dúvidas diretamente aos instrutores.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>Qual é a duração do curso?</h3>
+                    <p>O curso tem duração estimada de 40 horas, mas você pode fazê-lo no seu próprio ritmo.</p>
+                </div>
             </div>
         </div>
     </section>
@@ -94,8 +161,20 @@
         </div>
     </section>
 
+    <section class="contact-section" id="contact">
+        <div class="content-box">
+            <h2>Entre em Contato</h2>
+            <p>Tem alguma dúvida? Entre em contato conosco através dos canais abaixo:</p>
+            <ul class="contact-info">
+                <li>Email: suporte@bcryptcurso.com</li>
+                <li>Telefone: (11) 1234-5678</li>
+                <li>Endereço: Rua da Segurança, 123 - São Paulo, SP</li>
+            </ul>
+        </div>
+    </section>
+
     <footer>
-        <p>&copy; 2024 Bcrypt. Todos os direitos reservados.</p>
+        <p>&copy; 2024 BCRYPT Segurança. Todos os direitos reservados.</p>
     </footer>
 
     <script>

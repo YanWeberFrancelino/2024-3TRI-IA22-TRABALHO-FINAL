@@ -180,3 +180,34 @@ footer p {
         padding: 8px 0;
     }
 }
+
+
+/* ----------------- Estilos de Scroll Personalizado ----------------- */
+* {
+    scrollbar-width: thin; 
+    scrollbar-color: #4BCBDD #2A324B; 
+}
+
+*::-webkit-scrollbar {
+    width: 8px; 
+    height: 8px; 
+}
+
+*::-webkit-scrollbar-track {
+    background: #2A324B; 
+    border-radius: 10px; 
+}
+
+*::-webkit-scrollbar-thumb {
+    background: #4BCBDD; 
+    border-radius: 10px; 
+    border: 2px solid #2A324B; 
+}
+
+*::-webkit-scrollbar-thumb:hover {
+    background: #25B2C5; 
+}
+
+*::-webkit-scrollbar-thumb:active {
+    background: #2097A7; 
+}

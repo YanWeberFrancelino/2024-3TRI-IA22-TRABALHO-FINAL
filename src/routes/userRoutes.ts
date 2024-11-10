@@ -7,19 +7,27 @@ import userMiddleware from '../middlewares/user.middleware';
 const router = Router();
 
 router.get('/', checkToken, userController.listUsers);
+router.get('/me', checkToken, userController.getCurrentUser);
+
 router.put(
-  '/:id',
+  '/me',
   checkToken,
   userMiddleware.validateUserUpdate,
-  userController.updateUser
-);
-router.delete(
-  '/:id',
-  checkToken,
-  userMiddleware.validateUserDeletion,
-  userController.deleteUser
+  userController.updateCurrentUser
 );
 
-router.get('/me', checkToken, userController.getCurrentUser);
+router.put(
+  '/me/password',
+  checkToken,
+  userMiddleware.validatePasswordChange,
+  userController.changePassword
+);
+
+router.delete(
+  '/me',
+  checkToken,
+  userMiddleware.validateUserDeletion,
+  userController.deleteCurrentUser
+);
 
 export default router;
