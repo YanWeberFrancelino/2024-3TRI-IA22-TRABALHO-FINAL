@@ -1,7 +1,6 @@
-
 # Trabalho Final da Turma IA22 - Site de Cursos com Autenticação e Validação
 
-Bem-vindo ao repositório do **Trabalho Final da Turma IA22**! Este projeto consiste em um site básico completo, incluindo frontend, backend, banco de dados, validação, autenticação e esquemas básicos de segurança. O site permite que usuários se registrem, façam login, visualizem páginas privadas para membros logados, explorem módulos, vejam outros membros, visualizem seus próprios dados e efetuem logout. Além disso, há páginas públicas acessíveis para usuários não autenticados.
+Bem-vindo ao repositório do **Trabalho Final da Turma IA22**! Este projeto consiste em um site básico completo, incluindo frontend, backend, banco de dados, validação, autenticação e esquemas básicos de segurança. O site permite que usuários se registrem, façam login, visualizem páginas privadas para membros logados, explorem módulos, vejam outros membros, visualizem seus próprios dados, atualizem suas informações, alterem suas senhas e efetuem logout. Além disso, há páginas públicas acessíveis para usuários não autenticados.
 
 ## Índice
 
@@ -23,6 +22,29 @@ Bem-vindo ao repositório do **Trabalho Final da Turma IA22**! Este projeto cons
 13. [Contribuindo](#13-contribuindo)
 14. [Licença](#14-licença)
 15. [Contato](#15-contato)
+16. [Detalhamento Completo do Código e Funcionalidades](#16-detalhamento-completo-do-código-e-funcionalidades)
+    - [16.1. Arquivo `package.json`](#161-arquivo-packagejson)
+    - [16.2. Arquivo `src/index.ts`](#162-arquivo-srcindexts)
+    - [16.3. Arquivo `src/database.ts`](#163-arquivo-srcdatabasets)
+    - [16.4. Controladores](#164-controladores)
+        - [16.4.1. Arquivo `src/controllers/authController.ts`](#1641-arquivo-srccontrollersauthcontrollerts)
+        - [16.4.2. Arquivo `src/controllers/userController.ts`](#1642-arquivo-srccontrollersusercontrollerts)
+    - [16.5. Middlewares](#165-middlewares)
+        - [16.5.1. Arquivo `src/middlewares/errorHandler.ts`](#1651-arquivo-srcmiddlewareserrorhandlerts)
+        - [16.5.2. Arquivo `src/middlewares/jwt.middleware.ts`](#1652-arquivo-srcmiddlewaresjwtmiddlewarets)
+        - [16.5.3. Arquivo `src/middlewares/securityMiddleware.ts`](#1653-arquivo-srcmiddlewaressecuritymiddlewarets)
+        - [16.5.4. Arquivo `src/middlewares/user.middleware.ts`](#1654-arquivo-srcmiddlewaresusermiddlewarets)
+    - [16.6. Schemas de Validação](#166-schemas-de-validação)
+    - [16.7. Utilitários](#167-utilitários)
+    - [16.8. Rotas](#168-rotas)
+        - [16.8.1. Arquivo `src/routes/authRoutes.ts`](#1681-arquivo-srcroutesauthroutests)
+        - [16.8.2. Arquivo `src/routes/userRoutes.ts`](#1682-arquivo-srcroutesuserroutests)
+        - [16.8.3. Arquivo `src/routes/staticRoutes.ts`](#1683-arquivo-srcroutesstaticroutests)
+        - [16.8.4. Arquivo `src/routes/index.ts`](#1684-arquivo-srcroutesindexts)
+    - [16.9. Frontend: Páginas HTML](#169-frontend-páginas-html)
+17. [Boas Práticas e Recomendações](#17-boas-práticas-e-recomendações)
+18. [Recursos Adicionais](#18-recursos-adicionais)
+19. [Agradecimentos Finais](#19-agradecimentos-finais)
 
 ---
 
@@ -34,9 +56,12 @@ Este projeto representa o trabalho final da turma IA22. No meu caso, estou desen
 - Acessem páginas privadas de forma segura;
 - Visualizem módulos de cursos;
 - Interajam com outros membros;
-- Gerenciem seus próprios dados.
+- Gerenciem seus próprios dados, incluindo atualização de nome e email;
+- Alterem suas senhas;
+- Apaguem suas contas;
+- Efetuem logout.
 
-Além disso, o site conta com importantes implementações de segurança, como **rate limiting** para prevenir abusos e cabeçalhos de segurança que reforçam a proteção contra ataques comuns. O objetivo é oferecer uma experiência funcional e segura para os usuários, alinhada às melhores práticas de desenvolvimento web. 
+Além disso, o site conta com importantes implementações de segurança, como **rate limiting** para prevenir abusos e cabeçalhos de segurança que reforçam a proteção contra ataques comuns. O objetivo é oferecer uma experiência funcional e segura para os usuários, alinhada às melhores práticas de desenvolvimento web.
 
 ---
 
@@ -73,10 +98,10 @@ Além disso, o site conta com importantes implementações de segurança, como *
 ```plaintext
 2024-3TRI-IA22-TRABALHO-FINAL/
 │
-├── node_modules/
+├── node_modules/               # Pacotes instalados pelo npm
 │   └── ...
-├── public/
-│   ├── assets/
+├── public/                     # Arquivos estáticos públicos
+│   ├── assets/                 # Recursos como imagens e estilos
 │   │   ├── img/
 │   │   └── css/
 │   │       ├── style.css
@@ -93,33 +118,51 @@ Além disso, o site conta com importantes implementações de segurança, como *
 │   ├── login.html
 │   ├── ratelimit.html
 │   └── registrar.html
-├── src/
-│   ├── controllers/
+├── src/                        # Código-fonte TypeScript do servidor
+│   ├── controllers/            # Controladores da aplicação
 │   │   ├── authController.ts
 │   │   └── userController.ts
-│   ├── middlewares/
+│   ├── middlewares/            # Middlewares personalizados
 │   │   ├── errorHandler.ts
 │   │   ├── jwt.middleware.ts
 │   │   ├── securityMiddleware.ts
 │   │   └── user.middleware.ts
-│   ├── routes/
+│   ├── routes/                 # Definição das rotas
 │   │   ├── authRoutes.ts
 │   │   ├── index.ts
 │   │   ├── staticRoutes.ts
 │   │   └── userRoutes.ts
-│   ├── schemas/
+│   ├── schemas/                # Schemas de validação com Zod
 │   │   └── userSchema.ts
-│   ├── utils/
+│   ├── utils/                  # Funções utilitárias
 │   │   └── jwtPromise.ts
-│   ├── database.ts
-│   └── index.ts
-├── .env
-├── .gitignore
-├── package.json
-├── package-lock.json
-├── tsconfig.json
-└── README.md
+│   ├── database.ts             # Configuração do banco de dados SQLite
+│   └── index.ts                # Ponto de entrada da aplicação
+├── dist/                       # Arquivos compilados do TypeScript
+│   └── ...                     # Gerado após 'npm run build'
+├── .env                        # Variáveis de ambiente
+├── .gitignore                  # Arquivos ignorados pelo Git
+├── package.json                # Dependências e scripts do npm
+├── package-lock.json           # Versões exatas das dependências
+├── tsconfig.json               # Configurações do TypeScript
+└── README.md                   # Documentação do projeto
 ```
+
+### Descrição das Pastas e Arquivos Principais
+
+- **`node_modules/`**: Diretório onde o npm instala os pacotes necessários para o projeto.
+
+- **`public/`**: Contém os arquivos estáticos servidos ao cliente, como HTML, CSS e imagens.
+
+- **`src/`**: Contém o código-fonte do servidor escrito em TypeScript.
+
+- **`dist/`**: Diretório gerado após a compilação do TypeScript, contendo o código JavaScript. Este diretório é criado ao executar `npm run build`.
+
+- **`.env`**: Arquivo que contém variáveis de ambiente, como a porta do servidor e chaves secretas.
+
+- **`package.json`**: Arquivo que define as dependências do projeto e scripts de execução.
+
+- **`tsconfig.json`**: Arquivo de configuração do compilador TypeScript.
 
 ---
 
@@ -255,8 +298,6 @@ Existem três métodos principais para configurar e executar este projeto:
 
    - Clique no botão **Code** (verde) e selecione a aba **Codespaces**.
    - Clique em **Create codespace on main**.
-
-   ![Criar Codespace](img/create_codespace.png)
 
 3. **Aguarde a Inicialização**
 
@@ -417,70 +458,1019 @@ Edite o arquivo `tsconfig.json` para incluir as seguintes configurações:
 No explorador de arquivos do VS Code, crie as pastas necessárias:
 
 - **src**
-  - controllers
-  - middlewares
-  - routes
-  - schemas
-  - utils
+  - **controllers**
+  - **middlewares**
+  - **routes**
+  - **schemas**
+  - **utils**
 - **public**
-  - assets
-    - img
-    - css
-      - pages
+  - **assets**
+    - **img**
+    - **css**
+      - **pages**
 
-Você pode fazer isso clicando com o botão direito na pasta principal e selecionando **New Folder** (Nova Pasta) repetidamente.
+Você pode fazer isso clicando com o botão direito na pasta principal e selecionando **Nova Pasta** repetidamente.
 
-##### 7. Crie os Arquivos Iniciais
+##### 7. Crie os Arquivos Iniciais com o Código Correspondente
 
-Dentro das respectivas pastas, crie os arquivos necessários:
+Agora, vamos criar cada arquivo necessário e adicionar o código correspondente.
 
-- **src/**
-  - `index.ts`
-  - `database.ts`
-- **src/controllers/**
-  - `authController.ts`
-  - `userController.ts`
-- **src/middlewares/**
-  - `errorHandler.ts`
-  - `jwt.middleware.ts`
-  - `securityMiddleware.ts`
-  - `user.middleware.ts`
-- **src/routes/**
-  - `authRoutes.ts`
-  - `userRoutes.ts`
-  - `staticRoutes.ts`
-  - `index.ts`
-- **src/schemas/**
-  - `userSchema.ts`
-- **src/utils/**
-  - `jwtPromise.ts`
-- **public/**
-  - `404.html`
-  - `acesso-privado.html`
-  - `acesso-publico.html`
-  - `login.html`
-  - `ratelimit.html`
-  - `registrar.html`
-- **public/assets/css/**
-  - `style.css`
-- **public/assets/css/pages/**
-  - `404.css`
-  - `dashboard.css`
-  - `home.css`
-  - `login.css`
-  - `ratelimit.css`
-  - `registrar.css`
-- `README.md`
-- `.gitignore`
-- `.env`
+###### 7.1. Arquivos na Pasta `src/`
 
-**Nota:** Para criar um arquivo, clique com o botão direito na pasta desejada e selecione **New File** (Novo Arquivo).
+**a. `src/index.ts`**
 
-##### 8. Adicione o Conteúdo dos Arquivos
+**Criação do Arquivo:**
 
-Copie e cole o código fornecido nos arquivos correspondentes, conforme listado no [Estrutura do Projeto](#8-estrutura-do-projeto).
+- Clique com o botão direito na pasta `src` e selecione **Novo Arquivo**.
+- Nomeie o arquivo como `index.ts`.
 
-##### 9. Configure os Scripts no `package.json`
+**Código a ser inserido em `src/index.ts`:**
+
+```typescript
+import express from 'express';
+import path from 'path';
+import routes from './routes';
+import { connect } from './database';
+import errorHandler from './middlewares/errorHandler';
+import dotenv from 'dotenv';
+import {
+  corsOptions,
+  limiter,
+  securityHeaders,
+  hidePoweredBy,
+} from './middlewares/securityMiddleware';
+
+dotenv.config();
+
+const app = express();
+const port = process.env.PORT || 4060;
+
+app.use(express.json());
+
+app.use(corsOptions);
+app.use(limiter);
+app.use(securityHeaders);
+app.use(hidePoweredBy);
+
+const publicPath = path.resolve(process.cwd(), 'public');
+console.log('Servindo arquivos estáticos de:', publicPath);
+
+app.use('/assets', express.static(path.join(publicPath, 'assets')));
+
+app.use((req, res, next) => {
+  console.log(`Request URL: ${req.url}`);
+  next();
+});
+
+connect()
+  .then(() => {
+    console.log('Banco de dados pronto.');
+
+    app.use('/', routes);
+
+    app.use(errorHandler);
+
+    app.listen(port, () => console.log(`⚡ Servidor rodando na porta ${port}`));
+  })
+  .catch((error) => {
+    console.error('Falha ao iniciar o servidor devido ao erro no banco de dados:', error);
+  });
+```
+
+**Descrição do Código:**
+
+- Importa os módulos necessários, incluindo express, path, rotas, middlewares e variáveis de ambiente.
+- Configura o aplicativo Express, incluindo middlewares de segurança e tratamento de erros.
+- Serve arquivos estáticos da pasta `public/assets`.
+- Conecta ao banco de dados e inicia o servidor na porta especificada.
+
+**b. `src/database.ts`**
+
+**Criação do Arquivo:**
+
+- Na pasta `src`, crie um novo arquivo chamado `database.ts`.
+
+**Código a ser inserido em `src/database.ts`:**
+
+```typescript
+import { open, Database } from 'sqlite';
+import sqlite3 from 'sqlite3';
+import bcrypt from 'bcrypt';
+
+let instance: Database | null = null;
+
+export async function connect() {
+  if (instance) return instance;
+
+  try {
+    const db = await open({
+      filename: 'database.sqlite',
+      driver: sqlite3.Database
+    });
+    console.log('Conectado ao banco de dados SQLite.');
+
+    await db.exec(`
+      CREATE TABLE IF NOT EXISTS users (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        name TEXT,
+        email TEXT NOT NULL UNIQUE,
+        password TEXT
+      )
+    `);
+    console.log('Tabela "users" verificada/criada.');
+
+    const existingUser = await db.get(`SELECT * FROM users WHERE email = 'teste@mail.com'`);
+    if (!existingUser) {
+      const password = await bcrypt.hash('123123', 10);
+      await db.run(`
+        INSERT INTO users (name, email, password) 
+        VALUES (?, ?, ?)
+      `, ['Teste', 'teste@mail.com', password]);
+      console.log('Usuário "Teste" inserido no banco de dados.');
+    } else {
+      console.log('Usuário "Teste" já existe no banco de dados.');
+    }
+
+    instance = db;
+    return db;
+  } catch (error) {
+    console.error('Erro ao conectar ao banco de dados:', error);
+    throw error;
+  }
+}
+```
+
+**Descrição do Código:**
+
+- Estabelece uma conexão com o banco de dados SQLite.
+- Cria a tabela `users` se ela não existir.
+- Insere um usuário padrão se não existir.
+
+###### 7.2. Arquivos na Pasta `src/controllers/`
+
+**a. `src/controllers/authController.ts`**
+
+**Criação do Arquivo:**
+
+- Na pasta `src/controllers`, crie um novo arquivo chamado `authController.ts`.
+
+**Código a ser inserido em `authController.ts`:**
+
+```typescript
+import { Request, Response } from 'express';
+import { connect } from '../database';
+import bcrypt from 'bcrypt';
+import { signJWT } from '../utils/jwtPromise';
+
+export const register = async (req: Request, res: Response) => {
+  try {
+    const db = await connect();
+    const { name, email, password } = req.body;
+
+    const existingUser = await db.get(`SELECT * FROM users WHERE email = ?`, [email]);
+    if (existingUser) {
+      res.status(400).json({ error: 'Email já está em uso.' });
+      return;
+    }
+
+    const encryptedPassword = await bcrypt.hash(password, 10);
+
+    const ret = await db.run(
+      `INSERT INTO users (name, email, password) VALUES (?, ?, ?)`,
+      [name, email, encryptedPassword]
+    );
+
+    res.status(201).json({
+      message: 'Usuário criado com sucesso!',
+      userId: ret.lastID,
+      name,
+      email,
+    });
+  } catch (error) {
+    console.error('Erro ao criar usuário:', error);
+    res.status(500).json({ error: 'Erro interno do servidor.' });
+  }
+};
+
+export const login = async (req: Request, res: Response) => {
+  try {
+    const db = await connect();
+    const { email, password } = req.body;
+
+    const user = await db.get(`SELECT * FROM users WHERE email = ?`, [email]);
+
+    if (!user) {
+      res.status(401).json({ error: 'Usuário não encontrado.' });
+      return;
+    }
+
+    const isValid = await bcrypt.compare(password, user.password);
+
+    if (!isValid) {
+      res.status(401).json({ error: 'Senha incorreta.' });
+      return;
+    }
+
+    const token = await signJWT({ id: user.id, email: user.email, name: user.name });
+
+    res.status(200).json({
+      message: 'Login bem-sucedido!',
+      token,
+      name: user.name,
+      email: user.email,
+    });
+  } catch (error) {
+    console.error('Erro ao fazer login:', error);
+    res.status(500).json({ error: 'Erro interno do servidor.' });
+  }
+};
+
+export default {
+  register,
+  login,
+};
+```
+
+**Descrição do Código:**
+
+- Controlador responsável pelo registro e login de usuários.
+- `register`: Registra um novo usuário após validar que o email não está em uso.
+- `login`: Autentica o usuário e retorna um token JWT se as credenciais forem válidas.
+
+**b. `src/controllers/userController.ts`**
+
+**Criação do Arquivo:**
+
+- Na pasta `src/controllers`, crie um novo arquivo chamado `userController.ts`.
+
+**Código a ser inserido em `userController.ts`:**
+
+```typescript
+import { Request, Response } from 'express';
+import { connect } from '../database';
+import bcrypt from 'bcrypt';
+
+export const listUsers = async (req: Request, res: Response) => {
+  try {
+    const db = await connect();
+    const users = await db.all(`SELECT id, name, email FROM users`);
+    res.status(200).json(users);
+  } catch (error) {
+    console.error('Erro ao listar usuários:', error);
+    res.status(500).json({ error: 'Erro interno do servidor.' });
+  }
+};
+
+export const getCurrentUser = async (req: Request, res: Response) => {
+  try {
+    const db = await connect();
+    const userId = (req as any).user.id;
+
+    const user = await db.get(`SELECT id, name, email FROM users WHERE id = ?`, [
+      userId,
+    ]);
+
+    if (!user) {
+      res.status(404).json({ error: 'Usuário não encontrado.' });
+      return;
+    }
+
+    res.status(200).json(user);
+  } catch (error) {
+    console.error('Erro ao obter dados do usuário:', error);
+    res.status(500).json({ error: 'Erro interno do servidor.' });
+  }
+};
+
+export const updateCurrentUser = async (req: Request, res: Response) => {
+  try {
+    const db = await connect();
+    const userId = (req as any).user.id;
+    const { name, email } = req.body;
+
+    const existingUser = await db.get(`SELECT * FROM users WHERE id = ?`, [
+      userId,
+    ]);
+    if (!existingUser) {
+      res.status(404).json({ error: 'Usuário não encontrado.' });
+      return;
+    }
+
+    const updates = [];
+    const params: any[] = [];
+
+    if (name) {
+      updates.push('name = ?');
+      params.push(name);
+    }
+
+    if (email) {
+      const emailExists = await db.get(
+        `SELECT * FROM users WHERE email = ? AND id != ?`,
+        [email, userId]
+      );
+      if (emailExists) {
+        res.status(400).json({ error: 'Email já está em uso.' });
+        return;
+      }
+      updates.push('email = ?');
+      params.push(email);
+    }
+
+    if (updates.length === 0) {
+      res.status(400).json({ error: 'Nenhum dado para atualizar.' });
+      return;
+    }
+
+    params.push(userId);
+
+    await db.run(`UPDATE users SET ${updates.join(', ')} WHERE id = ?`, params);
+
+    res.status(200).json({ message: 'Dados atualizados com sucesso!' });
+  } catch (error) {
+    console.error('Erro ao atualizar usuário:', error);
+    res.status(500).json({ error: 'Erro interno do servidor.' });
+  }
+};
+
+export const changePassword = async (req: Request, res: Response) => {
+  try {
+    const db = await connect();
+    const userId = (req as any).user.id;
+    const { currentPassword, newPassword } = req.body;
+
+    const user = await db.get(`SELECT * FROM users WHERE id = ?`, [userId]);
+    if (!user) {
+      res.status(404).json({ error: 'Usuário não encontrado.' });
+      return;
+    }
+
+    const isValid = await bcrypt.compare(currentPassword, user.password);
+
+    if (!isValid) {
+      res.status(401).json({ error: 'Senha atual incorreta.' });
+      return;
+    }
+
+    const encryptedPassword = await bcrypt.hash(newPassword, 10);
+
+    await db.run(`UPDATE users SET password = ? WHERE id = ?`, [
+      encryptedPassword,
+      userId,
+    ]);
+
+    res.status(200).json({ message: 'Senha alterada com sucesso!' });
+  } catch (error) {
+    console.error('Erro ao alterar senha:', error);
+    res.status(500).json({ error: 'Erro interno do servidor.' });
+  }
+};
+
+export const deleteCurrentUser = async (req: Request, res: Response) => {
+  try {
+    const db = await connect();
+    const userId = (req as any).user.id;
+    const { password } = req.body;
+
+    const user = await db.get(`SELECT * FROM users WHERE id = ?`, [userId]);
+
+    if (!user) {
+      res.status(404).json({ error: 'Usuário não encontrado.' });
+      return;
+    }
+
+    const isValid = await bcrypt.compare(password, user.password);
+
+    if (!isValid) {
+      res.status(401).json({ error: 'Senha incorreta.' });
+      return;
+    }
+
+    await db.run(`DELETE FROM users WHERE id = ?`, [userId]);
+
+    res.status(200).json({ message: 'Conta apagada com sucesso!' });
+  } catch (error) {
+    console.error('Erro ao apagar usuário:', error);
+    res.status(500).json({ error: 'Erro interno do servidor.' });
+  }
+};
+
+export default {
+  listUsers,
+  getCurrentUser,
+  updateCurrentUser,
+  changePassword,
+  deleteCurrentUser,
+};
+```
+
+**Descrição do Código:**
+
+- Controlador que gerencia as operações relacionadas ao usuário autenticado.
+- Inclui funções para listar usuários, obter dados do usuário atual, atualizar dados, alterar senha e apagar conta.
+
+###### 7.3. Arquivos na Pasta `src/middlewares/`
+
+**a. `src/middlewares/errorHandler.ts`**
+
+**Criação do Arquivo:**
+
+- Na pasta `src/middlewares`, crie um novo arquivo chamado `errorHandler.ts`.
+
+**Código a ser inserido em `errorHandler.ts`:**
+
+```typescript
+import { Request, Response, NextFunction } from "express";
+
+const errorHandler = (err: any, req: Request, res: Response, next: NextFunction) => {
+  console.error(err.stack);
+  res.status(500).json({ error: 'Erro interno do servidor.' });
+};
+
+export default errorHandler;
+```
+
+**Descrição do Código:**
+
+- Middleware que captura erros não tratados e retorna uma resposta de erro genérica.
+
+**b. `src/middlewares/jwt.middleware.ts`**
+
+**Criação do Arquivo:**
+
+- Na pasta `src/middlewares`, crie um novo arquivo chamado `jwt.middleware.ts`.
+
+**Código a ser inserido em `jwt.middleware.ts`:**
+
+```typescript
+import { RequestHandler } from 'express';
+import { verifyJWT } from '../utils/jwtPromise';
+
+export const checkToken: RequestHandler = async (req, res, next) => {
+  const authHeader = req.headers.authorization;
+
+  if (!authHeader) {
+    res.status(401).json({ error: 'Token não fornecido' });
+    return;
+  }
+
+  const token = authHeader.split(' ')[1]; 
+
+  if (!token) {
+    res.status(401).json({ error: 'Token não fornecido' });
+    return;
+  }
+
+  try {
+    const decoded = await verifyJWT(token);
+    (req as any).user = decoded;
+    next();
+  } catch (error) {
+    console.error('Erro na verificação do token:', error);
+    res.status(401).json({ error: 'Token inválido' });
+  }
+};
+
+export default {
+  checkToken,
+};
+```
+
+**Descrição do Código:**
+
+- Middleware que verifica a validade do token JWT e adiciona as informações do usuário à requisição.
+
+**c. `src/middlewares/securityMiddleware.ts`**
+
+**Criação do Arquivo:**
+
+- Na pasta `src/middlewares`, crie um novo arquivo chamado `securityMiddleware.ts`.
+
+**Código a ser inserido em `securityMiddleware.ts`:**
+
+```typescript
+import { Request, Response, NextFunction } from 'express';
+import rateLimit from 'express-rate-limit';
+import cors from 'cors';
+import helmet from 'helmet';
+import path from 'path';
+
+export const corsOptions = cors({
+  origin: ['http://127.0.0.1:4060', 'http://localhost:4060'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true,
+});
+
+const isStaticAsset = (url: string) =>
+    url.startsWith('/assets') || url.endsWith('.css') || url.endsWith('.js') || url.endsWith('.png') || url.endsWith('.jpg') || url.endsWith('.ico');
+
+export const limiter = rateLimit({
+    windowMs: 1 * 60 * 1000, 
+    max: 100, 
+    handler: (req: Request, res: Response, next: NextFunction) => {
+      if (isStaticAsset(req.url)) {
+        next(); 
+      } else {
+        res.status(429).sendFile(path.join(__dirname, '../../public/ratelimit.html'));
+      }
+    },
+  });
+
+export const securityHeaders = helmet({
+  contentSecurityPolicy: {
+    directives: {
+      defaultSrc: ["'self'"],
+      scriptSrc: [
+        "'self'",
+        "'unsafe-inline'", 
+        "'unsafe-eval'",   
+        'https://cdn.jsdelivr.net',
+        'https://unpkg.com',
+      ],
+      styleSrc: [
+        "'self'",
+        "'unsafe-inline'", 
+        'https://fonts.googleapis.com',
+      ],
+      imgSrc: ["'self'", 'data:'],
+      fontSrc: ["'self'", 'https://fonts.gstatic.com'],
+      connectSrc: ["'self'"],
+      objectSrc: ["'none'"],
+      upgradeInsecureRequests: [],
+    },
+  },
+  crossOriginEmbedderPolicy: false,
+});
+
+export const hidePoweredBy = (req: Request, res: Response, next: NextFunction) => {
+  res.removeHeader('X-Powered-By');
+  next();
+};
+```
+
+**Descrição do Código:**
+
+- Configura políticas de segurança, incluindo CORS, rate limiting e cabeçalhos de segurança com Helmet.
+
+**d. `src/middlewares/user.middleware.ts`**
+
+**Criação do Arquivo:**
+
+- Na pasta `src/middlewares`, crie um novo arquivo chamado `user.middleware.ts`.
+
+**Código a ser inserido em `user.middleware.ts`:**
+
+```typescript
+import { Request, Response, NextFunction } from 'express';
+import {
+  registerSchema,
+  loginSchema,
+  updateUserSchema,
+  passwordChangeSchema,      
+  deleteAccountSchema       
+} from '../schemas/userSchema';
+
+export const validateUserRegistration = (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    req.body = registerSchema.parse(req.body);
+    next();
+  } catch (error: any) {
+    res
+      .status(400)
+      .json({ error: 'Dados de registro inválidos.', details: error.errors });
+  }
+};
+
+export const validateUserLogin = (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    req.body = loginSchema.parse(req.body);
+    next();
+  } catch (error: any) {
+    res
+      .status(400)
+      .json({ error: 'Dados de login inválidos.', details: error.errors });
+  }
+};
+
+export const validateUserUpdate = (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    req.body = updateUserSchema.parse(req.body);
+    next();
+  } catch (error: any) {
+    res
+      .status(400)
+      .json({ error: 'Dados de atualização inválidos.', details: error.errors });
+  }
+};
+
+export const validatePasswordChange = (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    req.body = passwordChangeSchema.parse(req.body);
+    next();
+  } catch (error: any) {
+    res.status(400).json({
+      error: 'Dados para alteração de senha inválidos.',
+      details: error.errors,
+    });
+  }
+};
+
+export const validateUserDeletion = (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    req.body = deleteAccountSchema.parse(req.body);
+    next();
+  } catch (error: any) {
+    res.status(400).json({
+      error: 'Dados para exclusão inválidos.',
+      details: error.errors,
+    });
+  }
+};
+
+export default {
+  validateUserRegistration,
+  validateUserLogin,
+  validateUserUpdate,
+  validatePasswordChange,   
+  validateUserDeletion,
+};
+```
+
+**Descrição do Código:**
+
+- Middlewares para validar dados de entrada usando os schemas definidos com Zod.
+
+###### 7.4. Arquivos na Pasta `src/routes/`
+
+**a. `src/routes/authRoutes.ts`**
+
+**Criação do Arquivo:**
+
+- Na pasta `src/routes`, crie um novo arquivo chamado `authRoutes.ts`.
+
+**Código a ser inserido em `authRoutes.ts`:**
+
+```typescript
+import { Router } from 'express';
+import authController from '../controllers/authController';
+import userMiddleware from '../middlewares/user.middleware';
+
+const router = Router();
+
+router.post('/register', userMiddleware.validateUserRegistration, authController.register);
+router.post('/login', userMiddleware.validateUserLogin, authController.login);
+
+export default router;
+```
+
+**Descrição do Código:**
+
+- Define as rotas de autenticação (`/auth/register` e `/auth/login`).
+
+**b. `src/routes/userRoutes.ts`**
+
+**Criação do Arquivo:**
+
+- Na pasta `src/routes`, crie um novo arquivo chamado `userRoutes.ts`.
+
+**Código a ser inserido em `userRoutes.ts`:**
+
+```typescript
+import { Router } from 'express';
+import userController from '../controllers/userController';
+import { checkToken } from '../middlewares/jwt.middleware';
+import userMiddleware from '../middlewares/user.middleware';
+
+const router = Router();
+
+router.get('/', checkToken, userController.listUsers);
+router.get('/me', checkToken, userController.getCurrentUser);
+
+router.put(
+  '/me',
+  checkToken,
+  userMiddleware.validateUserUpdate,
+  userController.updateCurrentUser
+);
+
+router.put(
+  '/me/password',
+  checkToken,
+  userMiddleware.validatePasswordChange,
+  userController.changePassword
+);
+
+router.delete(
+  '/me',
+  checkToken,
+  userMiddleware.validateUserDeletion,
+  userController.deleteCurrentUser
+);
+
+export default router;
+```
+
+**Descrição do Código:**
+
+- Define as rotas relacionadas ao usuário autenticado.
+
+**c. `src/routes/staticRoutes.ts`**
+
+**Criação do Arquivo:**
+
+- Na pasta `src/routes`, crie um novo arquivo chamado `staticRoutes.ts`.
+
+**Código a ser inserido em `staticRoutes.ts`:**
+
+```typescript
+import { Router } from 'express';
+import path from 'path';
+
+const router = Router();
+const publicPath = path.join(__dirname, '../../public');
+
+router.get('/', (req, res) => {
+  res.sendFile(path.join(publicPath, 'acesso-publico.html'));
+});
+
+router.get('/login', (req, res) => {
+  res.sendFile(path.join(publicPath, 'login.html'));
+});
+
+router.get('/registrar', (req, res) => {
+  res.sendFile(path.join(publicPath, 'registrar.html'));
+});
+
+router.get('/dashboard', (req, res) => {
+  res.sendFile(path.join(publicPath, 'acesso-privado.html'));
+});
+
+router.get('*', (req, res) => {
+  res.status(404).sendFile(path.join(publicPath, '404.html'));
+});
+
+export default router;
+```
+
+**Descrição do Código:**
+
+- Serve as páginas HTML estáticas para as rotas correspondentes.
+
+**d. `src/routes/index.ts`**
+
+**Criação do Arquivo:**
+
+- Na pasta `src/routes`, crie um novo arquivo chamado `index.ts`.
+
+**Código a ser inserido em `index.ts`:**
+
+```typescript
+import { Router } from 'express';
+import authRoutes from './authRoutes';
+import userRoutes from './userRoutes';
+import staticRoutes from './staticRoutes';
+
+const router = Router();
+
+router.use('/auth', authRoutes);
+router.use('/users', userRoutes);
+router.use('/', staticRoutes);
+
+export default router;
+```
+
+**Descrição do Código:**
+
+- Centraliza todas as rotas em um único arquivo.
+
+###### 7.5. Arquivos na Pasta `src/schemas/`
+
+**a. `src/schemas/userSchema.ts`**
+
+**Criação do Arquivo:**
+
+- Na pasta `src/schemas`, crie um novo arquivo chamado `userSchema.ts`.
+
+**Código a ser inserido em `userSchema.ts`:**
+
+```typescript
+import { z } from 'zod';
+
+export const registerSchema = z.object({
+  name: z.string().nonempty('Nome é obrigatório.').max(100, 'Nome muito longo.'),
+  email: z.string().email('Email inválido.').max(100, 'Email muito longo.'),
+  password: z
+    .string()
+    .min(6, 'A senha deve ter pelo menos 6 caracteres.')
+    .max(100, 'Senha muito longa.'),
+});
+
+export const loginSchema = z.object({
+  email: z.string().email('Email inválido.').max(100, 'Email muito longo.'),
+  password: z
+    .string()
+    .min(6, 'A senha deve ter pelo menos 6 caracteres.')
+    .max(100, 'Senha muito longa.'),
+});
+
+export const updateUserSchema = z.object({
+  name: z.string().max(100, 'Nome muito longo.').optional(),
+  email: z.string().email('Email inválido.').max(100, 'Email muito longo.').optional(),
+});
+
+export const passwordChangeSchema = z.object({
+  currentPassword: z.string().nonempty('Senha atual é obrigatória.'),
+  newPassword: z
+    .string()
+    .min(6, 'A nova senha deve ter pelo menos 6 caracteres.')
+    .max(100, 'Senha muito longa.'),
+});
+
+export const deleteAccountSchema = z.object({
+  password: z.string().nonempty('Senha é obrigatória.'),
+});
+
+export const idParamSchema = z.object({
+  id: z.string().regex(/^\d+$/, 'ID deve ser um número inteiro.'),
+});
+```
+
+**Descrição do Código:**
+
+- Define os schemas de validação para os dados de usuário usando a biblioteca Zod.
+
+###### 7.6. Arquivos na Pasta `src/utils/`
+
+**a. `src/utils/jwtPromise.ts`**
+
+**Criação do Arquivo:**
+
+- Na pasta `src/utils`, crie um novo arquivo chamado `jwtPromise.ts`.
+
+**Código a ser inserido em `jwtPromise.ts`:**
+
+```typescript
+import jwt from 'jsonwebtoken';
+
+export const signJWT = (payload: object): Promise<string> => {
+  const secret = process.env.JWT_SECRET || 'default_secret';
+  const expiresIn = process.env.JWT_EXPIRES_IN || '24h';
+
+  return new Promise((resolve, reject) => {
+    jwt.sign(payload, secret, { expiresIn }, (err, token) => {
+      if (err || !token) {
+        reject(err);
+      } else {
+        resolve(token);
+      }
+    });
+  });
+};
+
+export const verifyJWT = (token: string): Promise<any> => {
+  const secret = process.env.JWT_SECRET || 'default_secret';
+
+  return new Promise((resolve, reject) => {
+    jwt.verify(token, secret, (err, decoded) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(decoded);
+      }
+    });
+  });
+};
+```
+
+**Descrição do Código:**
+
+- Funções utilitárias para assinar e verificar tokens JWT usando Promises.
+
+###### 7.7. Arquivos na Pasta `public/`
+
+Crie os arquivos HTML e CSS correspondentes dentro da pasta `public` e `public/assets/css/pages/`.
+
+**Arquivos HTML na Pasta `public/`:**
+
+- `404.html`
+- `acesso-privado.html`
+- `acesso-publico.html`
+- `login.html`
+- `ratelimit.html`
+- `registrar.html`
+
+**Criação dos Arquivos HTML:**
+
+- Clique com o botão direito na pasta `public` e selecione **Novo Arquivo**.
+- Nomeie cada arquivo conforme listado acima.
+
+**Conteúdo Básico para `acesso-publico.html`:**
+
+```html
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Acesso Público</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/pages/home.css">
+</head>
+<body>
+  <h1>Bem-vindo ao Site de Cursos</h1>
+  <p>Esta é a página pública acessível a todos os usuários.</p>
+  <a href="/login">Login</a> | <a href="/registrar">Registrar</a>
+</body>
+</html>
+```
+
+**Repita o processo para os demais arquivos HTML, adaptando o conteúdo conforme necessário.**
+
+**Arquivos CSS na Pasta `public/assets/css/pages/`:**
+
+- `404.css`
+- `dashboard.css`
+- `home.css`
+- `login.css`
+- `ratelimit.css`
+- `registrar.css`
+
+**Criação dos Arquivos CSS:**
+
+- Clique com o botão direito na pasta `public/assets/css/pages/` e selecione **Novo Arquivo**.
+- Nomeie cada arquivo conforme listado acima.
+
+**Conteúdo Básico para `home.css`:**
+
+```css
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  background-color: #f0f0f0;
+}
+```
+
+**Repita o processo para os demais arquivos CSS, estilizando conforme desejado.**
+
+###### 7.8. Arquivos Adicionais na Raiz do Projeto
+
+**a. `README.md`**
+
+- Já estamos construindo o README com todas as informações necessárias.
+
+**b. `.gitignore`**
+
+**Criação do Arquivo:**
+
+- Na raiz do projeto, crie um arquivo chamado `.gitignore`.
+
+**Conteúdo do `.gitignore`:**
+
+```
+/node_modules
+/dist
+/.env
+/database.sqlite
+```
+
+**c. `.env`**
+
+**Criação do Arquivo:**
+
+- Na raiz do projeto, crie um arquivo chamado `.env`.
+
+**Conteúdo do `.env`:**
+
+```env
+PORT=4060
+JWT_SECRET=seu_segredo_jwt
+JWT_EXPIRES_IN=24h
+```
+
+---
+
+**Nota:** Agora, todos os arquivos e pastas foram criados, e o código foi adicionado conforme necessário.
+
+##### 8. Configure os Scripts no `package.json`
 
 Abra o arquivo `package.json` e edite a seção `"scripts"` para incluir os seguintes scripts:
 
@@ -493,7 +1483,7 @@ Abra o arquivo `package.json` e edite a seção `"scripts"` para incluir os segu
 },
 ```
 
-##### 10. Configure as Variáveis de Ambiente
+##### 9. Configure as Variáveis de Ambiente
 
 Crie um arquivo `.env` na raiz do projeto com o seguinte conteúdo:
 
@@ -503,7 +1493,7 @@ JWT_SECRET=seu_segredo_jwt
 JWT_EXPIRES_IN=24h
 ```
 
-##### 11. Inicie o Servidor em Modo de Desenvolvimento
+##### 10. Inicie o Servidor em Modo de Desenvolvimento
 
 No terminal integrado do VS Code, execute:
 
@@ -511,17 +1501,18 @@ No terminal integrado do VS Code, execute:
 npm run dev
 ```
 
-##### 12. Acesse o Aplicativo
+##### 11. Acesse o Aplicativo
 
 Abra o navegador e vá para `http://localhost:4060` para visualizar o site.
 
-##### 13. Adicione uma Captura de Tela da Estrutura de Arquivos no VS Code
+##### 12. Estrutura de Arquivos no VS Code
 
-Após criar todos os arquivos e pastas, tire uma captura de tela da estrutura de arquivos no VS Code para referência futura. Adicione a imagem na pasta `img` dentro de `public/assets/` e referencie-a no README:
+Estrutura arquivos
 
 ```markdown
 ![Estrutura de Arquivos no VS Code](public/assets/img/estrutura_vscode.png)
 ```
+
 ---
 
 ## 6. Configuração do Ambiente de Desenvolvimento
@@ -677,21 +1668,30 @@ Este site possui diversas rotas que servem páginas públicas e privadas, além 
 
 - **`GET /dashboard`**: Exibe a página do dashboard para usuários autenticados (`acesso-privado.html`).
 - **`GET /users/me`**: Retorna os dados do usuário autenticado.
-- **`GET /users`**: Lista todos os usuários (apenas para administradores).
-- **`PUT /users/:id`**: Atualiza os dados de um usuário específico.
-- **`DELETE /users/:id`**: Deleta um usuário específico.
+- **`PUT /users/me`**: Atualiza os dados de nome e email do usuário autenticado.
+- **`PUT /users/me/password`**: Altera a senha do usuário autenticado.
+- **DELETE /users/me`**: Apaga a conta do usuário autenticado.
 
 ### 9.3. Rotas de Autenticação
 
 - **`POST /auth/register`**: Registra um novo usuário.
 - **`POST /auth/login`**: Autentica um usuário e retorna um token JWT.
 
-### 9.4. Funcionalidades do Site
+### 9.4. Rotas Administrativas (Requer Autenticação)
+
+- **`GET /users`**: Lista todos os usuários (apenas para administradores).
+- **`PUT /users/:id`**: Atualiza os dados de um usuário específico.
+- **`DELETE /users/:id`**: Deleta um usuário específico.
+
+### 9.5. Funcionalidades do Site
 
 - **Registro de Usuários**: Usuários podem se registrar fornecendo nome, email e senha.
 - **Login de Usuários**: Usuários registrados podem fazer login para acessar funcionalidades protegidas.
 - **Dashboard Privado**: Após autenticação, usuários podem acessar o dashboard para ver informações pessoais e módulos do curso.
 - **Gerenciamento de Usuários**: Administradores podem listar, atualizar e deletar usuários.
+- **Atualização de Perfil**: Usuários autenticados podem atualizar seus dados pessoais (nome e email).
+- **Alteração de Senha**: Usuários autenticados podem alterar suas senhas.
+- **Apagamento de Conta**: Usuários autenticados podem apagar suas próprias contas.
 - **Validação de Dados**: Utiliza Zod para validar entradas de usuário em todas as rotas relevantes.
 - **Segurança**: Implementação de CORS, rate limiting, e cabeçalhos de segurança com Helmet.
 - **Autenticação JWT**: Protege rotas privadas e gerencia sessões de usuário.
@@ -902,13 +1902,13 @@ Authorization: Bearer SEU_TOKEN_JWT_AQUI
 3. **Verifique as Respostas**
 
    - Certifique-se de que as respostas são conforme esperado (códigos de status 200, 201, etc., e dados retornados).
-
+     
 ---
 
 ## 12. Tratando Erros Comuns
 
 Durante a configuração e execução do projeto, você pode encontrar alguns erros comuns. A seguir, estão descritas possíveis causas e soluções para esses problemas.
-
+   
 ### 12.1. Erro: `npm : O termo 'npm' não é reconhecido como nome de cmdlet, função, arquivo de script ou programa operável.`
 
 **Descrição**: Esse erro ocorre quando o Node.js (e, portanto, o npm) não está instalado corretamente ou o caminho (PATH) para o npm não está configurado.
@@ -1039,6 +2039,12 @@ Essas IAs são ferramentas que podem acelerar a resolução de problemas, oferec
 
 ---
 
+## 12. Tratando Erros Comuns
+
+[... The rest of the error handling remains the same ...]
+
+---
+
 ## 13. Contribuindo
 
 Contribuições são bem-vindas! Sinta-se à vontade para abrir issues e enviar pull requests.
@@ -1081,15 +2087,15 @@ Este projeto está licenciado sob a [MIT License](LICENSE).
 
 **Yohanna Weber Francelino**  
 [GitHub](https://github.com/YanWeberFrancelino)  
-Email: yohanna.weber@example.com
+Email: omelety15@gmail.com
 
 ---
 
-# Detalhamento Completo do Código e Funcionalidades
+# 16. Detalhamento Completo do Código e Funcionalidades
 
 Para garantir que todos os aspectos do projeto sejam compreendidos, a seguir está um detalhamento completo dos principais componentes do código, suas interações e funcionalidades.
 
-## 15.1. Arquivo `package.json`
+## 16.1. Arquivo `package.json`
 
 Define as dependências do projeto, scripts e metadados.
 
@@ -1141,7 +2147,7 @@ Define as dependências do projeto, scripts e metadados.
 - **`start`**: Inicia o servidor a partir dos arquivos compilados na pasta `dist`.
 - **`test`**: Placeholder para testes, atualmente exibe um erro.
 
-## 15.2. Arquivo `src/index.ts`
+## 16.2. Arquivo `src/index.ts`
 
 Ponto de entrada do aplicativo. Configura middlewares, rotas e inicia o servidor.
 
@@ -1175,7 +2181,6 @@ const publicPath = path.resolve(process.cwd(), 'public');
 console.log('Servindo arquivos estáticos de:', publicPath);
 
 app.use('/assets', express.static(path.join(publicPath, 'assets')));
-//app.use(express.static(publicPath));
 
 app.use((req, res, next) => {
   console.log(`Request URL: ${req.url}`);
@@ -1205,7 +2210,7 @@ connect()
 - **Conexão com o Banco de Dados**: Estabelece conexão com o banco de dados SQLite antes de iniciar o servidor.
 - **Rotas e Tratamento de Erros**: Utiliza rotas centralizadas e um middleware para tratamento de erros.
 
-## 15.3. Arquivo `src/database.ts`
+## 16.3. Arquivo `src/database.ts`
 
 Configura e gerencia a conexão com o banco de dados SQLite.
 
@@ -1263,9 +2268,9 @@ export async function connect() {
 - **Criação da Tabela `users`**: Cria a tabela `users` se não existir.
 - **Inserção de Usuário Padrão**: Insere um usuário padrão (`Teste`) caso não exista no banco de dados.
 
-## 15.4. Controladores
+## 16.4. Controladores
 
-### 15.4.1. Arquivo `src/controllers/authController.ts`
+### 16.4.1. Arquivo `src/controllers/authController.ts`
 
 Controla o registro e login de usuários.
 
@@ -1349,9 +2354,9 @@ export default {
 - **Registro de Usuário**: Cria um novo usuário após verificar se o email já está em uso. As senhas são criptografadas com bcrypt.
 - **Login de Usuário**: Verifica as credenciais do usuário e, se válidas, retorna um token JWT para autenticação.
 
-### 15.4.2. Arquivo `src/controllers/userController.ts`
+### 16.4.2. Arquivo `src/controllers/userController.ts`
 
-Controla operações de usuários, como listar, atualizar, deletar e obter dados do usuário autenticado.
+Controla operações de usuários, como listar, atualizar, deletar, alterar senha e apagar conta.
 
 ```typescript
 import { Request, Response } from 'express';
@@ -1369,13 +2374,36 @@ export const listUsers = async (req: Request, res: Response) => {
   }
 };
 
-export const updateUser = async (req: Request, res: Response) => {
+export const getCurrentUser = async (req: Request, res: Response) => {
   try {
     const db = await connect();
-    const { id } = req.params;
-    const { name, email, password } = req.body;
+    const userId = (req as any).user.id;
 
-    const existingUser = await db.get(`SELECT * FROM users WHERE id = ?`, [id]);
+    const user = await db.get(`SELECT id, name, email FROM users WHERE id = ?`, [
+      userId,
+    ]);
+
+    if (!user) {
+      res.status(404).json({ error: 'Usuário não encontrado.' });
+      return;
+    }
+
+    res.status(200).json(user);
+  } catch (error) {
+    console.error('Erro ao obter dados do usuário:', error);
+    res.status(500).json({ error: 'Erro interno do servidor.' });
+  }
+};
+
+export const updateCurrentUser = async (req: Request, res: Response) => {
+  try {
+    const db = await connect();
+    const userId = (req as any).user.id;
+    const { name, email } = req.body;
+
+    const existingUser = await db.get(`SELECT * FROM users WHERE id = ?`, [
+      userId,
+    ]);
     if (!existingUser) {
       res.status(404).json({ error: 'Usuário não encontrado.' });
       return;
@@ -1390,14 +2418,16 @@ export const updateUser = async (req: Request, res: Response) => {
     }
 
     if (email) {
+      const emailExists = await db.get(
+        `SELECT * FROM users WHERE email = ? AND id != ?`,
+        [email, userId]
+      );
+      if (emailExists) {
+        res.status(400).json({ error: 'Email já está em uso.' });
+        return;
+      }
       updates.push('email = ?');
       params.push(email);
-    }
-
-    if (password) {
-      const encryptedPassword = await bcrypt.hash(password, 10);
-      updates.push('password = ?');
-      params.push(encryptedPassword);
     }
 
     if (updates.length === 0) {
@@ -1405,51 +2435,75 @@ export const updateUser = async (req: Request, res: Response) => {
       return;
     }
 
-    params.push(id);
+    params.push(userId);
 
     await db.run(`UPDATE users SET ${updates.join(', ')} WHERE id = ?`, params);
 
-    res.status(200).json({ message: 'Usuário atualizado com sucesso!' });
+    res.status(200).json({ message: 'Dados atualizados com sucesso!' });
   } catch (error) {
     console.error('Erro ao atualizar usuário:', error);
     res.status(500).json({ error: 'Erro interno do servidor.' });
   }
 };
 
-export const deleteUser = async (req: Request, res: Response) => {
+export const changePassword = async (req: Request, res: Response) => {
   try {
     const db = await connect();
-    const { id } = req.params;
+    const userId = (req as any).user.id;
+    const { currentPassword, newPassword } = req.body;
 
-    const ret = await db.run(`DELETE FROM users WHERE id = ?`, [id]);
-
-    if (ret.changes === 0) {
+    const user = await db.get(`SELECT * FROM users WHERE id = ?`, [userId]);
+    if (!user) {
       res.status(404).json({ error: 'Usuário não encontrado.' });
       return;
     }
 
-    res.status(200).json({ message: 'Usuário deletado com sucesso!' });
+    const isValid = await bcrypt.compare(currentPassword, user.password);
+
+    if (!isValid) {
+      res.status(401).json({ error: 'Senha atual incorreta.' });
+      return;
+    }
+
+    const encryptedPassword = await bcrypt.hash(newPassword, 10);
+
+    await db.run(`UPDATE users SET password = ? WHERE id = ?`, [
+      encryptedPassword,
+      userId,
+    ]);
+
+    res.status(200).json({ message: 'Senha alterada com sucesso!' });
   } catch (error) {
-    console.error('Erro ao deletar usuário:', error);
+    console.error('Erro ao alterar senha:', error);
     res.status(500).json({ error: 'Erro interno do servidor.' });
   }
 };
 
-export const getCurrentUser = async (req: Request, res: Response) => {
+export const deleteCurrentUser = async (req: Request, res: Response) => {
   try {
     const db = await connect();
-    const userId = (req as any).user.id; 
+    const userId = (req as any).user.id;
+    const { password } = req.body;
 
-    const user = await db.get(`SELECT id, name, email FROM users WHERE id = ?`, [userId]);
+    const user = await db.get(`SELECT * FROM users WHERE id = ?`, [userId]);
 
     if (!user) {
       res.status(404).json({ error: 'Usuário não encontrado.' });
       return;
     }
 
-    res.status(200).json(user);
+    const isValid = await bcrypt.compare(password, user.password);
+
+    if (!isValid) {
+      res.status(401).json({ error: 'Senha incorreta.' });
+      return;
+    }
+
+    await db.run(`DELETE FROM users WHERE id = ?`, [userId]);
+
+    res.status(200).json({ message: 'Conta apagada com sucesso!' });
   } catch (error) {
-    console.error('Erro ao obter dados do usuário:', error);
+    console.error('Erro ao apagar usuário:', error);
     res.status(500).json({ error: 'Erro interno do servidor.' });
   }
 };
@@ -1457,464 +2511,23 @@ export const getCurrentUser = async (req: Request, res: Response) => {
 export default {
   listUsers,
   getCurrentUser,
-  updateUser,
-  deleteUser,
+  updateCurrentUser,
+  changePassword,
+  deleteCurrentUser,
 };
 ```
 
 ### Funcionalidades
 
 - **Listar Usuários**: Retorna uma lista de todos os usuários registrados (apenas para administradores).
-- **Atualizar Usuário**: Atualiza os dados de um usuário específico.
-- **Deletar Usuário**: Remove um usuário específico do banco de dados.
 - **Obter Dados do Usuário Autenticado**: Retorna os dados do usuário que está autenticado.
-
-## 15.5. Middlewares
-
-### 15.5.1. Arquivo `src/middlewares/errorHandler.ts`
-
-Middleware para tratamento de erros internos do servidor.
-
-```typescript
-import { Request, Response, NextFunction } from "express";
-
-const errorHandler = (err: any, req: Request, res: Response, next: NextFunction) => {
-  console.error(err.stack);
-  res.status(500).json({ error: 'Erro interno do servidor.' });
-};
-
-export default errorHandler;
-```
-
-### Funcionalidades
-
-- **Captura de Erros**: Intercepta erros que ocorrem durante o processamento das requisições.
-- **Resposta Uniforme**: Retorna uma resposta JSON com uma mensagem de erro genérica.
-
-### 15.5.2. Arquivo `src/middlewares/jwt.middleware.ts`
-
-Middleware para verificação de tokens JWT em rotas protegidas.
-
-```typescript
-import { RequestHandler } from 'express';
-import { verifyJWT } from '../utils/jwtPromise';
-
-export const checkToken: RequestHandler = async (req, res, next) => {
-  const authHeader = req.headers.authorization;
-
-  if (!authHeader) {
-    res.status(401).json({ error: 'Token não fornecido' });
-    return;
-  }
-
-  const token = authHeader.split(' ')[1]; 
-
-  if (!token) {
-    res.status(401).json({ error: 'Token não fornecido' });
-    return;
-  }
-
-  try {
-    const decoded = await verifyJWT(token);
-    (req as any).user = decoded;
-    next();
-  } catch (error) {
-    console.error('Erro na verificação do token:', error);
-    res.status(401).json({ error: 'Token inválido' });
-  }
-};
-
-export default {
-  checkToken,
-};
-```
-
-### Funcionalidades
-
-- **Verificação de Token**: Verifica se o token JWT fornecido é válido.
-- **Autorização**: Permite o acesso a rotas protegidas apenas se o token for válido.
-
-### 15.5.3. Arquivo `src/middlewares/securityMiddleware.ts`
-
-Middlewares para segurança, incluindo CORS, rate limiting, Helmet e remoção do cabeçalho `X-Powered-By`.
-
-```typescript
-import { Request, Response, NextFunction } from 'express';
-import rateLimit from 'express-rate-limit';
-import cors from 'cors';
-import helmet from 'helmet';
-import path from 'path';
-
-export const corsOptions = cors({
-  origin: ['http://127.0.0.1:4060', 'http://localhost:4060'],
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  credentials: true,
-});
-
-const isStaticAsset = (url: string) =>
-    url.startsWith('/assets') || url.endsWith('.css') || url.endsWith('.js') || url.endsWith('.png') || url.endsWith('.jpg') || url.endsWith('.ico');
-
-
-export const limiter = rateLimit({
-    windowMs: 1 * 60 * 1000, 
-    max: 100, 
-    handler: (req: Request, res: Response, next: NextFunction) => {
-      if (isStaticAsset(req.url)) {
-        next(); 
-      } else {
-        res.status(429).sendFile(path.join(__dirname, '../../public/ratelimit.html'));
-      }
-    },
-  });
-
-export const securityHeaders = helmet({
-  contentSecurityPolicy: {
-    directives: {
-      defaultSrc: ["'self'"],
-      scriptSrc: [
-        "'self'",
-        "'unsafe-inline'", 
-        "'unsafe-eval'",   
-        'https://cdn.jsdelivr.net',
-        'https://unpkg.com',
-      ],
-      styleSrc: [
-        "'self'",
-        "'unsafe-inline'", 
-        'https://fonts.googleapis.com',
-      ],
-      imgSrc: ["'self'", 'data:'],
-      fontSrc: ["'self'", 'https://fonts.gstatic.com'],
-      connectSrc: ["'self'"],
-      objectSrc: ["'none'"],
-      upgradeInsecureRequests: [],
-    },
-  },
-  crossOriginEmbedderPolicy: false,
-});
-
-export const hidePoweredBy = (req: Request, res: Response, next: NextFunction) => {
-  res.removeHeader('X-Powered-By');
-  next();
-};
-```
-
-### Funcionalidades
-
-- **CORS**: Configura políticas de CORS para permitir requisições apenas de origens especificadas.
-- **Rate Limiting**: Limita o número de requisições por IP para prevenir abusos.
-- **Helmet**: Configura cabeçalhos de segurança para proteger contra algumas vulnerabilidades web conhecidas.
-- **Remoção do `X-Powered-By`**: Remove o cabeçalho `X-Powered-By` para ocultar informações sobre o backend.
-
-### 15.5.4. Arquivo `src/middlewares/user.middleware.ts`
-
-Middlewares para validação de dados de usuário usando Zod.
-
-```typescript
-import { Request, Response, NextFunction } from 'express';
-import { registerSchema, loginSchema, updateUserSchema, idParamSchema } from '../schemas/userSchema';
-
-export const validateUserRegistration = (req: Request, res: Response, next: NextFunction) => {
-  try {
-    req.body = registerSchema.parse(req.body);
-    next();
-  } catch (error: any) {
-    res.status(400).json({ error: 'Dados de registro inválidos.', details: error.errors });
-  }
-};
-
-export const validateUserLogin = (req: Request, res: Response, next: NextFunction) => {
-  try {
-    req.body = loginSchema.parse(req.body);
-    next();
-  } catch (error: any) {
-    res.status(400).json({ error: 'Dados de login inválidos.', details: error.errors });
-  }
-};
-
-export const validateUserUpdate = (req: Request, res: Response, next: NextFunction) => {
-  try {
-    req.params = idParamSchema.parse(req.params);
-    req.body = updateUserSchema.parse(req.body);
-    next();
-  } catch (error: any) {
-    res.status(400).json({ error: 'Dados de atualização inválidos.', details: error.errors });
-  }
-};
-
-export const validateUserDeletion = (req: Request, res: Response, next: NextFunction) => {
-  try {
-    req.params = idParamSchema.parse(req.params);
-    next();
-  } catch (error: any) {
-    res.status(400).json({ error: 'ID inválido.', details: error.errors });
-  }
-};
-
-export default {
-  validateUserRegistration,
-  validateUserLogin,
-  validateUserUpdate,
-  validateUserDeletion,
-};
-```
-
-### Funcionalidades
-
-- **Validação de Registro**: Garante que os dados fornecidos durante o registro são válidos.
-- **Validação de Login**: Garante que os dados fornecidos durante o login são válidos.
-- **Validação de Atualização**: Garante que os dados fornecidos para atualizar um usuário são válidos.
-- **Validação de Deleção**: Garante que o ID fornecido para deletar um usuário é válido.
-
-## 15.6. Schemas de Validação
-
-### Arquivo `src/schemas/userSchema.ts`
-
-Define schemas de validação de dados usando Zod.
-
-```typescript
-import { z } from 'zod';
-
-export const registerSchema = z.object({
-  name: z.string().min(1, 'Nome é obrigatório').max(100, 'Nome muito longo'),
-  email: z.string().email('Email inválido').max(100, 'Email muito longo'),
-  password: z.string().min(6, 'Senha deve ter pelo menos 6 caracteres').max(100),
-});
-
-export const loginSchema = z.object({
-  email: z.string().email('Email inválido').max(100, 'Email muito longo'),
-  password: z.string().min(6, 'Senha deve ter pelo menos 6 caracteres').max(100),
-});
-
-export const updateUserSchema = z.object({
-  name: z.string().min(1).max(100).optional(),
-  email: z.string().email().max(100).optional(),
-  password: z.string().min(6).max(100).optional(),
-});
-
-export const idParamSchema = z.object({
-  id: z.string().regex(/^\d+$/, 'ID deve ser numérico'),
-});
-```
-
-### Funcionalidades
-
-- **`registerSchema`**: Valida dados de registro.
-- **`loginSchema`**: Valida dados de login.
-- **`updateUserSchema`**: Valida dados para atualização de usuário.
-- **`idParamSchema`**: Valida parâmetros de ID em rotas.
-
-## 15.7. Utilitários
-
-### Arquivo `src/utils/jwtPromise.ts`
-
-Funções utilitárias para assinar e verificar tokens JWT usando Promises.
-
-```typescript
-import jwt from 'jsonwebtoken';
-
-export const signJWT = (payload: object): Promise<string> => {
-  const secret = process.env.JWT_SECRET || 'default_secret';
-  const expiresIn = process.env.JWT_EXPIRES_IN || '24h';
-
-  return new Promise((resolve, reject) => {
-    jwt.sign(payload, secret, { expiresIn }, (err, token) => {
-      if (err || !token) {
-        reject(err);
-      } else {
-        resolve(token);
-      }
-    });
-  });
-};
-
-export const verifyJWT = (token: string): Promise<any> => {
-  const secret = process.env.JWT_SECRET || 'default_secret';
-
-  return new Promise((resolve, reject) => {
-    jwt.verify(token, secret, (err, decoded) => {
-      if (err) {
-        reject(err);
-      } else {
-        resolve(decoded);
-      }
-    });
-  });
-};
-```
-
-### Funcionalidades
-
-- **`signJWT`**: Cria um token JWT com um payload específico.
-- **`verifyJWT`**: Verifica a validade de um token JWT.
-
-## 15.8. Rotas
-
-### 15.8.1. Arquivo `src/routes/authRoutes.ts`
-
-Define as rotas para autenticação de usuários.
-
-```typescript
-import { Router } from 'express';
-import authController from '../controllers/authController';
-import userMiddleware from '../middlewares/user.middleware';
-
-const router = Router();
-
-router.post('/register', userMiddleware.validateUserRegistration, authController.register);
-router.post('/login', userMiddleware.validateUserLogin, authController.login);
-
-export default router;
-```
-
-### Funcionalidades
-
-- **`POST /auth/register`**: Registra um novo usuário.
-- **`POST /auth/login`**: Autentica um usuário existente.
-
-### 15.8.2. Arquivo `src/routes/userRoutes.ts`
-
-Define as rotas para operações de usuários.
-
-```typescript
-import { Router } from 'express';
-import userController from '../controllers/userController';
-import { checkToken } from '../middlewares/jwt.middleware';
-import userMiddleware from '../middlewares/user.middleware';
-
-const router = Router();
-
-router.get('/', checkToken, userController.listUsers);
-router.put(
-  '/:id',
-  checkToken,
-  userMiddleware.validateUserUpdate,
-  userController.updateUser
-);
-router.delete(
-  '/:id',
-  checkToken,
-  userMiddleware.validateUserDeletion,
-  userController.deleteUser
-);
-
-router.get('/me', checkToken, userController.getCurrentUser);
-
-export default router;
-```
-
-### Funcionalidades
-
-- **`GET /users`**: Lista todos os usuários (protegido por autenticação).
-- **`PUT /users/:id`**: Atualiza os dados de um usuário específico (protegido).
-- **`DELETE /users/:id`**: Deleta um usuário específico (protegido).
-- **`GET /users/me`**: Retorna os dados do usuário autenticado.
-
-### 15.8.3. Arquivo `src/routes/staticRoutes.ts`
-
-Define as rotas para servir páginas estáticas.
-
-```typescript
-import { Router } from 'express';
-import path from 'path';
-
-const router = Router();
-const publicPath = path.join(__dirname, '../../public');
-
-router.get('/', (req, res) => {
-  res.sendFile(path.join(publicPath, 'acesso-publico.html'));
-});
-
-router.get('/login', (req, res) => {
-  res.sendFile(path.join(publicPath, 'login.html'));
-});
-
-router.get('/registrar', (req, res) => {
-  res.sendFile(path.join(publicPath, 'registrar.html'));
-});
-
-router.get('/dashboard', (req, res) => {
-  res.sendFile(path.join(publicPath, 'acesso-privado.html'));
-});
-
-router.get('*', (req, res) => {
-  res.status(404).sendFile(path.join(publicPath, '404.html'));
-});
-
-export default router;
-```
-
-### Funcionalidades
-
-- **Servir Páginas HTML**: Roteia requisições para arquivos HTML estáticos correspondentes.
-- **Página 404**: Roteia todas as outras requisições para a página de erro 404.
-
-### 15.8.4. Arquivo `src/routes/index.ts`
-
-Centraliza todas as rotas definidas nos arquivos de rotas.
-
-```typescript
-import { Router } from 'express';
-import authRoutes from './authRoutes';
-import userRoutes from './userRoutes';
-import staticRoutes from './staticRoutes';
-
-const router = Router();
-
-router.use('/auth', authRoutes);
-router.use('/users', userRoutes);
-router.use('/', staticRoutes);
-
-export default router;
-```
-
-### Funcionalidades
-
-- **Centralização de Rotas**: Facilita a manutenção e organização das rotas do aplicativo.
-
-## 15.9. Frontend: Páginas HTML
-
-As páginas HTML estão localizadas na pasta `public/`. Cada página possui seu próprio estilo localizado em `public/assets/css/pages/`.
-
-### 15.9.1. `acesso-publico.html`
-
-Página pública acessível a todos os usuários, com informações gerais sobre o curso e opções para login e registro.
-
-### 15.9.2. `login.html`
-
-Página de login onde usuários autenticados podem inserir suas credenciais para acessar funcionalidades protegidas.
-
-### 15.9.3. `registrar.html`
-
-Página de registro onde novos usuários podem criar uma conta fornecendo nome, email e senha.
-
-### 15.9.4. `acesso-privado.html` (Dashboard)
-
-Página privada acessível apenas a usuários autenticados, exibindo informações pessoais e módulos do curso.
-
-### 15.9.5. `ratelimit.html`
-
-Página exibida quando o limite de requisições é excedido, informando o usuário sobre a restrição temporária.
-
-### 15.9.6. `404.html`
-
-Página de erro 404 exibida quando uma rota inexistente é acessada.
+- **Atualizar Dados do Usuário Autenticado**: Permite que o usuário autenticado atualize seu próprio nome e email.
+- **Alterar Senha do Usuário Autenticado**: Permite que o usuário autenticado altere sua senha fornecendo a senha atual e a nova senha.
+- **Apagar Conta do Usuário Autenticado**: Permite que o usuário autenticado apague sua própria conta fornecendo a senha atual.
 
 ---
 
-## 16. Conclusão
-
-Este projeto oferece uma base sólida para a criação de aplicações web completas com funcionalidades de autenticação, validação e segurança. Com uma estrutura organizada e bem documentada, é fácil de entender e expandir conforme necessário. Sinta-se à vontade para contribuir e melhorar este projeto!
-
----
-
-## 17. Agradecimentos
-
-Agradecemos a todos os membros da turma IA22 que contribuíram para o desenvolvimento deste trabalho final. Especial agradecimento ao professor e aos colegas de classe pelo suporte e colaboração durante todo o processo.
-
----
-
-# Boas Práticas e Recomendações
+# 17. Boas Práticas e Recomendações
 
 Para manter o projeto organizado e eficiente, recomendamos seguir as boas práticas de desenvolvimento e estruturação de código. Abaixo estão algumas recomendações adicionais:
 
@@ -1943,11 +2556,11 @@ Para manter o projeto organizado e eficiente, recomendamos seguir as boas práti
 ### 17.5. Testes
 
 - **Testes Unitários**: Implemente testes unitários para garantir que cada parte do código funcione conforme esperado.
-- **Testes de Integração**: Realize testes de integração para garantir que diferentes partes do sistema funcionem bem juntas.
-
+- **Testes de Integração**: Realize testes de integração para garantir que diferentes partes do sistema funcionem bem juntas.]
+  
 ---
 
-## 18. Recursos Adicionais
+# 18. Recursos Adicionais
 
 - **[Express.js Documentation](https://expressjs.com/)**: Documentação oficial do Express.js.
 - **[TypeScript Documentation](https://www.typescriptlang.org/docs/)**: Documentação oficial do TypeScript.
@@ -1958,8 +2571,9 @@ Para manter o projeto organizado e eficiente, recomendamos seguir as boas práti
 
 ---
 
-# Agradecimentos Finais
+# 19. Agradecimentos Finais
 
 Obrigado por utilizar este projeto e por contribuir para seu desenvolvimento contínuo. Esperamos que este guia completo tenha facilitado sua compreensão e implementação do site de cursos. Se tiver dúvidas ou sugestões, não hesite em entrar em contato!
 
 Boa codificação!
+
