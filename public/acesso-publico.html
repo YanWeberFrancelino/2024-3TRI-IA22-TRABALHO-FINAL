@@ -2,21 +2,31 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>Curso de Segurança com BCRYPT</title>
+    <title>Kodix Cursos</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/assets/css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700&family=Barlow:wght@100;600;800&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="/assets/img/icon.jpg" type="image/jpeg">
+    <style>
+        .header-logo {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+        }
+        .header-logo:hover {
+            color: rgb(189, 189, 189); 
+        }
+    </style>
 </head>
 <body>
     <header>
         <div class="header-container">
-            <h1>BCRYPT Segurança</h1>
+            <h1><a href="/" class="header-logo">Kodix Cursos</a></h1>
             <nav class="navigation">
                 <ul>
                     <li><a href="#home">Início</a></li>
                     <li><a href="#about">Sobre</a></li>
-                    <li><a href="#modules">Módulos</a></li>
+                    <li><a href="#courses">Cursos</a></li>
                     <li><a href="#testimonials">Depoimentos</a></li>
                     <li><a href="#faq">FAQ</a></li>
                     <li><a href="#contact">Contato</a></li>
@@ -29,27 +39,27 @@
     </header>
     <section class="hero-section" id="home">
         <div class="hero-content">
-            <h2>Proteja suas senhas com o máximo de segurança</h2>
-            <p>Aprenda como utilizar o BCRYPT para garantir a integridade e confidencialidade dos dados.</p>
-            <button onclick="window.location.href='/registrar'" class="btn secondary-btn">Inscreva-se Agora</button>
+            <h2>Aprenda a programar com Kodix Cursos</h2>
+            <p>Oferecemos cursos gratuitos de JavaScript, Python e muito mais em breve. Domine as tecnologias mais demandadas do mercado!</p>
+            <button onclick="window.location.href='/registrar'" class="btn secondary-btn">Comece Agora</button>
         </div>
     </section>
 
     <section class="features-section">
         <div class="content-box">
-            <h2>Recursos do Curso</h2>
+            <h2>O Que Oferecemos</h2>
             <div class="features">
                 <div class="feature-item">
                     <h3>Conteúdo Atualizado</h3>
-                    <p>Mantenha-se atualizado com as últimas práticas em segurança de senhas.</p>
+                    <p>Mantenha-se atualizado com materiais práticos e objetivos.</p>
                 </div>
                 <div class="feature-item">
-                    <h3>Certificado de Conclusão</h3>
-                    <p>Receba um certificado reconhecido ao finalizar o curso.</p>
+                    <h3>100% Gratuito</h3>
+                    <p>Todos os cursos são totalmente gratuitos e acessíveis a qualquer pessoa.</p>
                 </div>
                 <div class="feature-item">
-                    <h3>Acesso Vitalício</h3>
-                    <p>Acesse o conteúdo do curso a qualquer momento, sem limites.</p>
+                    <h3>Acesso a Qualquer Momento</h3>
+                    <p>Aprenda no seu ritmo com acesso ilimitado ao conteúdo.</p>
                 </div>
             </div>
         </div>
@@ -57,46 +67,33 @@
 
     <section class="about-section" id="about">
         <div class="content-box">
-            <h2>Por que escolher nosso curso?</h2>
-            <p>Nosso curso oferece um aprendizado completo sobre o BCRYPT, desde os conceitos básicos até implementações avançadas.</p>
+            <h2>Por que escolher a Kodix?</h2>
+            <p>A Kodix Cursos nasceu para democratizar o aprendizado em programação, ajudando você a conquistar novas habilidades e oportunidades.</p>
             <ul>
-                <li>Aulas interativas e práticas</li>
-                <li>Quizzes para testar seus conhecimentos</li>
-                <li>Suporte personalizado dos instrutores</li>
-                <li>Acesso a materiais exclusivos</li>
-                <li>Comunidade ativa de alunos</li>
+                <li>Aulas práticas e diretas</li>
+                <li>Projetos para reforçar o aprendizado</li>
+                <li>Suporte de uma comunidade ativa</li>
+                <li>Material acessível e gratuito</li>
             </ul>
         </div>
     </section>
 
-    <section class="modules-section" id="modules">
+    <section class="modules-section" id="courses">
         <div class="content-box">
-            <h2>Módulos do Curso</h2>
+            <h2>Conheça Nossos Cursos</h2>
             <div class="modules-carousel">
                 <div class="carousel-container" id="carousel-container">
                     <div class="carousel-slide">
-                        <h3>Módulo 1: Introdução ao BCRYPT</h3>
-                        <p>Entenda o que é o BCRYPT e por que ele é essencial para a segurança de senhas.</p>
+                        <h3>Curso de JavaScript</h3>
+                        <p>Aprenda os fundamentos e aplique JavaScript em projetos reais.</p>
                     </div>
                     <div class="carousel-slide">
-                        <h3>Módulo 2: Implementação Básica</h3>
-                        <p>Aprenda a implementar o BCRYPT em aplicações simples.</p>
+                        <h3>Curso de Python</h3>
+                        <p>Domine a linguagem Python para desenvolvimento e análise de dados.</p>
                     </div>
                     <div class="carousel-slide">
-                        <h3>Módulo 3: Boas Práticas</h3>
-                        <p>Conheça as melhores práticas para utilização segura do BCRYPT.</p>
-                    </div>
-                    <div class="carousel-slide">
-                        <h3>Módulo 4: Casos Avançados</h3>
-                        <p>Explore casos avançados e resolva desafios complexos de segurança.</p>
-                    </div>
-                    <div class="carousel-slide">
-                        <h3>Módulo 5: Integração com Frameworks</h3>
-                        <p>Aprenda a integrar o BCRYPT com frameworks populares.</p>
-                    </div>
-                    <div class="carousel-slide">
-                        <h3>Módulo 6: Projeto Final</h3>
-                        <p>Desenvolva um projeto completo aplicando todos os conceitos aprendidos.</p>
+                        <h3>Novos Cursos em Breve</h3>
+                        <p>Estamos preparando mais conteúdos incríveis para você!</p>
                     </div>
                 </div>
                 <button class="carousel-btn prev-btn" onclick="prevSlide()">&#10094;</button>
@@ -110,19 +107,19 @@
             <h2>O que nossos alunos dizem</h2>
             <div class="testimonials">
                 <div class="testimonial">
-                    <p>"O curso me ajudou a entender profundamente como proteger as senhas dos usuários. Recomendo a todos!"</p>
+                    <p>"Aprender programação nunca foi tão fácil e acessível. Recomendo demais!"</p>
                     <h4>- Ana Silva</h4>
                 </div>
                 <div class="testimonial">
-                    <p>"As aulas são claras e os quizzes reforçam o aprendizado. Excelente conteúdo."</p>
+                    <p>"Os cursos são práticos e os materiais são de ótima qualidade. Excelente!"</p>
                     <h4>- João Souza</h4>
                 </div>
                 <div class="testimonial">
-                    <p>"Aprendi a implementar o BCRYPT de forma eficaz nas minhas aplicações."</p>
+                    <p>"A Kodix realmente entrega valor com seus cursos gratuitos."</p>
                     <h4>- Maria Oliveira</h4>
                 </div>
                 <div class="testimonial">
-                    <p>"A comunidade é muito ativa e os instrutores sempre dispostos a ajudar."</p>
+                    <p>"Uma comunidade incrível para quem quer aprender programação sem complicação."</p>
                     <h4>- Pedro Santos</h4>
                 </div>
             </div>
@@ -134,20 +131,20 @@
             <h2>Perguntas Frequentes</h2>
             <div class="faq">
                 <div class="faq-item">
-                    <h3>O curso é indicado para iniciantes?</h3>
-                    <p>Sim, o curso é adequado tanto para iniciantes quanto para profissionais que desejam aprofundar seus conhecimentos.</p>
+                    <h3>Os cursos são realmente gratuitos?</h3>
+                    <p>Sim, todos os cursos da Kodix são completamente gratuitos.</p>
                 </div>
                 <div class="faq-item">
-                    <h3>Preciso de conhecimentos prévios em programação?</h3>
-                    <p>Conhecimentos básicos em programação são recomendados, mas não obrigatórios.</p>
+                    <h3>Preciso de conhecimentos prévios?</h3>
+                    <p>Não, os cursos incluem conceitos básicos para quem está começando.</p>
                 </div>
                 <div class="faq-item">
-                    <h3>Como funciona o suporte aos alunos?</h3>
-                    <p>Você terá acesso a um fórum exclusivo e poderá enviar dúvidas diretamente aos instrutores.</p>
+                    <h3>Como funciona o suporte?</h3>
+                    <p>Você pode interagir com outros alunos e receber ajuda na nossa comunidade online.</p>
                 </div>
                 <div class="faq-item">
-                    <h3>Qual é a duração do curso?</h3>
-                    <p>O curso tem duração estimada de 40 horas, mas você pode fazê-lo no seu próprio ritmo.</p>
+                    <h3>Preciso de equipamentos especiais?</h3>
+                    <p>Não, basta ter um computador ou celular com acesso à internet.</p>
                 </div>
             </div>
         </div>
@@ -156,25 +153,25 @@
     <section class="cta-section">
         <div class="content-box">
             <h2>Pronto para começar?</h2>
-            <p>Inscreva-se agora e comece a aprender como proteger suas aplicações com o BCRYPT.</p>
-            <button onclick="window.location.href='/registrar'" class="btn primary-btn">Quero me Inscrever</button>
+            <p>Inscreva-se agora e transforme seu futuro com a Kodix Cursos.</p>
+            <button onclick="window.location.href='/registrar'" class="btn primary-btn">Quero Começar</button>
         </div>
     </section>
 
     <section class="contact-section" id="contact">
         <div class="content-box">
             <h2>Entre em Contato</h2>
-            <p>Tem alguma dúvida? Entre em contato conosco através dos canais abaixo:</p>
+            <p>Fale conosco para mais informações:</p>
             <ul class="contact-info">
-                <li>Email: suporte@bcryptcurso.com</li>
+                <li>Email: suporte@kodixcursos.com</li>
                 <li>Telefone: (11) 1234-5678</li>
-                <li>Endereço: Rua da Segurança, 123 - São Paulo, SP</li>
+                <li>Endereço: Rua da Tecnologia, 123 - São Paulo, SP</li>
             </ul>
         </div>
     </section>
 
     <footer>
-        <p>&copy; 2024 BCRYPT Segurança. Todos os direitos reservados.</p>
+        <p>&copy; 2024 Kodix Cursos. Todos os direitos reservados.</p>
     </footer>
 
     <script>

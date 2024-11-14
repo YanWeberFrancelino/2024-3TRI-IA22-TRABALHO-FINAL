@@ -2,20 +2,34 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>Login - Aprendendo a Utilizar o BCRYPT</title>
+    <title>Login - Kodix Cursos</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/assets/css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700&family=Barlow:wght@100;600;800&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/jwt-decode/build/jwt-decode.min.js"></script>
     <link rel="shortcut icon" href="/assets/img/icon.jpg" type="image/jpeg">
+    <style>
+        .header-logo {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+        }
+        .header-logo:hover {
+            color: rgb(189, 189, 189);
+        }
+
+        .btn.secondary-btn {
+            visibility: hidden;
+        }
+
+        
+    </style>
 </head>
 <body>
     <header>
         <div class="header-container">
-            <h1>Login</h1>
-            <div class="header-buttons">
-                <button onclick="window.location.href='/'" class="btn secondary-btn">Página Inicial</button>
-            </div>
+            <h1><a href="/" class="header-logo">Kodix Cursos</a></h1>
+            <button class="btn secondary-btn">2022314399 FEZ ESTE PROJETO</button>
         </div>
     </header>
 
@@ -24,7 +38,7 @@
             <div class="login-form">
                 <div class="titles">
                     <h1>Entre na sua conta</h1>
-                    <p>...e experimente o <span>PODER</span> do <span>BCRYPT</span></p>
+                    <p>...e experimente o <span>PODER</span> da <span>Programação</span></p>
                 </div>
                 <form id="loginForm">
                     <div class="input-group">
@@ -46,7 +60,7 @@
     </div>
 
     <footer>
-        <p>&copy; 2024 Bcrypt. Todos os direitos reservados.</p>
+        <p>&copy; 2024 Kodix Cursos. Todos os direitos reservados.</p>
     </footer>
 
     <script>
@@ -101,14 +115,18 @@
           }
       });
 
-      function displayMessage(msg, type) {
-          messageDiv.textContent = msg;
-          messageDiv.className = type; 
-          messageDiv.classList.add('fade-in');
-          setTimeout(() => {
-              messageDiv.classList.remove('fade-in');
-          }, 500);
-      }
+        function displayMessage(msg, type) {
+            messageDiv.textContent = msg;
+            messageDiv.className = type;
+            messageDiv.classList.add('fade-in');
+
+            const visibleDuration = 5000;
+
+            setTimeout(() => {
+                messageDiv.textContent = '';
+                messageDiv.className = ''; 
+            }, visibleDuration);
+        }
     </script>
 </body>
 </html>

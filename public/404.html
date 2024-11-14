@@ -2,17 +2,28 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>Página Não Encontrada</title>
+    <title>Erro 404 - Kodix Cursos</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/assets/css/style.css">
     <link rel="stylesheet" href="/assets/css/pages/404.css">
     <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700&family=Barlow:wght@100;600;800&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="/assets/img/icon.jpg" type="image/jpeg">
+    <style>
+        .header-logo {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+        }
+        .header-logo:hover {
+            color: rgb(189, 189, 189);
+        }
+
+    </style>
 </head>
 <body class="page-404">
     <header>
         <div class="header-container">
-            <h1>Erro 404 - Página Não Encontrada</h1>
+            <h1><a href="/" class="header-logo">Kodix Cursos</a></h1>
         </div>
     </header>
 
@@ -21,12 +32,12 @@
             <img src="/assets/img/404.png" alt="Imagem de erro 404" class="error-image">
             <h2>Oops! A página que você procura não existe.</h2>
             <p>Parece que você se perdeu. Não se preocupe, vamos ajudá-lo a encontrar o caminho de volta.</p>
-            <button id="returnButton" class="btn secondary-btn">Voltar</button>
+            <button id="returnButton" class="btn primary-btn">Voltar</button>
         </div>
     </section>
 
     <footer>
-        <p>&copy; 2024 Bcrypt. Todos os direitos reservados.</p>
+        <p>&copy; 2024 Kodix Cursos. Todos os direitos reservados.</p>
     </footer>
 
     <script>

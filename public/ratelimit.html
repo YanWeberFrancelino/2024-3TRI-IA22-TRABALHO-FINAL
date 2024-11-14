@@ -2,16 +2,28 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>Limite de Requisições Atingido</title>
+    <title>Limite de Requisições Atingido - Kodix Cursos</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/assets/css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700&family=Barlow:wght@100;600;800&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="/assets/img/icon.jpg" type="image/jpeg">
+    <style>
+        .header-logo {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+        }
+        .header-logo:hover {
+            color: rgb(189, 189, 189);
+        }
+
+    </style>
 </head>
 <body class="page-rate-limit">
     <header>
         <div class="header-container">
-            <h1>Você atingiu o limite de requisições!</h1>
+            <h1><a href="/" class="header-logo">Kodix Cursos</a></h1>
+            
         </div>
     </header>
 
@@ -20,16 +32,15 @@
             <img src="/assets/img/ratel.png" alt="Imagem de Limite de Requisições" class="rate-limit-image">
             <h2>Oops! Você está fazendo muitas requisições.</h2>
             <p>Por favor, tente novamente após alguns minutos.</p>
-            <button id="returnButton" class="btn secondary-btn">Voltar</button>
+            <button id="returnButton" class="btn primary-btn">Voltar</button>
         </div>
     </section>
 
     <footer>
-        <p>&copy; 2024 Bcrypt. Todos os direitos reservados.</p>
+        <p>&copy; 2024 Kodix Cursos. Todos os direitos reservados.</p>
     </footer>
 
     <script>
-
         const token = localStorage.getItem('token');
         const returnButton = document.getElementById('returnButton');
 

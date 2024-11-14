@@ -47,29 +47,29 @@ async function showHome() {
         <h2>Bem-vindo, <span id="username">${username}</span>!</h2>
         <p>Você está autenticado. Utilize as opções acima para navegar.</p>
         <h3>Sobre a Plataforma</h3>
-        <p>Esta plataforma oferece diversos cursos de segurança com foco em diferentes linguagens de programação, utilizando o BCRYPT para hashing de senhas. Inscreva-se nos cursos de seu interesse e aprenda no seu próprio ritmo.</p>
+        <p>Esta plataforma oferece diversos cursos com foco em linguagens de programação, como JavaScript e Python. Inscreva-se nos cursos de seu interesse e aprenda no seu próprio ritmo, com materiais práticos e interativos.</p>
         <h3>FAQs</h3>
         <div class="faq">
             <div class="faq-item">
-                <h4 onclick="toggleElement('faq1')">Como fazer quizzes?</h4>
+                <h4 onclick="toggleElement('faq1')">Como participar de quizzes?</h4>
                 <div id="faq1" class="faq-content hidden">
-                    <p>Para fazer quizzes, vá até a seção "Explorar Cursos", inscreva-se em um curso, e acesse as aulas que possuem quizzes.</p>
+                    <p>Para participar de quizzes, vá até a seção "Explorar Cursos", inscreva-se em um curso e acesse as aulas que possuem quizzes interativos.</p>
                 </div>
             </div>
             <div class="faq-item">
-                <h4 onclick="toggleElement('faq2')">Como ver os módulos?</h4>
+                <h4 onclick="toggleElement('faq2')">Como acessar os módulos?</h4>
                 <div id="faq2" class="faq-content hidden">
-                    <p>Na seção "Meus Cursos", você encontrará a lista de cursos nos quais está inscrito. Selecione um curso para ver os módulos disponíveis.</p>
+                    <p>Na seção "Meus Cursos", você encontrará a lista de cursos nos quais está inscrito. Clique em um curso para visualizar os módulos disponíveis.</p>
                 </div>
             </div>
             <div class="faq-item">
-                <h4 onclick="toggleElement('faq3')">Como ver meus dados?</h4>
+                <h4 onclick="toggleElement('faq3')">Como alterar meus dados?</h4>
                 <div id="faq3" class="faq-content hidden">
-                    <p>Para visualizar seus dados pessoais, clique em "Meus Dados" na barra de navegação.</p>
+                    <p>Para alterar seus dados pessoais, clique em "Meus Dados" na barra de navegação e edite suas informações.</p>
                 </div>
             </div>
             <div class="faq-item">
-                <h4 onclick="toggleElement('faq4')">Como deslogar?</h4>
+                <h4 onclick="toggleElement('faq4')">Como sair da conta?</h4>
                 <div id="faq4" class="faq-content hidden">
                     <p>Para sair da sua conta, clique no botão "Logout" no canto superior direito da página.</p>
                 </div>
@@ -77,6 +77,7 @@ async function showHome() {
         </div>
     `;
 }
+
 
 async function showExplorarCursos() {
     const content = document.getElementById('content-text');
