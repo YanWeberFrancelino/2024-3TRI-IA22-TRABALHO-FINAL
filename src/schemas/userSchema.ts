@@ -21,7 +21,9 @@ export const loginSchema = z.object({
 export const updateUserSchema = z.object({
   name: z.string().max(100, 'Nome muito longo.').optional(),
   email: z.string().email('Email inválido.').max(100, 'Email muito longo.').optional(),
+  currentPassword: z.string().nonempty('Senha atual é obrigatória.'),
 });
+
 
 export const passwordChangeSchema = z.object({
   currentPassword: z.string().nonempty('Senha atual é obrigatória.'),

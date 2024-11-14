@@ -52,25 +52,25 @@ async function showHome() {
         <div class="faq">
             <div class="faq-item">
                 <h4 onclick="toggleElement('faq1')">Como fazer quizzes?</h4>
-                <div id="faq1" class="faq-content">
+                <div id="faq1" class="faq-content hidden">
                     <p>Para fazer quizzes, vá até a seção "Explorar Cursos", inscreva-se em um curso, e acesse as aulas que possuem quizzes.</p>
                 </div>
             </div>
             <div class="faq-item">
                 <h4 onclick="toggleElement('faq2')">Como ver os módulos?</h4>
-                <div id="faq2" class="faq-content">
+                <div id="faq2" class="faq-content hidden">
                     <p>Na seção "Meus Cursos", você encontrará a lista de cursos nos quais está inscrito. Selecione um curso para ver os módulos disponíveis.</p>
                 </div>
             </div>
             <div class="faq-item">
                 <h4 onclick="toggleElement('faq3')">Como ver meus dados?</h4>
-                <div id="faq3" class="faq-content">
+                <div id="faq3" class="faq-content hidden">
                     <p>Para visualizar seus dados pessoais, clique em "Meus Dados" na barra de navegação.</p>
                 </div>
             </div>
             <div class="faq-item">
                 <h4 onclick="toggleElement('faq4')">Como deslogar?</h4>
-                <div id="faq4" class="faq-content">
+                <div id="faq4" class="faq-content hidden">
                     <p>Para sair da sua conta, clique no botão "Logout" no canto superior direito da página.</p>
                 </div>
             </div>
@@ -508,6 +508,8 @@ function editProfile(currentName, currentEmail) {
             <input type="text" id="edit-name" name="edit-name" value="${currentName}">
             <label for="edit-email">Email:</label>
             <input type="email" id="edit-email" name="edit-email" value="${currentEmail}">
+            <label for="current-password">Senha Atual:</label>
+            <input type="password" id="current-password" name="current-password">
             <div class="form-buttons">
                 <button onclick="saveProfile()" class="btn primary-btn">Salvar Alterações</button>
                 <button onclick="viewProfile()" class="btn secondary-btn">Cancelar</button>
@@ -516,9 +518,16 @@ function editProfile(currentName, currentEmail) {
     `;
 }
 
+
 async function saveProfile() {
     const name = document.getElementById('edit-name').value.trim();
     const email = document.getElementById('edit-email').value.trim();
+    const currentPassword = document.getElementById('current-password').value;
+
+    if (!currentPassword) {
+        displayMessage('Por favor, insira sua senha atual para confirmar.', 'error');
+        return;
+    }
 
     try {
         const response = await fetch('/users/me', {
@@ -527,7 +536,7 @@ async function saveProfile() {
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer ' + token
             },
-            body: JSON.stringify({ name, email })
+            body: JSON.stringify({ name, email, currentPassword })
         });
 
         const data = await response.json();
@@ -536,7 +545,7 @@ async function saveProfile() {
             displayMessage('Dados atualizados com sucesso!', 'success');
             viewProfile();
         } else {
-            displayMessage(data.error, 'error');
+            displayMessage(data.error || 'Erro ao atualizar os dados.', 'error');
         }
     } catch (error) {
         console.error('Erro:', error);

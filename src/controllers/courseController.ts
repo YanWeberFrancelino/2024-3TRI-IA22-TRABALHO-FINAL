@@ -30,12 +30,10 @@ export const getCursoDetalhes = async (req: Request, res: Response) => {
       const aulas = await db.all(`SELECT * FROM aulas WHERE modulo_id = ? ORDER BY ordem`, [modulo.id]);
 
       for (const aula of aulas) {
-        // Buscar quizzes para a aula
         const quiz = await db.get(`SELECT * FROM quizzes WHERE aula_id = ?`, [aula.id]);
         if (quiz) {
           const questions = await db.all(`SELECT * FROM quiz_questions WHERE quiz_id = ?`, [quiz.id]);
 
-          // Formatar as opções de JSON string para array
           const formattedQuestions = questions.map(q => ({
             id: q.id,
             question: q.question,

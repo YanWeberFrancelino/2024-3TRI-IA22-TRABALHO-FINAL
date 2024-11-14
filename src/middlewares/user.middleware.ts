@@ -54,6 +54,7 @@ export const validateUserUpdate = (
   }
 };
 
+
 export const validatePasswordChange = (
   req: Request,
   res: Response,

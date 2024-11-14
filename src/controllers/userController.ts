@@ -39,13 +39,17 @@ export const updateCurrentUser = async (req: Request, res: Response) => {
   try {
     const db = await connect();
     const userId = (req as any).user.id;
-    const { name, email } = req.body;
+    const { name, email, currentPassword } = req.body;
 
-    const existingUser = await db.get(`SELECT * FROM users WHERE id = ?`, [
-      userId,
-    ]);
+    const existingUser = await db.get(`SELECT * FROM users WHERE id = ?`, [userId]);
     if (!existingUser) {
       res.status(404).json({ error: 'Usuário não encontrado.' });
+      return;
+    }
+
+    const isValid = await bcrypt.compare(currentPassword, existingUser.password);
+    if (!isValid) {
+      res.status(401).json({ error: 'Senha atual incorreta.' });
       return;
     }
 
@@ -58,10 +62,7 @@ export const updateCurrentUser = async (req: Request, res: Response) => {
     }
 
     if (email) {
-      const emailExists = await db.get(
-        `SELECT * FROM users WHERE email = ? AND id != ?`,
-        [email, userId]
-      );
+      const emailExists = await db.get(`SELECT * FROM users WHERE email = ? AND id != ?`, [email, userId]);
       if (emailExists) {
         res.status(400).json({ error: 'Email já está em uso.' });
         return;
@@ -85,6 +86,7 @@ export const updateCurrentUser = async (req: Request, res: Response) => {
     res.status(500).json({ error: 'Erro interno do servidor.' });
   }
 };
+
 
 export const changePassword = async (req: Request, res: Response) => {
   try {

@@ -82,10 +82,13 @@
 }
 
 .faq-content {
-    display: none;
     margin-top: 5px;
     padding-left: 15px;
     border-left: 2px solid #4BCBDD;
+}
+
+.faq-content.hidden {
+    display: none;
 }
 
 .faq-content p {
@@ -148,7 +151,7 @@
     margin-top: 15px;
     font-size: 16px;
     line-height: 1.6;
-    padding: 15px;
+    padding: 25px;
     border: 2px solid #4BCBDD;
     border-radius: 8px;
     background-color: #2A324B;
@@ -158,12 +161,58 @@
     margin-bottom: 16px;
 }
 
+.lesson-content ul, .lesson-content ol {
+    margin-left: 20px;
+    padding-left: 20px;
+}
+
+.lesson-content li {
+    margin-bottom: 10px;
+}
+
+.lesson-content h1, .lesson-content h2, .lesson-content h3, .lesson-content h4, .lesson-content h5, .lesson-content h6 {
+    color: #28BDD2;
+    margin-bottom: 15px;
+}
+
+.lesson-content code {
+    background-color: #1E2434;
+    padding: 2px 4px;
+    border-radius: 3px;
+}
+
 .lesson-content pre {
     background-color: #1E2434;
     padding: 15px;
     border-radius: 5px;
     overflow-x: auto;
     color: #EFF1F6;
+    position: relative;
+}
+
+/* ----------------- Estilos para o Botão Copiar Código ----------------- */
+.copy-code-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    padding: 6px 10px;
+    font-size: 14px;
+    background-color: #28BDD2;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    opacity: 0.8;
+    transition: opacity 0.3s ease, background-color 0.3s ease;
+}
+
+.copy-code-btn:hover {
+    opacity: 1;
+    background-color: #25B2C5;
+}
+
+.copy-code-btn:active {
+    background-color: #2097A7;
 }
 
 /* ----------------- Estilos dos Botões ----------------- */
@@ -242,6 +291,22 @@
 .btn.voltar-btn:active {
     background-color: #38A1B6;
 }
+
+.btn.btn-quiz:hover {
+    background-color: #232c45;
+    box-shadow: 0 4px 8px rgba(40, 189, 210, 0.3);
+}
+
+.btn.btn-back:hover {
+    background-color: #232c45;
+    box-shadow: 0 4px 8px rgba(75, 203, 221, 0.3);
+}
+
+.btn.btn-complete:hover {
+    background-color: #46399b;
+    box-shadow: 0 4px 8px rgba(75, 203, 221, 0.3);
+}
+
 
 /* ----------------- Botões de Aula Consistentes ----------------- */
 .lesson-buttons {
@@ -364,7 +429,9 @@
 .profile-buttons {
     display: flex;
     gap: 10px;
-    margin-top: 20px;
+    margin-top: 35px;
+    align-items: center;
+    justify-content: center;
 }
 
 /* Formulários de Edição */
@@ -402,21 +469,36 @@
 
 /* ----------------- Estilos das Mensagens ----------------- */
 .message {
-    margin-top: 20px;
-    padding: 10px;
+    max-width: 600px; 
+    margin: 20px auto;
+    padding: 15px;
     border-radius: 5px;
     font-size: 16px;
+    text-align: center;
 }
 
 .message.success {
     background-color: #d4edda;
     color: #155724;
+    max-width: 600px; 
+    margin: 20px auto;
+    padding: 15px;
+    border-radius: 5px;
+    font-size: 16px;
+    text-align: center;
 }
 
 .message.error {
     background-color: #f8d7da;
     color: #721c24;
+    max-width: 600px; 
+    margin: 20px auto;
+    padding: 15px;
+    border-radius: 5px;
+    font-size: 16px;
+    text-align: center;
 }
+
 
 /* ----------------- Animações ----------------- */
 @keyframes fadeInRight {
