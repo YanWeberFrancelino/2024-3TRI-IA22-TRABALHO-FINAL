@@ -1,0 +1,420 @@
+{
+  "cursos": [
+    {
+      "nome": "Curso de JavaScript",
+      "descricao": "Aprenda JavaScript do básico ao avançado, explorando desde a instalação até técnicas avançadas de desenvolvimento web.",
+      "imagem": "javascript.jpg",
+      "modulos": [
+        {
+          "nome": "Introdução ao JavaScript",
+          "ordem": 1,
+          "aulas": [
+            {
+              "titulo": "O que é JavaScript?",
+              "conteudo": "JavaScript é uma linguagem de programação dinâmica amplamente utilizada para criar interatividade e funcionalidades avançadas em páginas web. Ela permite manipular o DOM, responder a eventos do usuário, realizar requisições assíncronas e muito mais.\n\n### Principais Características\n\n- **Linguagem Interpretada**: Executada diretamente no navegador sem necessidade de compilação.\n- **Orientada a Objetos**: Suporta programação orientada a objetos com protótipos e classes.\n- **Event-Driven**: Responde a eventos como cliques, movimentos do mouse e interações do usuário.\n\n### Exemplo Básico\n\n```javascript\n// Exemplo de função que exibe uma mensagem no console\nfunction saudacao(nome) {\n  console.log(`Olá, ${nome}! Bem-vindo ao curso de JavaScript.`);\n}\n\nsaudacao('Aluno');\n```\n\nNeste exemplo, definimos uma função `saudacao` que recebe um parâmetro `nome` e exibe uma mensagem personalizada no console.",
+              "ordem": 1,
+              "quizzes": [
+                {
+                  "question": "JavaScript é uma linguagem de programação de que tipo?",
+                  "options": [
+                    "A) Lógica de Programação",
+                    "B) Linguagem de Marcação",
+                    "C) Linguagem de Estilo",
+                    "D) Linguagem de Script"
+                  ],
+                  "correct_option": "D"
+                }
+              ]
+            },
+            {
+              "titulo": "História do JavaScript",
+              "conteudo": "JavaScript foi criado por Brendan Eich em 1995 e inicialmente chamado de Mocha. Posteriormente, foi renomeado para LiveScript e, finalmente, para JavaScript. Desde então, evoluiu significativamente, incorporando padrões ECMAScript que definem suas funcionalidades e sintaxe.\n\n### Evolução da Linguagem\n\n- **1995**: Criação de JavaScript como Mocha.\n- **1996**: Renomeado para LiveScript.\n- **1997**: Padronização pelo ECMA International como ECMAScript.\n- **2009**: Introdução do ECMAScript 5 (ES5).\n- **2015**: Lançamento do ECMAScript 6 (ES6) com recursos modernos.\n\n### Impacto no Desenvolvimento Web\n\nJavaScript transformou a maneira como desenvolvemos a web, permitindo a criação de aplicações ricas e interativas que antes eram impossíveis com apenas HTML e CSS.\n\n### Exemplo de Código Moderno\n\n```javascript\n// Utilizando let e const para declaração de variáveis\nconst PI = 3.14159;\nlet raio = 5;\n\nfunction calcularArea(raio) {\n  return PI * raio * raio;\n}\n\nconsole.log(`A área do círculo é: ${calcularArea(raio)}`);\n```\n\nEste exemplo demonstra o uso de `const` para constantes e `let` para variáveis que podem ser reatribuídas, uma prática recomendada em ES6.",
+              "ordem": 2,
+              "quizzes": []
+            },
+            {
+              "titulo": "Configuração do Ambiente de Desenvolvimento",
+              "conteudo": "Para começar a programar em JavaScript, você precisa de um editor de texto e um navegador moderno. Recomendamos o uso de editores como Visual Studio Code, Sublime Text ou Atom. Além disso, instale o Node.js para executar JavaScript no servidor e gerenciar pacotes com o npm.\n\n### Passos para Configuração\n\n1. **Instalar um Editor de Texto**:\n   - [Visual Studio Code](https://code.visualstudio.com/)\n   - [Sublime Text](https://www.sublimetext.com/)\n   - [Atom](https://atom.io/)\n\n2. **Instalar Node.js**:\n   - Visite [nodejs.org](https://nodejs.org/) e baixe a versão LTS recomendada.\n   - Siga as instruções de instalação para o seu sistema operacional.\n\n3. **Verificar Instalação**:\n   Abra o terminal e execute:\n   ```bash\nnode -v\nnpm -v\n```\n   Isso exibirá as versões instaladas do Node.js e npm.\n\n### Exemplo de Uso do npm\n\n```bash\n# Inicializar um novo projeto Node.js\nnpm init -y\n\n# Instalar o pacote express\nnpm install express\n```\n\nO comando `npm init -y` cria um arquivo `package.json` com configurações padrão, e `npm install express` instala o framework Express para desenvolvimento de aplicações web.",
+              "ordem": 3,
+              "quizzes": [
+                {
+                  "question": "Qual ferramenta é recomendada para gerenciar pacotes em JavaScript?",
+                  "options": [
+                    "A) pip",
+                    "B) npm",
+                    "C) gem",
+                    "D) composer"
+                  ],
+                  "correct_option": "B"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "nome": "Fundamentos de JavaScript",
+          "ordem": 2,
+          "aulas": [
+            {
+              "titulo": "Variáveis e Tipos de Dados",
+              "conteudo": "Em JavaScript, variáveis são usadas para armazenar dados. Existem três maneiras principais de declarar variáveis: `var`, `let` e `const`. Os tipos de dados incluem `Number`, `String`, `Boolean`, `Object`, `Array`, `Function`, `Null` e `Undefined`.\n\n### Declaração de Variáveis\n\n- **var**: Escopo de função, pode ser redeclarado.\n- **let**: Escopo de bloco, não pode ser redeclarado.\n- **const**: Escopo de bloco, deve ser inicializado no momento da declaração e não pode ser reatribuído.\n\n### Tipos de Dados\n\n- **Number**: Representa números, tanto inteiros quanto de ponto flutuante.\n- **String**: Cadeias de caracteres.\n- **Boolean**: Valores lógicos `true` ou `false`.\n- **Object**: Estruturas complexas que podem conter múltiplas propriedades.\n- **Array**: Lista ordenada de elementos.\n- **Function**: Blocos de código reutilizáveis.\n- **Null** e **Undefined**: Representam ausência de valor.\n\n### Exemplo de Declaração\n\n```javascript\n// Usando var\nvar idade = 25;\nconsole.log(idade); // 25\n\n// Usando let\nlet nome = 'João';\nconsole.log(nome); // João\n\n// Usando const\nconst PI = 3.14159;\nconsole.log(PI); // 3.14159\n\n// Tipos de Dados\nlet numero = 10; // Number\nlet texto = 'Hello, World!'; // String\nlet isJavaScriptFun = true; // Boolean\nlet pessoa = { nome: 'Maria', idade: 30 }; // Object\nlet lista = [1, 2, 3, 4, 5]; // Array\nlet saudacao = function() { return 'Olá!'; }; // Function\nlet vazio = null; // Null\nlet indefinido;\nconsole.log(indefinido); // undefined\n```\n\nNeste exemplo, vemos diferentes maneiras de declarar variáveis e os tipos de dados que podem ser armazenados nelas.",
+              "ordem": 1,
+              "quizzes": [
+                {
+                  "question": "Qual palavra-chave é usada para declarar uma variável que não pode ser reatribuída?",
+                  "options": [
+                    "A) var",
+                    "B) let",
+                    "C) const",
+                    "D) immutable"
+                  ],
+                  "correct_option": "C"
+                }
+              ]
+            },
+            {
+              "titulo": "Operadores Básicos",
+              "conteudo": "JavaScript possui vários operadores para realizar operações aritméticas (`+`, `-`, `*`, `/`), de comparação (`==`, `===`, `!=`, `!==`, `>`, `<`), lógicos (`&&`, `||`, `!`) e outros. É fundamental entender a precedência e associatividade desses operadores para evitar erros lógicos no código.\n\n### Operadores Aritméticos\n\n- **+**: Adição\n- **-**: Subtração\n- **\\***: Multiplicação\n- **/**: Divisão\n- **%**: Módulo (resto da divisão)\n\n### Operadores de Comparação\n\n- **==**: Igualdade (valor)\n- **===**: Igualdade estrita (valor e tipo)\n- **!=**: Diferença (valor)\n- **!==**: Diferença estrita (valor e tipo)\n- **>**: Maior que\n- **<**: Menor que\n\n### Operadores Lógicos\n\n- **&&**: E lógico\n- **||**: Ou lógico\n- **!**: Negação lógica\n\n### Exemplo de Operadores\n\n```javascript\nlet a = 10;\nlet b = 5;\n\n// Operadores Aritméticos\nconsole.log(a + b); // 15\nconsole.log(a - b); // 5\nconsole.log(a * b); // 50\nconsole.log(a / b); // 2\nconsole.log(a % b); // 0\n\n// Operadores de Comparação\nconsole.log(a == '10'); // true\nconsole.log(a === '10'); // false\nconsole.log(a != b); // true\nconsole.log(a > b); // true\n\n// Operadores Lógicos\nconsole.log(a > b && b > 0); // true\nconsole.log(a < b || b > 0); // true\nconsole.log(!(a < b)); // true\n```\n\nNeste exemplo, demonstramos o uso de diferentes operadores para realizar operações matemáticas, comparações e lógicas.",
+
+              "ordem": 2,
+              "quizzes": [
+                {
+                  "question": "Qual operador verifica igualdade estrita em JavaScript?",
+                  "options": [
+                    "A) ==",
+                    "B) ===",
+                    "C) !=",
+                    "D) !=="
+                  ],
+                  "correct_option": "B"
+                }
+              ]
+            },
+            {
+              "titulo": "Estruturas de Controle",
+              "conteudo": "Estruturas de controle permitem direcionar o fluxo de execução do programa. As principais estruturas incluem `if`, `else if`, `else`, `switch`, loops `for`, `while` e `do...while`. Utilizar essas estruturas de forma eficiente é essencial para criar lógica complexa e funcional.\n\n### Estrutura Condicional: if-else\n\n```javascript\nlet hora = 20;\n\nif (hora < 12) {\n  console.log('Bom dia!');\n} else if (hora < 18) {\n  console.log('Boa tarde!');\n} else {\n  console.log('Boa noite!');\n}\n```\n\n### Estrutura Condicional: switch\n\n```javascript\nlet fruta = 'maçã';\n\nswitch (fruta) {\n  case 'banana':\n    console.log('A fruta é banana.');\n    break;\n  case 'maçã':\n    console.log('A fruta é maçã.');\n    break;\n  default:\n    console.log('Fruta desconhecida.');\n}\n```\n\n### Loops: for\n\n```javascript\nfor (let i = 0; i < 5; i++) {\n  console.log(`Contagem: ${i}`);\n}\n```\n\n### Loops: while\n\n```javascript\nlet contador = 0;\nwhile (contador < 5) {\n  console.log(`Contador: ${contador}`);\n  contador++;\n}\n```\n\n### Loops: do...while\n\n```javascript\nlet numero = 0;\ndo {\n  console.log(`Número: ${numero}`);\n  numero++;\n} while (numero < 5);\n```\n\nEssas estruturas permitem controlar como e quando certas partes do código são executadas, tornando possível implementar lógica condicional e repetitiva.",
+              "ordem": 3,
+              "quizzes": [
+                {
+                  "question": "Qual estrutura de controle é mais adequada para múltiplas condições baseadas no valor de uma única variável?",
+                  "options": [
+                    "A) if-else",
+                    "B) switch",
+                    "C) for loop",
+                    "D) while loop"
+                  ],
+                  "correct_option": "B"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "nome": "Manipulação do DOM",
+          "ordem": 3,
+          "aulas": [
+            {
+              "titulo": "Selecionando Elementos no DOM",
+              "conteudo": "O Document Object Model (DOM) representa a estrutura de uma página web. Em JavaScript, você pode selecionar elementos usando métodos como `getElementById`, `getElementsByClassName`, `querySelector` e `querySelectorAll`. Isso permite manipular o conteúdo, estilo e atributos dos elementos selecionados.\n\n### Seleção de Elementos\n\n- **getElementById**: Seleciona um elemento pelo seu ID.\n- **getElementsByClassName**: Seleciona todos os elementos com uma determinada classe.\n- **querySelector**: Seleciona o primeiro elemento que corresponde a um seletor CSS.\n- **querySelectorAll**: Seleciona todos os elementos que correspondem a um seletor CSS.\n\n### Exemplo de Seleção\n\n```html\n<!DOCTYPE html>\n<html>\n<head>\n  <title>Exemplo de Seleção de DOM</title>\n</head>\n<body>\n  <h1 id='titulo'>Bem-vindo</h1>\n  <p class='paragrafo'>Este é um parágrafo.</p>\n  <p class='paragrafo'>Este é outro parágrafo.</p>\n\n  <script>\n    // Selecionando pelo ID\n    const titulo = document.getElementById('titulo');\n    console.log(titulo.textContent); // Bem-vindo\n\n    // Selecionando pela classe\n    const paragrafos = document.getElementsByClassName('paragrafo');\n    for (let p of paragrafos) {\n      console.log(p.textContent);\n    }\n\n    // Selecionando com querySelector\n    const primeiroParagrafo = document.querySelector('.paragrafo');\n    console.log(primeiroParagrafo.textContent); // Este é um parágrafo.\n\n    // Selecionando com querySelectorAll\n    const todosParagrafos = document.querySelectorAll('.paragrafo');\n    todosParagrafos.forEach((p, index) => {\n      console.log(`Parágrafo ${index + 1}: ${p.textContent}`);\n    });\n  </script>\n</body>\n</html>\n```\n\nNeste exemplo, demonstramos como selecionar diferentes elementos no DOM utilizando vários métodos de seleção.",
+              "ordem": 1,
+              "quizzes": [
+                {
+                  "question": "Qual método retorna o primeiro elemento que corresponde a um seletor CSS específico?",
+                  "options": [
+                    "A) getElementById",
+                    "B) getElementsByClassName",
+                    "C) querySelector",
+                    "D) querySelectorAll"
+                  ],
+                  "correct_option": "C"
+                }
+              ]
+            },
+            {
+              "titulo": "Modificando o DOM",
+              "conteudo": "Após selecionar elementos, você pode modificá-los utilizando propriedades como `innerHTML`, `textContent`, `style`, e métodos como `appendChild`, `removeChild` e `replaceChild`. Essas manipulações permitem atualizar dinamicamente o conteúdo da página sem recarregá-la.\n\n### Modificando Conteúdo\n\n- **innerHTML**: Define ou retorna o conteúdo HTML de um elemento.\n- **textContent**: Define ou retorna o conteúdo de texto de um elemento.\n- **style**: Modifica os estilos CSS de um elemento.\n\n### Manipulação de Elementos\n\n- **appendChild**: Adiciona um nó filho ao final da lista de filhos de um elemento.\n- **removeChild**: Remove um nó filho de um elemento.\n- **replaceChild**: Substitui um nó filho por outro.\n\n### Exemplo de Modificação\n\n```html\n<!DOCTYPE html>\n<html>\n<head>\n  <title>Exemplo de Modificação do DOM</title>\n  <style>\n    .destaque {\n      color: red;\n      font-weight: bold;\n    }\n  </style>\n</head>\n<body>\n  <h1 id='titulo'>Título Original</h1>\n  <p id='paragrafo'>Parágrafo original.</p>\n\n  <script>\n    // Selecionando elementos\n    const titulo = document.getElementById('titulo');\n    const paragrafo = document.getElementById('paragrafo');\n\n    // Modificando conteúdo\n    titulo.textContent = 'Título Atualizado';\n    paragrafo.innerHTML = 'Este é um <span class=\"destaque\">parágrafo</span> atualizado.';\n\n    // Modificando estilo\n    paragrafo.style.fontSize = '18px';\n\n    // Adicionando um novo elemento\n    const novoElemento = document.createElement('p');\n    novoElemento.textContent = 'Este é um novo parágrafo adicionado dinamicamente.';\n    document.body.appendChild(novoElemento);\n\n    // Removendo um elemento\n    // document.body.removeChild(novoElemento);\n\n    // Substituindo um elemento\n    const elementoSubstituto = document.createElement('h2');\n    elementoSubstituto.textContent = 'Elemento Substituto';\n    document.body.replaceChild(elementoSubstituto, titulo);\n  </script>\n</body>\n</html>\n```\n\nNeste exemplo, atualizamos o conteúdo e o estilo de elementos existentes e adicionamos um novo parágrafo dinamicamente ao DOM.",
+              "ordem": 2,
+              "quizzes": [
+                {
+                  "question": "Qual propriedade é usada para alterar o conteúdo HTML interno de um elemento?",
+                  "options": [
+                    "A) textContent",
+                    "B) innerHTML",
+                    "C) innerText",
+                    "D) outerHTML"
+                  ],
+                  "correct_option": "B"
+                }
+              ]
+            },
+            {
+              "titulo": "Eventos no JavaScript",
+              "conteudo": "Eventos são ações que ocorrem na página web, como cliques, movimentos do mouse, teclas pressionadas, entre outros. Em JavaScript, você pode adicionar ouvintes de eventos usando métodos como `addEventListener` para executar funções específicas quando esses eventos são disparados.\n\n### Adicionando Ouvintes de Eventos\n\n```javascript\n// Selecionando um botão\nconst botao = document.getElementById('meuBotao');\n\n// Função de callback para o evento de clique\nfunction aoClicar() {\n  alert('Botão clicado!');\n}\n\n// Adicionando o ouvinte de evento\nbotao.addEventListener('click', aoClicar);\n```\n\n### Tipos de Eventos Comuns\n\n- **click**: Disparado quando um elemento é clicado.\n- **mouseover**: Disparado quando o cursor passa sobre um elemento.\n- **keydown**: Disparado quando uma tecla é pressionada.\n- **submit**: Disparado quando um formulário é enviado.\n\n### Exemplo Completo\n\n```html\n<!DOCTYPE html>\n<html>\n<head>\n  <title>Exemplo de Eventos</title>\n</head>\n<body>\n  <button id='meuBotao'>Clique em mim</button>\n  <input type='text' id='meuInput' placeholder='Digite algo'>\n\n  <script>\n    // Selecionando elementos\n    const botao = document.getElementById('meuBotao');\n    const input = document.getElementById('meuInput');\n\n    // Função para o evento de clique\n    function aoClicar() {\n      alert('Botão foi clicado!');\n    }\n\n    // Função para o evento de digitação\n    function aoDigitar(evento) {\n      console.log(`Tecla pressionada: ${evento.key}`);\n    }\n\n    // Adicionando ouvintes de eventos\n    botao.addEventListener('click', aoClicar);\n    input.addEventListener('keydown', aoDigitar);\n  </script>\n</body>\n</html>\n```\n\nNeste exemplo, adicionamos eventos de clique a um botão e eventos de digitação a um campo de entrada de texto.",
+              "ordem": 3,
+              "quizzes": [
+                {
+                  "question": "Qual método é utilizado para adicionar um ouvinte de evento a um elemento?",
+                  "options": [
+                    "A) onEvent",
+                    "B) addListener",
+                    "C) addEventListener",
+                    "D) attachEvent"
+                  ],
+                  "correct_option": "C"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "nome": "JavaScript Avançado",
+          "ordem": 4,
+          "aulas": [
+            {
+              "titulo": "Assíncrono em JavaScript",
+              "conteudo": "JavaScript é single-threaded, mas suporta operações assíncronas através de callbacks, Promises e `async/await`. Entender como gerenciar operações assíncronas é crucial para trabalhar com APIs, realizar requisições de rede e melhorar a performance das aplicações.\n\n### Callbacks\n\nCallbacks são funções passadas como argumentos para outras funções e são executadas após a conclusão de uma operação.\n\n```javascript\nfunction fetchData(callback) {\n  setTimeout(() => {\n    const data = { nome: 'João', idade: 30 };\n    callback(data);\n  }, 2000);\n}\n\nfetchData(function(data) {\n  console.log('Dados recebidos:', data);\n});\n```\n\n### Promises\n\nPromises representam operações assíncronas que podem ser resolvidas ou rejeitadas.\n\n```javascript\nfunction fetchData() {\n  return new Promise((resolve, reject) => {\n    setTimeout(() => {\n      const sucesso = true;\n      if (sucesso) {\n        resolve({ nome: 'Maria', idade: 25 });\n      } else {\n        reject('Erro ao buscar dados');\n      }\n    }, 2000);\n  });\n}\n\nfetchData()\n  .then(data => {\n    console.log('Dados recebidos:', data);\n  })\n  .catch(error => {\n    console.error(error);\n  });\n```\n\n### Async/Await\n\n`async` e `await` simplificam o trabalho com Promises, tornando o código mais legível.\n\n```javascript\nasync function fetchData() {\n  return new Promise((resolve) => {\n    setTimeout(() => {\n      resolve({ nome: 'Carlos', idade: 28 });\n    }, 2000);\n  });\n}\n\nasync function exibirDados() {\n  try {\n    const data = await fetchData();\n    console.log('Dados recebidos:', data);\n  } catch (error) {\n    console.error(error);\n  }\n}\n\nexibirDados();\n```\n\nNeste exemplo, a função `exibirDados` utiliza `await` para esperar a resolução da Promise retornada por `fetchData`.",
+              "ordem": 1,
+              "quizzes": [
+                {
+                  "question": "Qual palavra-chave é usada para definir uma função assíncrona em JavaScript?",
+                  "options": [
+                    "A) async",
+                    "B) await",
+                    "C) promise",
+                    "D) defer"
+                  ],
+                  "correct_option": "A"
+                }
+              ]
+            },
+            {
+              "titulo": "Programação Orientada a Objetos",
+              "conteudo": "JavaScript suporta conceitos de Programação Orientada a Objetos (POO) através de protótipos e, mais recentemente, da sintaxe de classes introduzida no ES6. Conceitos como encapsulamento, herança e polimorfismo podem ser implementados para criar código mais organizado e reutilizável.\n\n### Classes em JavaScript\n\n```javascript\nclass Pessoa {\n  constructor(nome, idade) {\n    this.nome = nome;\n    this.idade = idade;\n  }\n\n  apresentar() {\n    console.log(`Olá, meu nome é ${this.nome} e tenho ${this.idade} anos.`);\n  }\n}\n\nclass Estudante extends Pessoa {\n  constructor(nome, idade, curso) {\n    super(nome, idade);\n    this.curso = curso;\n  }\n\n  estudar() {\n    console.log(`${this.nome} está estudando ${this.curso}.`);\n  }\n}\n\nconst aluno = new Estudante('Ana', 22, 'Engenharia');\naluno.apresentar(); // Olá, meu nome é Ana e tenho 22 anos.\naluno.estudar(); // Ana está estudando Engenharia.\n```\n\n### Conceitos de POO\n\n- **Encapsulamento**: Ocultar os detalhes internos de um objeto e expor apenas o necessário.\n- **Herança**: Permite que uma classe derive propriedades e métodos de outra classe.\n- **Polimorfismo**: Permite que métodos com o mesmo nome se comportem de maneira diferente em classes diferentes.\n\n### Exemplo de Polimorfismo\n\n```javascript\nclass Animal {\n  fazerSom() {\n    console.log('O animal faz um som.');\n  }\n}\n\nclass Cachorro extends Animal {\n  fazerSom() {\n    console.log('O cachorro late.');\n  }\n}\n\nclass Gato extends Animal {\n  fazerSom() {\n    console.log('O gato mia.');\n  }\n}\n\nconst animais = [new Cachorro(), new Gato()];\n\nanimais.forEach(animal => {\n  animal.fazerSom();\n});\n```\n\nNeste exemplo, tanto `Cachorro` quanto `Gato` estendem a classe `Animal` e implementam o método `fazerSom` de maneira diferente, demonstrando o polimorfismo.",
+              "ordem": 2,
+              "quizzes": [
+                {
+                  "question": "Qual palavra-chave é usada para herdar de uma classe base em JavaScript?",
+                  "options": [
+                    "A) extends",
+                    "B) inherits",
+                    "C) implements",
+                    "D) super"
+                  ],
+                  "correct_option": "A"
+                }
+              ]
+            },
+            {
+              "titulo": "Módulos em JavaScript",
+              "conteudo": "Módulos permitem dividir o código em arquivos menores e reutilizáveis. Utilizando `export` e `import`, você pode compartilhar funções, classes e variáveis entre diferentes arquivos, facilitando a manutenção e escalabilidade do projeto.\n\n### Exportando Módulos\n\n```javascript\n// arquivo math.js\nexport const PI = 3.14159;\n\nexport function calcularCircunferencia(raio) {\n  return 2 * PI * raio;\n}\n\nexport default class Calculadora {\n  somar(a, b) {\n    return a + b;\n  }\n}\n```\n\n### Importando Módulos\n\n```javascript\n// arquivo app.js\nimport Calculadora, { PI, calcularCircunferencia } from './math.js';\n\nconsole.log(`Valor de PI: ${PI}`);\nconsole.log(`Circunferência: ${calcularCircunferencia(5)}`);\n\nconst calc = new Calculadora();\nconsole.log(`Soma: ${calc.somar(10, 15)}`);\n```\n\n### Benefícios dos Módulos\n\n- **Organização**: Facilita a organização do código em partes lógicas.\n- **Reutilização**: Permite reutilizar código em diferentes partes da aplicação.\n- **Manutenção**: Torna o código mais fácil de manter e escalar.\n\n### Configuração com Node.js\n\nPara utilizar módulos ES6 no Node.js, certifique-se de que seu `package.json` contém o campo `'type': 'module'`, ou utilize a extensão `.mjs` para os arquivos de módulo.\n\n```json\n{\n  \"name\": \"meu-projeto\",\n  \"version\": \"1.0.0\",\n  \"type\": \"module\",\n  \"scripts\": {\n    \"start\": \"node app.js\"\n  }\n}\n```\n\nIsso permite que você utilize a sintaxe de importação e exportação nos seus arquivos JavaScript.",
+              "ordem": 3,
+              "quizzes": [
+                {
+                  "question": "Qual palavra-chave é usada para importar módulos em JavaScript?",
+                  "options": [
+                    "A) require",
+                    "B) import",
+                    "C) include",
+                    "D) use"
+                  ],
+                  "correct_option": "B"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "nome": "Curso de Python",
+      "descricao": "Domine Python para desenvolvimento web, automação, ciência de dados e muito mais, aprendendo desde os fundamentos até tópicos avançados.",
+      "imagem": "python.jpg",
+      "modulos": [
+        {
+          "nome": "Fundamentos de Python",
+          "ordem": 1,
+          "aulas": [
+            {
+              "titulo": "Introdução ao Python",
+              "conteudo": "Python é uma linguagem de programação de alto nível, conhecida por sua sintaxe clara e legibilidade. É amplamente utilizada em desenvolvimento web, ciência de dados, automação, inteligência artificial e muito mais.\n\n### Características do Python\n\n- **Sintaxe Simples**: Facilita a escrita e leitura do código.\n- **Interpretação**: Executado linha por linha, facilitando a depuração.\n- **Bibliotecas Extensas**: Possui uma vasta coleção de bibliotecas para diversas aplicações.\n- **Orientação a Objetos**: Suporta POO de forma robusta.\n\n### Exemplo Básico\n\n```python\n# Função que exibe uma saudação\ndef saudacao(nome):\n    print(f'Olá, {nome}! Bem-vindo ao curso de Python.')\n\nsaudacao('Aluno')\n```\n\nNeste exemplo, definimos uma função `saudacao` que recebe um parâmetro `nome` e exibe uma mensagem personalizada.",
+              "ordem": 1,
+              "quizzes": [
+                {
+                  "question": "Qual é uma característica distintiva de Python?",
+                  "options": [
+                    "A) Sintaxe complexa",
+                    "B) Tipagem estática",
+                    "C) Legibilidade e simplicidade",
+                    "D) Exclusivamente para desenvolvimento web"
+                  ],
+                  "correct_option": "C"
+                }
+              ]
+            },
+            {
+              "titulo": "Instalação e Configuração",
+              "conteudo": "Para começar com Python, você precisa instalar o Python interpreter. Visite o site oficial [python.org](https://www.python.org/) para baixar a versão mais recente. Após a instalação, configure variáveis de ambiente e instale um editor de texto ou IDE como PyCharm, VS Code ou Sublime Text.\n\n### Passos para Instalação\n\n1. **Baixar o Instalador**:\n   - Acesse [python.org](https://www.python.org/downloads/) e baixe a versão adequada para o seu sistema operacional.\n\n2. **Executar o Instalador**:\n   - Siga as instruções do instalador. Certifique-se de marcar a opção \"Add Python to PATH\" durante a instalação.\n\n3. **Verificar Instalação**:\n   Abra o terminal ou prompt de comando e execute:\n   ```bash\npython --version\npip --version\n```\n   Isso exibirá as versões instaladas do Python e pip.\n\n4. **Instalar um Editor de Texto ou IDE**:\n   - [PyCharm](https://www.jetbrains.com/pycharm/)\n   - [Visual Studio Code](https://code.visualstudio.com/)\n   - [Sublime Text](https://www.sublimetext.com/)\n\n### Configuração do Ambiente\n\nApós a instalação, você pode configurar ambientes virtuais para gerenciar dependências específicas do projeto usando `venv`:\n\n```bash\n# Criar um ambiente virtual\npython -m venv meu_ambiente\n\n# Ativar o ambiente virtual\n# No Windows\nmeu_ambiente\\Scripts\\activate\n\n# No macOS/Linux\nsource meu_ambiente/bin/activate\n\n# Instalar pacotes no ambiente virtual\npip install requests\n```\n\nAmbientes virtuais ajudam a isolar as dependências de cada projeto, evitando conflitos entre pacotes.",
+              "ordem": 2,
+              "quizzes": [
+                {
+                  "question": "Qual ferramenta é comumente usada para gerenciar pacotes em Python?",
+                  "options": [
+                    "A) npm",
+                    "B) pip",
+                    "C) gem",
+                    "D) composer"
+                  ],
+                  "correct_option": "B"
+                }
+              ]
+            },
+            {
+              "titulo": "Primeiros Passos com Python",
+              "conteudo": "Aprenda a escrever e executar seu primeiro script em Python. Entenda a estrutura básica de um programa Python, como utilizar a função `print()`, e execute seu script no terminal ou através de um ambiente de desenvolvimento integrado.\n\n### Estrutura Básica de um Programa Python\n\n```python\n# Este é um comentário em Python\n\n# Função principal\ndef main():\n    print('Olá, mundo!')\n\n# Verifica se o script está sendo executado diretamente\nif __name__ == '__main__':\n    main()\n```\n\n### Executando o Script\n\n1. **Salvar o Arquivo**:\n   - Salve o código acima em um arquivo chamado `hello.py`.\n\n2. **Executar no Terminal**:\n   - Abra o terminal ou prompt de comando e navegue até o diretório onde o arquivo está salvo.\n   - Execute o script com o comando:\n     ```bash\n     python hello.py\n     ```\n   - A saída será:\n     ```\n     Olá, mundo!\n     ```\n\n### Exemplo de Entrada e Saída\n\n```python\n# Script para calcular a soma de dois números\n\ndef soma(a, b):\n    return a + b\n\nnumero1 = float(input('Digite o primeiro número: '))\nnumero2 = float(input('Digite o segundo número: '))\n\nresultado = soma(numero1, numero2)\nprint(f'A soma de {numero1} e {numero2} é {resultado}.')\n```\n\nNeste exemplo, o programa solicita que o usuário digite dois números, calcula a soma e exibe o resultado.",
+              "ordem": 3,
+              "quizzes": []
+            }
+          ]
+        },
+        {
+          "nome": "Estruturas de Dados",
+          "ordem": 2,
+          "aulas": [
+            {
+              "titulo": "Listas e Tuplas",
+              "conteudo": "Listas são estruturas de dados mutáveis que permitem armazenar sequências ordenadas de itens. Tuplas são semelhantes, mas são imutáveis. Aprenda a criar, acessar, modificar e iterar sobre listas e tuplas, além de entender suas diferenças e quando usar cada uma.\n\n### Listas\n\n- **Mutáveis**: Podem ser modificadas após a criação.\n- **Ordenadas**: Mantêm a ordem dos elementos.\n- **Permitem Duplicatas**: Podem conter elementos repetidos.\n\n### Exemplo de Lista\n\n```python\n# Criando uma lista\nfrutas = ['maçã', 'banana', 'laranja']\n\n# Acessando elementos\nprint(frutas[0])  # maçã\n\n# Modificando um elemento\nfrutas[1] = 'morango'\nprint(frutas)  # ['maçã', 'morango', 'laranja']\n\n# Adicionando um elemento\nfrutas.append('uva')\nprint(frutas)  # ['maçã', 'morango', 'laranja', 'uva']\n```\n\n### Tuplas\n\n- **Imutáveis**: Não podem ser modificadas após a criação.\n- **Ordenadas**: Mantêm a ordem dos elementos.\n- **Permitem Duplicatas**: Podem conter elementos repetidos.\n\n### Exemplo de Tupla\n\n```python\n# Criando uma tupla\ncores = ('vermelho', 'verde', 'azul')\n\n# Acessando elementos\nprint(cores[1])  # verde\n\n# Tentando modificar um elemento (resultará em erro)\n# cores[1] = 'amarelo'  # TypeError: 'tuple' object does not support item assignment\n\n# Iterando sobre uma tupla\nfor cor in cores:\n    print(cor)\n```\n\n### Quando Usar Listas vs. Tuplas\n\n- **Listas**: Use quando precisar de uma coleção de itens que pode ser modificada ao longo do tempo.\n- **Tuplas**: Use quando precisar de uma coleção de itens que não deve ser alterada, garantindo a imutabilidade.",
+              "ordem": 1,
+              "quizzes": [
+                {
+                  "question": "Qual das seguintes estruturas de dados em Python é imutável?",
+                  "options": [
+                    "A) List",
+                    "B) Dictionary",
+                    "C) Set",
+                    "D) Tuple"
+                  ],
+                  "correct_option": "D"
+                }
+              ]
+            },
+            {
+              "titulo": "Dicionários e Conjuntos",
+              "conteudo": "Dicionários são coleções de pares chave-valor que permitem o armazenamento eficiente e acesso rápido aos dados. Conjuntos são coleções não ordenadas de elementos únicos. Explore como criar, acessar, modificar e realizar operações com dicionários e conjuntos.\n\n### Dicionários\n\n- **Chave-Valor**: Cada elemento é composto por uma chave única e um valor associado.\n- **Mutáveis**: Podem ser modificados após a criação.\n- **Desordenados**: A partir do Python 3.7, os dicionários mantêm a ordem de inserção dos elementos.\n\n### Exemplo de Dicionário\n\n```python\n# Criando um dicionário\npessoa = {\n    'nome': 'Carlos',\n    'idade': 28,\n    'cidade': 'São Paulo'\n}\n\n# Acessando valores\nprint(pessoa['nome'])  # Carlos\n\n# Modificando um valor\npessoa['idade'] = 29\nprint(pessoa)  # {'nome': 'Carlos', 'idade': 29, 'cidade': 'São Paulo'}\n\n# Adicionando um novo par chave-valor\npessoa['profissão'] = 'Engenheiro'\nprint(pessoa)  # {'nome': 'Carlos', 'idade': 29, 'cidade': 'São Paulo', 'profissão': 'Engenheiro'}\n```\n\n### Conjuntos\n\n- **Elementos Únicos**: Não permitem duplicatas.\n- **Mutáveis**: Podem ser modificados após a criação.\n- **Não Ordenados**: Não mantêm a ordem dos elementos.\n\n### Exemplo de Conjunto\n\n```python\n# Criando um conjunto\nfrutas = {'maçã', 'banana', 'laranja'}\n\n# Adicionando um elemento\nfrutas.add('uva')\nprint(frutas)  # {'banana', 'maçã', 'laranja', 'uva'}\n\n# Tentando adicionar um elemento duplicado\nfrutas.add('maçã')\nprint(frutas)  # {'banana', 'maçã', 'laranja', 'uva'}\n\n# Removendo um elemento\nfrutas.remove('banana')\nprint(frutas)  # {'maçã', 'laranja', 'uva'}\n```\n\n### Operações com Conjuntos\n\n- **União**: Combina elementos de dois conjuntos.\n- **Interseção**: Retém apenas os elementos comuns a ambos os conjuntos.\n- **Diferença**: Retém apenas os elementos que estão em um conjunto e não no outro.\n\n### Exemplo de Operações\n\n```python\nconjunto_a = {1, 2, 3, 4}\nconjunto_b = {3, 4, 5, 6}\n\n# União\nuniao = conjunto_a.union(conjunto_b)\nprint(uniao)  # {1, 2, 3, 4, 5, 6}\n\n# Interseção\ninterseccao = conjunto_a.intersection(conjunto_b)\nprint(interseccao)  # {3, 4}\n\n# Diferença\ndiferenca = conjunto_a.difference(conjunto_b)\nprint(diferenca)  # {1, 2}\n```\n\nDicionários e conjuntos são ferramentas poderosas para gerenciar e organizar dados em Python, cada um com suas características e usos específicos.",
+              "ordem": 2,
+              "quizzes": [
+                {
+                  "question": "Qual método é usado para adicionar um item a um conjunto em Python?",
+                  "options": [
+                    "A) append()",
+                    "B) add()",
+                    "C) insert()",
+                    "D) push()"
+                  ],
+                  "correct_option": "B"
+                }
+              ]
+            },
+            {
+              "titulo": "Compreensões de Listas",
+              "conteudo": "Compreensões de listas fornecem uma maneira concisa de criar listas a partir de iteráveis. Elas permitem aplicar condições e transformações diretamente na criação da lista, tornando o código mais limpo e eficiente.\n\n### Sintaxe Básica\n\n```python\n# Lista normal\nquadrados = []\nfor x in range(10):\n    quadrados.append(x**2)\n\n# Compreensão de lista\nquadrados = [x**2 for x in range(10)]\n```\n\n### Compreensões com Condição\n\nVocê pode incluir uma condição para filtrar elementos.\n\n```python\n# Números pares\npares = [x for x in range(20) if x % 2 == 0]\nprint(pares)  # [0, 2, 4, 6, 8, 10, 12, 14, 16, 18]\n```\n\n### Compreensões Aninhadas\n\nVocê pode usar compreensões de listas aninhadas para trabalhar com estruturas de dados mais complexas.\n\n```python\n# Matrizes\nmatriz = [\n    [1, 2, 3],\n    [4, 5, 6],\n    [7, 8, 9]\n]\n\n# Transpor a matriz\ntransposta = [[linha[i] for linha in matriz] for i in range(len(matriz[0]))]\nprint(transposta)  # [[1, 4, 7], [2, 5, 8], [3, 6, 9]]\n```\n\n### Vantagens das Compreensões de Listas\n\n- **Código Mais Limpo**: Reduz a quantidade de linhas de código necessárias para criar listas.\n- **Desempenho Melhorado**: Pode ser mais rápido que loops tradicionais.\n- **Legibilidade**: Facilita a compreensão da intenção do código.\n\n### Exemplo Completo\n\n```python\n# Filtrando e transformando dados\nnomes = ['Ana', 'Bruno', 'Carlos', 'Diana', 'Eduardo']\n\n# Criar uma nova lista com nomes que começam com 'C' ou 'D'\nnomes_filtrados = [nome.upper() for nome in nomes if nome.startswith(('C', 'D'))]\nprint(nomes_filtrados)  # ['CARLOS', 'DIANA']\n```\n\nAs compreensões de listas são uma ferramenta poderosa em Python que ajudam a escrever código mais eficiente e legível.",
+              "ordem": 3,
+              "quizzes": []
+            }
+          ]
+        },
+        {
+          "nome": "Programação Orientada a Objetos",
+          "ordem": 3,
+          "aulas": [
+            {
+              "titulo": "Classes e Objetos",
+              "conteudo": "A Programação Orientada a Objetos (POO) é um paradigma que utiliza 'objetos' para modelar dados e funcionalidades. Em Python, classes são usadas para definir novos tipos de dados. Aprenda a criar classes, instanciar objetos, definir atributos e métodos, e entender conceitos como encapsulamento.\n\n### Definição de Classe\n\n```python\nclass Pessoa:\n    def __init__(self, nome, idade):\n        self.nome = nome\n        self.idade = idade\n\n    def apresentar(self):\n        print(f'Olá, meu nome é {self.nome} e tenho {self.idade} anos.')\n```\n\n### Instanciando Objetos\n\n```python\n# Criando uma instância da classe Pessoa\npessoa1 = Pessoa('João', 30)\npessoa1.apresentar()  # Olá, meu nome é João e tenho 30 anos.\n```\n\n### Encapsulamento\n\nEncapsulamento é o conceito de esconder os detalhes internos de um objeto e expor apenas o necessário. Em Python, você pode indicar atributos privados utilizando um underscore (`_`) ou duplo underscore (`__`), embora o encapsulamento não seja estrito como em outras linguagens.\n\n```python\nclass ContaBancaria:\n    def __init__(self, titular, saldo=0):\n        self.titular = titular\n        self.__saldo = saldo  # Atributo privado\n\n    def depositar(self, valor):\n        if valor > 0:\n            self.__saldo += valor\n            print(f'Depositado: {valor}. Novo saldo: {self.__saldo}')\n        else:\n            print('Valor de depósito inválido.')\n\n    def sacar(self, valor):\n        if 0 < valor <= self.__saldo:\n            self.__saldo -= valor\n            print(f'Sacado: {valor}. Novo saldo: {self.__saldo}')\n        else:\n            print('Saldo insuficiente ou valor inválido.')\n\n# Uso da classe\nconta = ContaBancaria('Maria', 1000)\nconta.depositar(500)  # Depositado: 500. Novo saldo: 1500\nconta.sacar(200)      # Sacado: 200. Novo saldo: 1300\n\n# Tentativa de acessar atributo privado (resulta em erro)\n# print(conta.__saldo)  # AttributeError\n```\n\n### Métodos Especializados\n\nAlém de métodos comuns, Python permite a definição de métodos especiais como `__str__`, `__repr__`, e outros que permitem personalizar o comportamento das instâncias em diferentes contextos.\n\n```python\nclass Livro:\n    def __init__(self, titulo, autor):\n        self.titulo = titulo\n        self.autor = autor\n\n    def __str__(self):\n        return f\"'{self.titulo}' por {self.autor}\"\n\n    def __repr__(self):\n        return f\"Livro(titulo='{self.titulo}', autor='{self.autor}')\"\n\nlivro = Livro('1984', 'George Orwell')\nprint(livro)      # '1984' por George Orwell\nprint(repr(livro))  # Livro(titulo='1984', autor='George Orwell')\n```\n\nCompreender classes e objetos é fundamental para criar aplicações estruturadas e de fácil manutenção em Python.",
+              "ordem": 1,
+              "quizzes": [
+                {
+                  "question": "Como se define uma classe em Python?",
+                  "options": [
+                    "A) class NomeClasse:",
+                    "B) def NomeClasse:",
+                    "C) object NomeClasse:",
+                    "D) class: NomeClasse"
+                  ],
+                  "correct_option": "A"
+                }
+              ]
+            },
+            {
+              "titulo": "Herança e Polimorfismo",
+              "conteudo": "Herança permite que uma classe derive propriedades e métodos de outra classe, promovendo reutilização de código. Polimorfismo permite que métodos com o mesmo nome se comportem de maneira diferente em classes diferentes. Explore como implementar herança e polimorfismo em Python para criar hierarquias de classes flexíveis.\n\n### Herança\n\nHerança permite que uma classe (subclasse) herde atributos e métodos de outra classe (superclasse).\n\n```python\nclass Animal:\n    def __init__(self, nome):\n        self.nome = nome\n\n    def fazer_som(self):\n        print('O animal faz um som.')\n\nclass Cachorro(Animal):\n    def fazer_som(self):\n        print('O cachorro late.')\n\nclass Gato(Animal):\n    def fazer_som(self):\n        print('O gato mia.')\n\n# Uso da herança\ncachorro = Cachorro('Rex')\ngato = Gato('Mia')\ncachorro.fazer_som()  # O cachorro late.\ngato.fazer_som()      # O gato mia.\n```\n\n### Polimorfismo\n\nPolimorfismo permite que diferentes classes respondam a métodos com o mesmo nome de maneiras distintas.\n\n```python\nclass Forma:\n    def desenhar(self):\n        pass\n\nclass Circulo(Forma):\n    def desenhar(self):\n        print('Desenhando um círculo.')\n\nclass Quadrado(Forma):\n    def desenhar(self):\n        print('Desenhando um quadrado.')\n\n# Função que utiliza polimorfismo\ndef desenhar_forma(formas):\n    for forma in formas:\n        forma.desenhar()\n\nformas = [Circulo(), Quadrado()]\ndesenhar_forma(formas)\n# Saída:\n# Desenhando um círculo.\n# Desenhando um quadrado.\n```\n\n### Benefícios da Herança e Polimorfismo\n\n- **Reutilização de Código**: Evita a duplicação de código, promovendo a manutenção eficiente.\n- **Flexibilidade**: Permite que novas classes sejam introduzidas sem modificar o código existente.\n- **Organização**: Facilita a criação de hierarquias lógicas de classes.\n\nCompreender esses conceitos permite a criação de aplicações mais robustas e escaláveis.",
+              "ordem": 2,
+              "quizzes": [
+                {
+                  "question": "Qual palavra-chave é usada para herdar de uma classe base em Python?",
+                  "options": [
+                    "A) inherit",
+                    "B) extends",
+                    "C) super",
+                    "D) class NomeClasse(BaseClasse):"
+                  ],
+                  "correct_option": "D"
+                }
+              ]
+            },
+            {
+              "titulo": "Métodos Especiais e Dunder Methods",
+              "conteudo": "Python possui métodos especiais conhecidos como 'dunder methods' (double underscore) que permitem definir comportamentos para operações internas como inicialização, representação de strings, operações aritméticas, e muito mais. Aprenda a utilizar métodos como `__init__`, `__str__`, `__repr__`, `__add__`, entre outros.\n\n### Método __init__\n\nO método `__init__` é o construtor da classe, responsável por inicializar os atributos do objeto.\n\n```python\nclass Pessoa:\n    def __init__(self, nome, idade):\n        self.nome = nome\n        self.idade = idade\n\n    def apresentar(self):\n        print(f'Olá, meu nome é {self.nome} e tenho {self.idade} anos.')\n\npessoa = Pessoa('Lucas', 25)\npessoa.apresentar()  # Olá, meu nome é Lucas e tenho 25 anos.\n```\n\n### Métodos __str__ e __repr__\n\n- **__str__**: Define a representação em string amigável para o usuário.\n- **__repr__**: Define a representação oficial da string, útil para depuração.\n\n```python\nclass Livro:\n    def __init__(self, titulo, autor):\n        self.titulo = titulo\n        self.autor = autor\n\n    def __str__(self):\n        return f\"'{self.titulo}' por {self.autor}\"\n\n    def __repr__(self):\n        return f\"Livro(titulo='{self.titulo}', autor='{self.autor}')\"\n\nlivro = Livro('1984', 'George Orwell')\nprint(str(livro))   # '1984' por George Orwell\nprint(repr(livro))  # Livro(titulo='1984', autor='George Orwell')\n```\n\n### Métodos Aritméticos\n\nVocê pode definir como objetos de suas classes se comportam em operações aritméticas.\n\n```python\nclass Vetor:\n    def __init__(self, x, y):\n        self.x = x\n        self.y = y\n\n    def __add__(self, outro):\n        return Vetor(self.x + outro.x, self.y + outro.y)\n\n    def __str__(self):\n        return f'Vetor({self.x}, {self.y})'\n\nv1 = Vetor(2, 3)\nv2 = Vetor(4, 5)\nv3 = v1 + v2\nprint(v3)  # Vetor(6, 8)\n```\n\n### Vantagens dos Dunder Methods\n\n- **Flexibilidade**: Permitem que objetos se comportem de maneira intuitiva em diferentes contextos.\n- **Leitura de Código**: Facilita a compreensão do código ao utilizar operadores padrão para operações personalizadas.\n\nCompreender e utilizar dunder methods pode tornar suas classes mais poderosas e integradas com a linguagem Python.",
+              "ordem": 3,
+              "quizzes": []
+            }
+          ]
+        },
+        {
+          "nome": "Desenvolvimento Web com Python",
+          "ordem": 4,
+          "aulas": [
+            {
+              "titulo": "Introdução ao Django",
+              "conteudo": "Django é um framework web de alto nível que incentiva o desenvolvimento rápido e o design limpo e pragmático. Aprenda a instalar o Django, criar um projeto, configurar rotas, criar views, templates e modelos para interagir com bancos de dados.\n\n### Instalação do Django\n\n```bash\n# Instalar o Django usando pip\npip install django\n```\n\n### Criando um Novo Projeto\n\n```bash\n# Criar um novo projeto Django chamado 'meuprojeto'\ndjango-admin startproject meuprojeto\n\n# Navegar para o diretório do projeto\ncd meuprojeto\n```\n\n### Estrutura do Projeto Django\n\n- **manage.py**: Script de gerenciamento do projeto.\n- **meuprojeto/**: Diretório do projeto contendo configurações.\n- **app/**: Diretórios de aplicativos individuais dentro do projeto.\n\n### Executando o Servidor de Desenvolvimento\n\n```bash\npython manage.py runserver\n```\n\nAbra o navegador e acesse `http://127.0.0.1:8000/` para ver a página inicial padrão do Django.\n\n### Criando uma Aplicação\n\n```bash\n# Criar uma nova aplicação chamada 'blog'\npython manage.py startapp blog\n```\n\n### Configurando a Aplicação\n\nAdicione a aplicação recém-criada ao arquivo `settings.py` dentro da lista `INSTALLED_APPS`:\n\n```python\n# meuprojeto/settings.py\n\nINSTALLED_APPS = [\n    # ...\n    'blog',\n]\n```\n\n### Criando uma View Básica\n\n```python\n# blog/views.py\n\nfrom django.http import HttpResponse\n\ndef index(request):\n    return HttpResponse('Bem-vindo ao Blog!')\n```\n\n### Configurando URLs\n\n```python\n# meuprojeto/urls.py\n\nfrom django.contrib import admin\nfrom django.urls import path\nfrom blog import views\n\nurlpatterns = [\n    path('admin/', admin.site.urls),\n    path('blog/', views.index, name='blog_index'),\n]\n```\n\n### Executando e Testando\n\nReinicie o servidor de desenvolvimento e acesse `http://127.0.0.1:8000/blog/` para ver a mensagem \"Bem-vindo ao Blog!\".\n\n### Próximos Passos\n\n- **Templates**: Aprender a criar templates HTML dinâmicos.\n- **Modelos**: Definir modelos de dados e interagir com o banco de dados.\n- **Formulários**: Criar e processar formulários web.\n\nDjango é um framework poderoso que facilita o desenvolvimento de aplicações web robustas e escaláveis.",
+              "ordem": 1,
+              "quizzes": [
+                {
+                  "question": "Qual comando é usado para iniciar um novo projeto Django?",
+                  "options": [
+                    "A) django new project",
+                    "B) django create project",
+                    "C) django-admin startproject",
+                    "D) python manage.py newproject"
+                  ],
+                  "correct_option": "C"
+                }
+              ]
+            },
+            {
+              "titulo": "APIs com Flask",
+              "conteudo": "Flask é um microframework web para Python que é leve e fácil de usar. Ele é ideal para criar APIs RESTful. Aprenda a instalar o Flask, configurar rotas, lidar com requisições HTTP, integrar com bancos de dados e implementar autenticação básica.\n\n### Instalação do Flask\n\n```bash\npip install Flask\n```\n\n### Criando uma Aplicação Flask Básica\n\n```python\n# app.py\n\nfrom flask import Flask, jsonify, request\n\napp = Flask(__name__)\n\n# Rota para a página inicial\n@app.route('/')\ndef home():\n    return 'Bem-vindo à API Flask!'\n\n# Rota para retornar dados em JSON\n@app.route('/api/data', methods=['GET'])\ndef get_data():\n    data = {\n        'nome': 'API Flask',\n        'versao': '1.0'\n    }\n    return jsonify(data)\n\n# Rota para receber dados via POST\n@app.route('/api/data', methods=['POST'])\ndef post_data():\n    novo_dado = request.json\n    return jsonify({'mensagem': 'Dado recebido!', 'dado': novo_dado}), 201\n\nif __name__ == '__main__':\n    app.run(debug=True)\n```\n\n### Executando a Aplicação\n\n```bash\npython app.py\n```\n\nAcesse `http://127.0.0.1:5000/` para ver a mensagem inicial. Utilize ferramentas como Postman ou curl para interagir com as rotas de API.\n\n### Integração com Bancos de Dados\n\nFlask pode ser integrado com bancos de dados utilizando bibliotecas como SQLAlchemy.\n\n```bash\npip install Flask-SQLAlchemy\n```\n\n```python\n# app.py (continuação)\n\nfrom flask_sqlalchemy import SQLAlchemy\n\napp.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///meu_banco.db'\ndb = SQLAlchemy(app)\n\nclass Usuario(db.Model):\n    id = db.Column(db.Integer, primary_key=True)\n    nome = db.Column(db.String(80), nullable=False)\n    email = db.Column(db.String(120), unique=True, nullable=False)\n\n    def __repr__(self):\n        return f'<Usuario {self.nome}>'\n\n# Criar o banco de dados\nwith app.app_context():\n    db.create_all()\n```\n\n### Autenticação Básica\n\nImplementar autenticação em APIs é essencial para proteger recursos. Flask oferece várias extensões para isso, como Flask-Login e Flask-JWT.\n\n```bash\npip install Flask-JWT-Extended\n```\n\n```python\n# app.py (continuação)\n\nfrom flask_jwt_extended import JWTManager, create_access_token, jwt_required\n\napp.config['JWT_SECRET_KEY'] = 'super-secret'  # Alterar para uma chave segura\njwt = JWTManager(app)\n\n# Rota para login e criação de token\n@app.route('/login', methods=['POST'])\ndef login():\n    username = request.json.get('username', None)\n    password = request.json.get('password', None)\n    if username != 'admin' or password != 'senha':\n        return jsonify({\"msg\": \"Credenciais inválidas\"}), 401\n\n    access_token = create_access_token(identity=username)\n    return jsonify(access_token=access_token)\n\n# Rota protegida\n@app.route('/protected', methods=['GET'])\n@jwt_required()\ndef protected():\n    return jsonify({\"msg\": \"Acesso concedido à rota protegida!\"})\n```\n\nNeste exemplo, implementamos rotas para login que geram tokens JWT e rotas protegidas que exigem autenticação.",
+              "ordem": 2,
+              "quizzes": [
+                {
+                  "question": "Qual método HTTP é geralmente usado para criar novos recursos em uma API RESTful?",
+                  "options": [
+                    "A) GET",
+                    "B) POST",
+                    "C) PUT",
+                    "D) DELETE"
+                  ],
+                  "correct_option": "B"
+                }
+              ]
+            },
+            {
+              "titulo": "Autenticação e Autorização",
+              "conteudo": "Implemente sistemas de autenticação para verificar a identidade dos usuários e autorização para controlar o acesso a recursos específicos. Explore bibliotecas como Django Auth ou Flask-Login para gerenciar sessões de usuários, hashing de senhas e permissões.\n\n### Autenticação com Django\n\nDjango possui um sistema de autenticação integrado que facilita a implementação de login, logout e gerenciamento de usuários.\n\n#### Configuração Básica\n\n1. **Migrar Banco de Dados**:\n   ```bash\npython manage.py migrate\n```\n2. **Criar um Superusuário**:\n   ```bash\npython manage.py createsuperuser\n```\n\n#### Uso no Frontend\n\n```python\n# meuprojeto/urls.py\n\nfrom django.contrib import admin\nfrom django.urls import path\nfrom django.contrib.auth import views as auth_views\n\nurlpatterns = [\n    path('admin/', admin.site.urls),\n    path('login/', auth_views.LoginView.as_view(), name='login'),\n    path('logout/', auth_views.LogoutView.as_view(), name='logout'),\n]\n```\n\n### Autenticação com Flask-Login\n\nFlask-Login é uma extensão que gerencia a autenticação de usuários em aplicações Flask.\n\n#### Instalação\n\n```bash\npip install Flask-Login\n```\n\n#### Configuração Básica\n\n```python\n# app.py (continuação)\n\nfrom flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user\n\nlogin_manager = LoginManager()\nlogin_manager.init_app(app)\n\n# Modelo de usuário\nclass User(UserMixin):\n    def __init__(self, id):\n        self.id = id\n\n# Usuários de exemplo\nusuarios = {'admin': {'senha': 'senha'}}\n\n@login_manager.user_loader\ndef load_user(user_id):\n    if user_id in usuarios:\n        return User(user_id)\n    return None\n\n# Rota para login\n@app.route('/login', methods=['POST'])\ndef login():\n    username = request.json.get('username')\n    password = request.json.get('password')\n    if username in usuarios and usuarios[username]['senha'] == password:\n        user = User(username)\n        login_user(user)\n        return jsonify({\"msg\": \"Login bem-sucedido!\"})\n    return jsonify({\"msg\": \"Credenciais inválidas\"}), 401\n\n# Rota protegida\n@app.route('/dashboard')\n@login_required\ndef dashboard():\n    return f'Bem-vindo, {current_user.id}! Este é o dashboard protegido.'\n\n# Rota para logout\n@app.route('/logout')\n@login_required\ndef logout():\n    logout_user()\n    return jsonify({\"msg\": \"Logout bem-sucedido!\"})\n```\n\n### Hashing de Senhas\n\nPara armazenar senhas de forma segura, utilize hashing com bibliotecas como `bcrypt`.\n\n```bash\npip install bcrypt\n```\n\n```python\nimport bcrypt\n\n# Gerando um hash para a senha\nsenha = b'minha_senha_segura'\nsalt = bcrypt.gensalt()\nhash_senha = bcrypt.hashpw(senha, salt)\nprint(hash_senha)\n\n# Verificando a senha\nsenha_input = b'minha_senha_segura'\nif bcrypt.checkpw(senha_input, hash_senha):\n    print('Senha correta!')\nelse:\n    print('Senha incorreta.')\n```\n\n### Controle de Permissões\n\nDjango permite definir permissões específicas para usuários e grupos, controlando o acesso a diferentes partes da aplicação.\n\n```python\n# Definindo permissões em modelos\nfrom django.db import models\nfrom django.contrib.auth.models import User\n\nclass Documento(models.Model):\n    titulo = models.CharField(max_length=100)\n    conteudo = models.TextField()\n    autor = models.ForeignKey(User, on_delete=models.CASCADE)\n\n    class Meta:\n        permissions = [\n            ('pode_editar_documento', 'Pode editar documento'),\n        ]\n```\n\n### Verificando Permissões\n\n```python\nfrom django.contrib.auth.decorators import permission_required\n\n@permission_required('blog.pode_editar_documento', raise_exception=True)\ndef editar_documento(request, documento_id):\n    # Lógica para editar o documento\n    pass\n```\n\nA implementação adequada de autenticação e autorização é essencial para proteger recursos e garantir que apenas usuários autorizados possam acessar ou modificar dados sensíveis.",
+              "ordem": 3,
+              "quizzes": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

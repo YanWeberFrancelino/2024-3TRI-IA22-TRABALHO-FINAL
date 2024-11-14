@@ -1,6 +1,12 @@
-# Trabalho Final da Turma IA22 - Site de Cursos com Autenticação e Validação
+# Trabalho Final da Turma IA22 - Site com Autenticação e Validação
 
-Bem-vindo ao repositório do **Trabalho Final da Turma IA22**! Este projeto consiste em um site básico completo, incluindo frontend, backend, banco de dados, validação, autenticação e esquemas básicos de segurança. O site permite que usuários se registrem, façam login, visualizem páginas privadas para membros logados, explorem módulos, vejam outros membros, visualizem seus próprios dados, atualizem suas informações, alterem suas senhas e efetuem logout. Além disso, há páginas públicas acessíveis para usuários não autenticados.
+Bem-vindo ao repositório do **Trabalho Final da Turma IA22**! Este projeto consiste em um site completo e básico, incluindo frontend, backend, banco de dados, validação, autenticação e esquemas básicos de segurança. O site oferece funcionalidades como registro de usuários, login, visualização de páginas privadas (disponíveis apenas para membros autenticados), exploração de módulos, exibição de outros membros, consulta e atualização dos próprios dados, alteração de senha e logout. Além disso, existem páginas públicas acessíveis para usuários não autenticados.
+
+Optei por desenvolver um site de cursos com funcionalidades completas, como autenticação, validação e medidas básicas de segurança. A plataforma permite que os usuários realizem diversas ações. Veja abaixo uma imagem da página inicial (Home) pública, acessível a todos, mesmo sem login:
+
+![Página Principal Home](./public/assets/img/home.png) 
+
+---
 
 ## Índice
 
@@ -147,6 +153,9 @@ Além disso, o site conta com importantes implementações de segurança, como *
 ├── tsconfig.json               # Configurações do TypeScript
 └── README.md                   # Documentação do projeto
 ```
+
+![Estrutura Diretórios](./public/assets/img/estrutura2.png) 
+
 
 ### Descrição das Pastas e Arquivos Principais
 
@@ -1654,48 +1663,119 @@ A seguir, uma descrição detalhada da estrutura de diretórios e arquivos do pr
 
 ## 9. Rotas, Páginas e Funcionalidades
 
-Este site possui diversas rotas que servem páginas públicas e privadas, além de rotas de API para autenticação e gerenciamento de usuários.
+Este site possui diversas rotas que servem páginas públicas e privadas, além de rotas de API para autenticação e gerenciamento de usuários. Abaixo estão descritas as rotas, funcionalidades e outras características importantes.
 
-### 9.1. Rotas Públicas
+---
 
-- **`GET /`**: Exibe a página de acesso público (`acesso-publico.html`).
-- **`GET /login`**: Exibe a página de login (`login.html`).
-- **`GET /registrar`**: Exibe a página de registro (`registrar.html`).
-- **`GET /ratelimit`**: Exibe a página quando o limite de requisições é excedido (`ratelimit.html`).
-- **`GET /404`**: Exibe a página de erro 404 (`404.html`).
+### 9.1. **Rotas Públicas**
 
-### 9.2. Rotas Privadas (Requer Autenticação)
+- **`GET /`**: Exibe a página inicial pública, acessível a todos os usuários, com informações gerais sobre o sistema.
 
-- **`GET /dashboard`**: Exibe a página do dashboard para usuários autenticados (`acesso-privado.html`).
-- **`GET /users/me`**: Retorna os dados do usuário autenticado.
-- **`PUT /users/me`**: Atualiza os dados de nome e email do usuário autenticado.
-- **`PUT /users/me/password`**: Altera a senha do usuário autenticado.
-- **DELETE /users/me`**: Apaga a conta do usuário autenticado.
+- **`GET /login`**: Exibe a página de login, onde usuários podem inserir suas credenciais para autenticação.
 
-### 9.3. Rotas de Autenticação
+- **`GET /registrar`**: Exibe a página de registro para novos usuários criarem uma conta.
 
-- **`POST /auth/register`**: Registra um novo usuário.
-- **`POST /auth/login`**: Autentica um usuário e retorna um token JWT.
+- **`GET /ratelimit`**: Exibe uma página de aviso quando o limite de requisições é excedido pelo usuário.
 
-### 9.4. Rotas Administrativas (Requer Autenticação)
+- **`GET /404`**: Apresenta uma página de erro personalizada para acessos a URLs inválidas ou inexistentes.
 
-- **`GET /users`**: Lista todos os usuários (apenas para administradores).
-- **`PUT /users/:id`**: Atualiza os dados de um usuário específico.
-- **`DELETE /users/:id`**: Deleta um usuário específico.
+---
 
-### 9.5. Funcionalidades do Site
+### 9.2. **Rotas Privadas (Requer Autenticação)**
 
-- **Registro de Usuários**: Usuários podem se registrar fornecendo nome, email e senha.
-- **Login de Usuários**: Usuários registrados podem fazer login para acessar funcionalidades protegidas.
-- **Dashboard Privado**: Após autenticação, usuários podem acessar o dashboard para ver informações pessoais e módulos do curso.
-- **Gerenciamento de Usuários**: Administradores podem listar, atualizar e deletar usuários.
-- **Atualização de Perfil**: Usuários autenticados podem atualizar seus dados pessoais (nome e email).
-- **Alteração de Senha**: Usuários autenticados podem alterar suas senhas.
-- **Apagamento de Conta**: Usuários autenticados podem apagar suas próprias contas.
-- **Validação de Dados**: Utiliza Zod para validar entradas de usuário em todas as rotas relevantes.
-- **Segurança**: Implementação de CORS, rate limiting, e cabeçalhos de segurança com Helmet.
-- **Autenticação JWT**: Protege rotas privadas e gerencia sessões de usuário.
+- **`GET /dashboard`**: Exibe a página do dashboard, uma área exclusiva para usuários autenticados, com informações e funcionalidades específicas.
 
+- **`GET /users/me`**: Retorna os dados do usuário atualmente autenticado no sistema.
+
+- **`PUT /users/me`**: Permite que o usuário autenticado atualize seus dados de nome e email.
+
+- **`PUT /users/me/password`**: Permite ao usuário alterar sua senha.
+
+- **`DELETE /users/me`**: Realiza a exclusão permanente da conta do usuário autenticado.
+
+---
+
+### 9.3. **Rotas de Autenticação**
+
+- **`POST /auth/register`**: Registra um novo usuário, armazenando seus dados no sistema.
+
+- **`POST /auth/login`**: Realiza a autenticação do usuário e retorna um token JWT para acesso às áreas protegidas.
+
+---
+
+### 9.4. **Rotas Administrativas (Requer Autenticação)**
+
+- **`GET /users`**: Lista todos os usuários cadastrados no sistema. (Somente para administradores.)
+
+- **`PUT /users/:id`**: Permite que administradores atualizem dados de um usuário específico.
+
+- **`DELETE /users/:id`**: Permite que administradores deletem um usuário específico do sistema.
+
+---
+
+### 9.5. **Funcionalidades do Site**
+
+- **Registro de Usuários**: Os usuários podem se registrar fornecendo nome, email e senha. O sistema valida os dados e armazena as informações de forma segura.
+
+- **Login de Usuários**: Permite que usuários registrados façam login para acessar áreas protegidas.
+
+- **Dashboard Privado**: Após autenticação, os usuários podem acessar o dashboard, que exibe informações personalizadas e funcionalidades específicas, como visualização de dados pessoais.
+
+- **Gerenciamento de Usuários**: Administradores têm ferramentas para listar, atualizar e excluir usuários do sistema.
+
+- **Atualização de Perfil**: Usuários autenticados podem alterar seus dados pessoais, como nome e email.
+
+- **Alteração de Senha**: Usuários podem redefinir sua senha diretamente no sistema.
+
+- **Exclusão de Conta**: Usuários podem optar por excluir sua conta permanentemente.
+
+- **Páginas de Erro e Limitação**:  
+  - *Erro 404*: Mostra uma página informativa ao acessar URLs inexistentes.  
+  - *Rate Limit*: Apresenta uma mensagem de alerta ao exceder o limite de requisições permitidas.
+
+---
+
+### **Segurança e Validação**
+
+- **Validação de Dados**: Todas as entradas de dados do usuário são validadas utilizando a biblioteca Zod, garantindo maior segurança.
+
+- **CORS e Proteção de Cabeçalhos**: O site implementa CORS e usa Helmet para adicionar camadas de segurança, protegendo contra vulnerabilidades comuns.
+
+- **Rate Limiting**: Previne abuso do sistema limitando requisições em um intervalo de tempo.
+
+- **Autenticação JWT**: Todas as rotas protegidas são acessíveis apenas por meio de um token JWT, que valida a sessão do usuário.
+
+---
+
+### **Ilustrações**
+
+1. **Página Inicial (`/`)**: Uma interface pública que oferece informações gerais e pontos de entrada para login ou registro.  
+
+   ![Página Principal Home](./public/assets/img/home.png)
+    ![Página Principal Home](./public/assets/img/home3.png) 
+
+3. **Página de Login (`/login`)**: Permite que os usuários entrem no sistema inserindo suas credenciais.  
+   
+   ![Página Login](./public/assets/img/login.png) 
+
+4. **Página de Registro (`/registrar`)**: Interface para novos usuários criarem contas no sistema.  
+   
+   ![Página Registro](./public/assets/img/registro.png) 
+
+5. **Dashboard Privado (`/dashboard`)**: Área autenticada que exibe informações personalizadas e funcionalidades para usuários registrados.  
+
+   ![Página Privada Dashboard](./public/assets/img/pv1.png)
+   ![Página Privada Dashboard](./public/assets/img/pv2.png) 
+
+6. **Página de Erro 404 (`/404`)**: Uma página que informa quando um usuário tenta acessar uma rota inexistente.  
+   
+    ![Página de Erro 404](./public/assets/img/p404.png) 
+
+7. **Página de Rate Limit (`/ratelimit`)**: Aparece quando um usuário excede o limite de requisições, indicando a necessidade de reduzir o volume de acessos.  
+
+ ![Página de Erro Rate Limit](./public/assets/img/prate.png) 
+   
+   
 ---
 
 ## 10. Comandos Úteis

@@ -68,17 +68,7 @@ footer p {
 }
 
 /* ----------------- Estilos Gerais de Botões ----------------- */
-.btn {
-    padding: 10px 20px;
-    background-color: #4BCBDD;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-    text-align: center;
-    font-size: 16px;
-}
+
 
 .btn.primary-btn {
     background-color: #28BDD2;
