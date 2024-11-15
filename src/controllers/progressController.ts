@@ -1,4 +1,3 @@
-// src/controllers/progressController.ts
 import { Request, Response } from 'express';
 import { connect } from '../database';
 
