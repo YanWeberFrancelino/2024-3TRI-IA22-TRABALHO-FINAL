@@ -1,5 +1,3 @@
-// dashboard.js
-
 const token = localStorage.getItem('token');
 let username = 'Usuário';
 let currentCursoId = null;
