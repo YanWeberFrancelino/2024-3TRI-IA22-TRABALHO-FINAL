@@ -1,4 +1,3 @@
-// src/utils/jwtPromise.ts
 import jwt from 'jsonwebtoken';
 
 export const signJWT = (payload: object): Promise<string> => {
