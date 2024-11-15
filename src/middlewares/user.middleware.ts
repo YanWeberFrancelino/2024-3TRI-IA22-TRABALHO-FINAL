@@ -1,4 +1,3 @@
-// src/middlewares/user.middleware.ts
 import { Request, Response, NextFunction } from 'express';
 import {
   registerSchema,
