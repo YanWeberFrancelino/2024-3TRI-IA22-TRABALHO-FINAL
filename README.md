@@ -4,7 +4,7 @@ Bem-vindo ao repositório do **Trabalho Final da Turma IA22**! Este projeto cons
 
 Atualmente, a plataforma disponibiliza dois cursos de programação: **Python** e **JavaScript**. Cada curso é composto por módulos e aulas interativas com quizzes para avaliar o aprendizado dos usuários. Veja abaixo uma imagem da página inicial (Home) pública, acessível a todos, mesmo sem login:
 
-![Página Principal Home](./public/assets/img/home.png) 
+![Página Principal Home](./public/assets/img/kodix.png) 
 
 ---
 
