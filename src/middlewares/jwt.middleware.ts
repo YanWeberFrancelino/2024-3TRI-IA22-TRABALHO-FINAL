@@ -1,4 +1,3 @@
-// src/middlewares/jwt.middleware.ts
 import { RequestHandler } from 'express';
 import { verifyJWT } from '../utils/jwtPromise';
 
