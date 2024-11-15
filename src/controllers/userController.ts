@@ -1,4 +1,3 @@
-// src/controllers/userController.ts
 import { Request, Response } from 'express';
 import { connect } from '../database';
 import bcrypt from 'bcrypt';
