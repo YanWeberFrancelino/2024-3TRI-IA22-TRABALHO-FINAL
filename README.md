@@ -288,7 +288,7 @@ Existem dois métodos principais para configurar e executar este projeto:
 
 5. **Configure as Variáveis de Ambiente**
 
-   Crie um arquivo `.env` na raiz do projeto com as seguintes variáveis:
+   Crie um arquivo `.env` na raiz do projeto caso não exista, com as seguintes variáveis:
 
    ```env
    PORT=4060
@@ -346,7 +346,7 @@ Este método envolve clonar o repositório localmente no seu computador usando o
 
 5. **Configure as Variáveis de Ambiente**
 
-   Crie um arquivo `.env` na raiz do projeto com as seguintes variáveis:
+   Crie um arquivo `.env` na raiz do projeto caso não exista, com as seguintes variáveis:
 
    ```env
    PORT=4060
