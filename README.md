@@ -318,10 +318,6 @@ Existem dois métodos principais para configurar e executar este projeto:
 
 ---
 
-Aqui está a versão atualizada do guia, incluindo o passo de abrir o projeto no VS Code:
-
----
-
 ### 5.2. Clonando o Repositório com Git
 
 Este método envolve clonar o repositório localmente no seu computador usando o Git.
@@ -383,9 +379,6 @@ Este método envolve clonar o repositório localmente no seu computador usando o
    Abra o navegador e vá para `http://localhost:4060` para visualizar o site.
 
 --- 
-
-Essa atualização garante que o usuário saiba como abrir o projeto diretamente no VS Code.
----
 
 ## 6. Configuração do Ambiente de Desenvolvimento
 
