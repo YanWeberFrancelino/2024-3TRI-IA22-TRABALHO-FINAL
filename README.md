@@ -139,8 +139,6 @@ O objetivo é proporcionar uma experiência de aprendizado funcional e segura, a
 └── README.md                   # Documentação do projeto
 ```
 
-![Estrutura Diretórios](./public/assets/img/estrutura2.png) 
-
 ---
 
 ## 4. Pré-requisitos
