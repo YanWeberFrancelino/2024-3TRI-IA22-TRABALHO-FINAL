@@ -318,6 +318,10 @@ Existem dois métodos principais para configurar e executar este projeto:
 
 ---
 
+Aqui está a versão atualizada do guia, incluindo o passo de abrir o projeto no VS Code:
+
+---
+
 ### 5.2. Clonando o Repositório com Git
 
 Este método envolve clonar o repositório localmente no seu computador usando o Git.
@@ -338,13 +342,21 @@ Este método envolve clonar o repositório localmente no seu computador usando o
    cd 2024-3TRI-IA22-TRABALHO-FINAL
    ```
 
-4. **Instale as Dependências**
+4. **Abra o Projeto no VS Code**
+
+   No terminal, digite o seguinte comando para abrir o Visual Studio Code na pasta do projeto:
+
+   ```bash
+   code .
+   ```
+
+5. **Instale as Dependências**
 
    ```bash
    npm install
    ```
 
-5. **Configure as Variáveis de Ambiente**
+6. **Configure as Variáveis de Ambiente**
 
    Crie um arquivo `.env` na raiz do projeto caso não exista, com as seguintes variáveis:
 
@@ -354,22 +366,25 @@ Este método envolve clonar o repositório localmente no seu computador usando o
    JWT_EXPIRES_IN=24h
    ```
 
-6. **Compile o Projeto**
+7. **Compile o Projeto**
 
    ```bash
    npm run build
    ```
 
-7. **Inicie o Servidor em Modo de Desenvolvimento**
+8. **Inicie o Servidor em Modo de Desenvolvimento**
 
    ```bash
    npm run dev
    ```
 
-8. **Acesse o Aplicativo**
+9. **Acesse o Aplicativo**
 
    Abra o navegador e vá para `http://localhost:4060` para visualizar o site.
 
+--- 
+
+Essa atualização garante que o usuário saiba como abrir o projeto diretamente no VS Code.
 ---
 
 ## 6. Configuração do Ambiente de Desenvolvimento
