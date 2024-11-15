@@ -1,4 +1,3 @@
-// src/database.ts
 import { open, Database } from 'sqlite';
 import sqlite3 from 'sqlite3';
 import bcrypt from 'bcrypt';
