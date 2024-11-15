@@ -1,4 +1,3 @@
-// src/schemas/userSchema.ts
 import { z } from 'zod';
 
 export const registerSchema = z.object({
