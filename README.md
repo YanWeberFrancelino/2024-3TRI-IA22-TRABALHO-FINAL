@@ -608,6 +608,6 @@ Para manter o projeto organizado e eficiente, recomendamos seguir as boas práti
 
 ## 18. Agradecimentos Finais
 
-Obrigado por utilizar este projeto e por contribuir para seu desenvolvimento contínuo. Esperamos que este guia completo tenha facilitado sua compreensão e implementação do site de cursos de programação. Se tiver dúvidas ou sugestões, não hesite em entrar em contato!
+Obrigada por utilizar este projeto e por contribuir para seu desenvolvimento contínuo. Esperamos que este guia completo tenha facilitado sua compreensão e implementação do site de cursos de programação. Se tiver dúvidas ou sugestões, não hesite em entrar em contato!
 
 Boa codificação!
