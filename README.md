@@ -1,6 +1,6 @@
-# Trabalho Final da Turma IA22 - Site de Cursos de Programação
+# Trabalho Final da IA22 - Site de Cursos de Programação
 
-Bem-vindo ao repositório do **Trabalho Final da Turma IA22**! Este projeto consiste em um site básico completo de cursos de programação, incluindo frontend, backend, banco de dados, validação, autenticação e medidas básicas de segurança. O site oferece funcionalidades como registro de usuários, login, inscrição em cursos, visualização de aulas e quizzes, acompanhamento de progresso, atualização de dados pessoais, alteração de senha e logout. Além disso, há páginas públicas acessíveis para usuários não autenticados.
+Bem-vindo ao **Kodix Cursos**! Este projeto consiste em um site básico completo de cursos de programação, incluindo frontend, backend, banco de dados, validação, autenticação e medidas básicas de segurança. O site oferece funcionalidades como registro de usuários, login, inscrição em cursos, visualização de aulas e quizzes, acompanhamento de progresso, atualização de dados pessoais, alteração de senha e logout. Além disso, há páginas públicas acessíveis para usuários não autenticados.
 
 Atualmente, a plataforma disponibiliza dois cursos de programação: **Python** e **JavaScript**. Cada curso é composto por módulos e aulas interativas com quizzes para avaliar o aprendizado dos usuários. Veja abaixo uma imagem da página inicial (Home) pública, acessível a todos, mesmo sem login:
 
