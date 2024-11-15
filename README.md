@@ -113,6 +113,7 @@ O objetivo é proporcionar uma experiência de aprendizado funcional e segura, a
 │   │   ├── course.middleware.ts
 │   │   ├── errorHandler.ts
 │   │   ├── jwt.middleware.ts
+│   │   ├── securityMiddleware.ts
 │   │   └── user.middleware.ts
 │   ├── routes/                 # Definição das rotas
 │   │   ├── authRoutes.ts
