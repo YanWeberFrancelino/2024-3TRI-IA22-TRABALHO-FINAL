@@ -1,5 +1,3 @@
-// src/routes/courseRoutes.ts
-
 import { Router } from 'express';
 import courseController from '../controllers/courseController';
 import enrollmentController from '../controllers/enrollmentController';
