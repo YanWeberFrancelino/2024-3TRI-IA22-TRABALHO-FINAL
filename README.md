@@ -35,7 +35,7 @@ Atualmente, a plataforma disponibiliza dois cursos de programação: **Python** 
 
 ## 1. Introdução
 
-Este projeto representa o trabalho final da turma IA22. Desenvolvemos um site de cursos de programação com funcionalidades completas, incluindo autenticação, validação e medidas básicas de segurança. A plataforma permite que os usuários:
+Neste projeto, desenvolvi um site de cursos de programação com funcionalidades completas, incluindo autenticação, validação e medidas básicas de segurança. A plataforma permite que os usuários:
 
 - Realizem registro e login;
 - Inscrevam-se nos cursos disponíveis;
