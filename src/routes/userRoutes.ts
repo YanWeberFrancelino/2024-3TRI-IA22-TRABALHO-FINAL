@@ -1,4 +1,3 @@
-// src/routes/userRoutes.ts
 import { Router } from 'express';
 import userController from '../controllers/userController';
 import { checkToken } from '../middlewares/jwt.middleware';
