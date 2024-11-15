@@ -1,4 +1,3 @@
-// src/schemas/courseSchema.ts
 import { z } from 'zod';
 
 export const enrollSchema = z.object({
